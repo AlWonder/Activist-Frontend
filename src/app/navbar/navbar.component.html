@@ -16,9 +16,14 @@
       <ul class="nav navbar-nav">
         <li class="active"><a routerLink="/events">Мероприятия <span class="sr-only">(current)</span></a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Профиль</a></li>
+      <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn">
+        <li><a href="#" role="button" (click)="toggleLogin($event)">Вход</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn">
+        <li><a>Профиль</a></li>
+        <li><a (click)="logout()">Выход</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<login *ngIf="loginForm"></login>

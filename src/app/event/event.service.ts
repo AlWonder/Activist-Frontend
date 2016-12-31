@@ -7,13 +7,15 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EventService {
 
-  //constructor(private http: Http) { }
+  constructor(private http: Http) { }
 
-  getEvents(): Promise<Event[]> {
-    return Promise.resolve(EVENTS);
+  getEvents() {
+    return this.http.get('http://localhost:8080/events')
+          .map(response => <Event[]>response.json());
   }
 
-  getEvent(id: number): Promise<Event> {
-    return Promise.resolve(EVENTS[id]);
+  getEvent(id: number) {
+    return this.http.get('http://localhost:8080/events/' + id)
+          .map(response => <Event>response.json());
   }
 }

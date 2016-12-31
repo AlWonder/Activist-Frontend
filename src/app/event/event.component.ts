@@ -13,8 +13,8 @@ export class EventComponent implements OnInit {
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
-    this.eventService.getEvent(1)
-      .then(event => this.event = event);
+    this.eventService.getEvent(4)
+        .subscribe(data => this.event = data);
   }
 
 }
