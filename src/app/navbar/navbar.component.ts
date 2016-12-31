@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { LoginComponent } from '../login/login.component'
 
 import { UserService } from '../user.service';
@@ -8,12 +8,13 @@ import { UserService } from '../user.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
 
-  loginForm = false;
   isLoggedIn : boolean;
 
   constructor(private userService: UserService) { }
+  @Output() onLoginButtonPressed = new EventEmitter<boolean>();
 
   //jwtHelper: JwtHelper = new JwtHelper();
 
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit {
 
   toggleLogin(event) {
     event.preventDefault();
-    this.loginForm == true ? this.loginForm = false : this.loginForm = true;
+
+    this.onLoginButtonPressed.emit(true);
   }
 
   logout() {

@@ -8,10 +8,16 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  loginForm: boolean = false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+  }
+
+  onLoginButtonPressed(a: boolean) {
+    this.loginForm == true ? this.loginForm = false : this.loginForm = true;
+    console.log(this.loginForm);
   }
 
 }

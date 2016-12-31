@@ -1,5 +1,6 @@
 .login {
-  
+  position: absolute;
+  top: 0;
   background-color: #fafafa;
   width: 500;
   height: 400;
