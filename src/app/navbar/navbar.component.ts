@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { LoginComponent } from '../login/login.component'
 
-import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'navbar',
@@ -11,15 +11,15 @@ import { UserService } from '../user.service';
 
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn : boolean;
+  authenticated : boolean;
 
-  constructor(private userService: UserService) { }
+  constructor(private authService: AuthService) { }
   @Output() onLoginButtonPressed = new EventEmitter<boolean>();
 
   //jwtHelper: JwtHelper = new JwtHelper();
 
   ngOnInit() {
-    this.isLoggedIn = this.userService.isLoggedIn();
+    this.authenticated = this.authService.authenticated();
     /*console.log(
     this.jwtHelper.decodeToken(token),
     this.jwtHelper.getTokenExpirationDate(token),
@@ -33,8 +33,6 @@ export class NavbarComponent implements OnInit {
     this.onLoginButtonPressed.emit(true);
   }
 
-  logout() {
-    this.userService.logout();
-  }
+
 
 }

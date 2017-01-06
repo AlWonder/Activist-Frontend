@@ -60,4 +60,12 @@ export class UserService {
     return false;
   }
 
+  getUserByToken(id: number) {
+    if (!!localStorage.getItem('auth_token')) {
+    return this.http.get('http://localhost:8080/user/?auth-token=')
+          .map(response => <Event>response.json());
+    }
+  }
+
+
 }

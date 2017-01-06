@@ -12,8 +12,9 @@ import { EventService } from './event/event.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component'
 
-import { UserService } from './user.service';
-import { JwtHelper } from 'angular2-jwt';
+import { AuthService } from './auth.service';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JwtHelper } from 'angular2-jwt';
     EventsComponent,
     HomeComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -33,13 +35,13 @@ import { JwtHelper } from 'angular2-jwt';
       { path: 'home', component: HomeComponent },
       { path: 'events', component: EventsComponent },
       { path: 'events/:id', component: EventComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'signup', component: SignupComponent }
     ])
   ],
   providers: [
     EventService,
-    UserService,
-    JwtHelper
+    AuthService,
+    AUTH_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })

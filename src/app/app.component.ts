@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +8,18 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   loginForm: boolean = false;
 
-  constructor(private userService: UserService) { }
+  thing: string;
+
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
+
   }
 
-  onLoginButtonPressed(a: boolean) {
+  toggleLogin() {
     this.loginForm == true ? this.loginForm = false : this.loginForm = true;
     console.log(this.loginForm);
   }
