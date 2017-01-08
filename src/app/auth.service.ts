@@ -1,6 +1,13 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
+import { Headers, RequestOptions, Http } from '@angular/http';
+
+import { User } from './models/user';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -18,7 +25,7 @@ export class AuthService {
     callbackURL: 'http://localhost:4200/',
   });
 
-  constructor(private router: Router) {
+  constructor(private http: Http, private router: Router) {
     var result = this.auth0.parseHash(window.location.hash);
 
     if (result && result.idToken) {
@@ -51,7 +58,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
   }
 
-  public signUp(username, password, firstName) {
+  /*public signUp(username, password, firstName) {
     this.auth0.signup({
       connection: 'Username-Password-Authentication',
       responseType: 'token',
@@ -61,5 +68,27 @@ export class AuthService {
     }, function(err) {
       if (err) alert("something went wrong: " + err.message);
     });
+
+  }*/
+
+  public signUp(user: User) {
+    let headers = new Headers({ 'content-type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post("https://alwonder.eu.auth0.com/dbconnections/signup", {
+      client_id: 'OJpLcs68G0OymE5F6VDoWHgFfWJJ8V3C',
+      connection: 'Username-Password-Authentication',
+      email: user.email,
+      password: user.password,
+      user_metadata: {
+        first_name: user.firstName,
+        second_name: user.secondName,
+        last_name: user.lastName,
+        gender: user.gender.toString(),
+        group: user.group.toString()
+      },
+    }, options)
+    .map(res => res.json())
+    .catch((error:any) => { return Observable.throw(error); });
   }
 }

@@ -18,6 +18,7 @@
 	        <li class="active"><a routerLink="/events">Мероприятия <span class="sr-only">(current)</span></a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right" *ngIf="!auth.authenticated()">
+					<li><a routerLink="/signup">Регистрация</a></li>
 	        <li><a role="button" (click)="toggleLogin()">Вход</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right" *ngIf="auth.authenticated()">

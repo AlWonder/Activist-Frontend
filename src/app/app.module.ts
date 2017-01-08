@@ -13,7 +13,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component'
 
 import { AuthService } from './auth.service';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
@@ -40,8 +39,7 @@ import { SignupComponent } from './signup/signup.component';
   ],
   providers: [
     EventService,
-    AuthService,
-    AUTH_PROVIDERS
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

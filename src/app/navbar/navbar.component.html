@@ -17,7 +17,8 @@
         <li class="active"><a routerLink="/events">Мероприятия <span class="sr-only">(current)</span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" *ngIf="!authenticated">
-        <li><a href="#" role="button" (click)="toggleLogin($event)">Вход</a></li>
+        <li><a routerLink="/signup">Регистрация</a></li>
+        <li><a href="#" role="button" (click)="toggleLogin($event)">Вхощщщд</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" *ngIf="authenticated">
         <li><a>Профиль</a></li>

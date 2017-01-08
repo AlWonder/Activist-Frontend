@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Headers, RequestOptions, Http } from '@angular/http';
-
 
 import { AuthService } from '../auth.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-signup',
@@ -11,29 +10,17 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private authService: AuthService, private http: Http) { }
+  user: User = new User();
+  done: boolean;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  addHero (email: string, password: string, firstName: string, secondName: string, lastName: string, gender: number, group: number) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    this.http.post("http://localhost:8080/signup", {
-      email: email,
-      password: password,
-      first_name: firstName,
-      second_name: secondName,
-      last_name: lastName,
-      gender: gender,
-      user_group: group
-    }).subscribe(data => {
-                alert('ok');
-          }, error => {
-              console.log(JSON.stringify(error.json()));
-          });;
-    console.log('Sent');
+  signUp() {
+    this.authService.signUp(this.user)
+      .subscribe((data) => {console.log(data); this.done=true;});
   }
 
 }

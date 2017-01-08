@@ -2,43 +2,37 @@
 <form>
 <div class="form-group">
   <label for="name">Email</label>
-  <input type="email" class="form-control" #username placeholder="yours@example.com">
+  <input type="email" class="form-control" name="email" [(ngModel)]="user.email" placeholder="yours@example.com">
 </div>
 <div class="form-group">
   <label for="name">Пароль</label>
-  <input type="password" class="form-control" #password placeholder="ваш пароль">
+  <input type="password" class="form-control" name="password" [(ngModel)]="user.password" placeholder="ваш пароль">
 </div>
 <div class="form-group">
   <label for="name">Имя</label>
-  <input type="text" class="form-control" #firstName placeholder="имя">
+  <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" placeholder="имя">
 </div>
 <div class="form-group">
   <label for="name">Отчество</label>
-  <input type="text" class="form-control" #secondName placeholder="отчество">
+  <input type="text" class="form-control" name="secondName" [(ngModel)]="user.secondName" placeholder="отчество">
 </div>
 <div class="form-group">
   <label for="name">Фамилия</label>
-  <input type="text" class="form-control" #lastName placeholder="фамилия">
+  <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" placeholder="фамилия">
 </div>
 <div class="form-group">
   <label for="name">Пол</label>
-  <select class="form-control" #gender>
+  <select class="form-control" name="gender" [(ngModel)]="user.gender">
     <option value="1">Мужской</option>
     <option value="2">Женский</option>
   </select>
 </div>
 <div class="form-group">
   <label for="name">Зарегистрироваться как</label>
-  <select class="form-control" #group>
+  <select class="form-control" name="group" [(ngModel)]="user.group">
     <option value="1">Участник</option>
     <option value="2">Организатор</option>
   </select>
 </div>
-<button type="submit" class="btn btn-default" (click)="addHero(username.value,
-password.value,
-firstName.value,
- secondName.value,
-  lastName.value,
-   gender.value,
-    group.value)">Sign Up</button>
+<button type="submit" class="btn btn-default" (click)="signUp()">Sign Up</button>
 </form>
