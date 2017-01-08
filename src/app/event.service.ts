@@ -1,7 +1,7 @@
-import { EVENTS } from '../mocks/events';
+import { EVENTS } from './mocks/events';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Event } from './event';
+import { Event } from './models/event';
 import 'rxjs/add/operator/map';
 
 @Injectable()

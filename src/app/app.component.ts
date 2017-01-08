@@ -13,10 +13,10 @@ export class AppComponent implements OnInit {
 
   thing: string;
 
-  constructor(public auth: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-
+    console.log(localStorage.getItem('id_token'));
   }
 
   toggleLogin() {

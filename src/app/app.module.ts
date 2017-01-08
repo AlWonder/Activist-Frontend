@@ -8,12 +8,11 @@ import { AppComponent } from './app.component';
 import { EventComponent } from './event/event.component';
 import { EventsComponent } from './events/events.component';
 import { HomeComponent } from './home/home.component';
-import { EventService } from './event/event.service';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 import { AuthService } from './auth.service';
-import { SignupComponent } from './signup/signup.component';
+import { EventService } from './event.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { SignupComponent } from './signup/signup.component';
     EventComponent,
     EventsComponent,
     HomeComponent,
-    NavbarComponent,
     LoginComponent,
     SignupComponent
   ],

@@ -17,13 +17,13 @@
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a routerLink="/events">Мероприятия <span class="sr-only">(current)</span></a></li>
 	      </ul>
-	      <ul class="nav navbar-nav navbar-right" *ngIf="!auth.authenticated()">
+	      <ul class="nav navbar-nav navbar-right" *ngIf="!authService.authenticated()">
 					<li><a routerLink="/signup">Регистрация</a></li>
 	        <li><a role="button" (click)="toggleLogin()">Вход</a></li>
 	      </ul>
-	      <ul class="nav navbar-nav navbar-right" *ngIf="auth.authenticated()">
+	      <ul class="nav navbar-nav navbar-right" *ngIf="authService.authenticated()">
 	        <li><a>Профиль</a></li>
-	        <li><a (click)="auth.logout()">Выход</a></li>
+	        <li><a (click)="authService.logout()">Выход</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->

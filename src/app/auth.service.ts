@@ -58,25 +58,8 @@ export class AuthService {
     localStorage.removeItem('id_token');
   }
 
-  /*public signUp(username, password, firstName) {
-    this.auth0.signup({
-      connection: 'Username-Password-Authentication',
-      responseType: 'token',
-      email: username,
-      password: password,
-      firstName: firstName
-    }, function(err) {
-      if (err) alert("something went wrong: " + err.message);
-    });
-
-  }*/
-
   public signUp(user: User) {
-    let headers = new Headers({ 'content-type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post("https://alwonder.eu.auth0.com/dbconnections/signup", {
-      client_id: 'OJpLcs68G0OymE5F6VDoWHgFfWJJ8V3C',
+    this.auth0.signup({
       connection: 'Username-Password-Authentication',
       email: user.email,
       password: user.password,
@@ -87,8 +70,8 @@ export class AuthService {
         gender: user.gender.toString(),
         group: user.group.toString()
       },
-    }, options)
-    .map(res => res.json())
-    .catch((error:any) => { return Observable.throw(error); });
+    }, function(err) {
+      if (err) alert("something went wrong: " + err.message);
+    });
   }
 }
