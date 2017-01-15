@@ -1,0 +1,14 @@
+<div *ngIf="authService.authenticated() && authService.userProfile">
+    <h4>You are logged in</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Profile</h3>
+        <img [src]="authService.userProfile.picture" alt="" class="profile-img">
+        <p><strong>ФИО: </strong> {{authService.userProfile.user_metadata.first_name}}
+                                  {{authService.userProfile.user_metadata.second_name}}
+                                  {{authService.userProfile.user_metadata.last_name}}</p>
+        <p><strong>Email: </strong> {{authService.userProfile.email}}</p>
+      </div>
+    </div>
+  </div>
+  <h4 *ngIf="!authService.authenticated()">You are not logged in, please click 'Log in' button to login</h4>

@@ -10,9 +10,13 @@ import { EventsComponent } from './events/events.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { NewEventComponent } from './new-event/new-event.component';
 
 import { AuthService } from './auth.service';
 import { EventService } from './event.service';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { EventService } from './event.service';
     EventsComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent,
+    UnauthorizedComponent,
+    NewEventComponent
   ],
   imports: [
     BrowserModule,
@@ -31,13 +38,18 @@ import { EventService } from './event.service';
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'events', component: EventsComponent },
+      { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard] },
       { path: 'events/:id', component: EventComponent },
-      { path: 'signup', component: SignupComponent }
+      { path: 'signup', component: SignupComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'unauthorized', component: UnauthorizedComponent },
+      { path: '**', redirectTo: '/home' }
     ])
   ],
   providers: [
     EventService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,36 +1,49 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
-import { Headers, RequestOptions, Http } from '@angular/http';
 
 import { User } from './models/user';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
 
 // Avoid name not found warnings
-declare var Auth0Lock: any;
 declare var Auth0: any;
 
 @Injectable()
 export class AuthService {
-  // Configure Auth0
-  lock = new Auth0Lock('OJpLcs68G0OymE5F6VDoWHgFfWJJ8V3C', 'alwonder.eu.auth0.com', {});
 
   auth0 = new Auth0({
     domain: 'alwonder.eu.auth0.com',
-    clientID: 'OJpLcs68G0OymE5F6VDoWHgFfWJJ8V3C',
+    clientID: 'ur6mJO0drrUOhMf9lxPayYnM9ZtGAUPR',
     responseType: 'token',
     callbackURL: 'http://localhost:4200/',
   });
 
-  constructor(private http: Http, private router: Router) {
+  //Store profile object in auth class
+  userProfile: any;
+
+  constructor(private router: Router) {
+
+    // Set userProfile attribute of already saved profile
+    this.userProfile = JSON.parse(localStorage.getItem('profile'));
+
     var result = this.auth0.parseHash(window.location.hash);
 
-    if (result && result.idToken) {
-      localStorage.setItem('id_token', result.idToken);
-      this.router.navigate(['/Home']);
+    if (result && result.idToken && result.accessToken) {
+
+      // Fetch profile information and set idToken
+      this.auth0.getUserInfo(result.accessToken, (error, profile) => {
+        if (error) {
+          // Handle error
+          alert("GetUserInfo: " + error);
+          return;
+        }
+
+        localStorage.setItem('profile', JSON.stringify(profile));
+        this.userProfile = profile;
+        localStorage.setItem('id_token', result.idToken);
+        //console.log(this.userProfile);
+      });
+
+      this.router.navigate(['/home']);
     } else if (result && result.error) {
       alert('error: ' + result.error);
     }
@@ -39,7 +52,6 @@ export class AuthService {
   public login(username, password) {
     this.auth0.login({
       connection: 'Username-Password-Authentication',
-      responseType: 'token',
       email: username,
       password: password,
     }, function(err) {
@@ -56,6 +68,9 @@ export class AuthService {
   public logout() {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
+    localStorage.removeItem('profile');
+    this.userProfile = undefined;
+    this.router.navigate(['/home']);
   }
 
   public signUp(user: User) {
@@ -74,4 +89,9 @@ export class AuthService {
       if (err) alert("something went wrong: " + err.message);
     });
   }
+
+  public isOrganizer() {
+  return this.userProfile && this.userProfile.user_metadata
+    && this.userProfile.user_metadata.group == "2";
+}
 }

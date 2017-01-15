@@ -16,12 +16,11 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('id_token'));
+    console.log(this.authService.userProfile);
   }
 
   toggleLogin() {
     this.loginForm == true ? this.loginForm = false : this.loginForm = true;
-    console.log(this.loginForm);
   }
 
 }
