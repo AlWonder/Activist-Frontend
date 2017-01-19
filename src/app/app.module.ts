@@ -40,6 +40,7 @@ import { AuthGuard } from './auth.guard';
       { path: 'events', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard] },
       { path: 'events/:id', component: EventComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'unauthorized', component: UnauthorizedComponent },

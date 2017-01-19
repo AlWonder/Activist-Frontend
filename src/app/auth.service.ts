@@ -1,6 +1,8 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable } from "rxjs/Observable";
 
 import { User } from './models/user';
 
@@ -20,7 +22,7 @@ export class AuthService {
   //Store profile object in auth class
   userProfile: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: Http) {
 
     // Set userProfile attribute of already saved profile
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
@@ -50,13 +52,12 @@ export class AuthService {
   }
 
   public login(username, password) {
-    this.auth0.login({
-      connection: 'Username-Password-Authentication',
-      email: username,
-      password: password,
-    }, function(err) {
-      if (err) alert("something went wrong: " + err.message);
-    });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post("//localhost:8080/login", { username, password }, options)
+                    .map(this.extractData)
+                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
   }
 
   public authenticated() {
@@ -74,20 +75,29 @@ export class AuthService {
   }
 
   public signUp(user: User) {
-    this.auth0.signup({
-      connection: 'Username-Password-Authentication',
-      email: user.email,
-      password: user.password,
-      user_metadata: {
-        first_name: user.firstName,
-        second_name: user.secondName,
-        last_name: user.lastName,
-        gender: user.gender.toString(),
-        group: user.group.toString()
-      },
-    }, function(err) {
-      if (err) alert("something went wrong: " + err.message);
-    });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post("//localhost:8080/signup", { user }, options)
+                    .map(this.extractData)
+                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+  }
+
+  public handleResponse(response: any) {
+    if ( response.errors == null ) {
+      console.log(response)
+      localStorage.setItem('id_token', response.idToken);
+      this.router.navigate(['/home']);
+    } else {
+      for (let error of response.errors) {
+        alert(error.userMessage);
+      }
+    }
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body || { };
   }
 
   public isOrganizer() {

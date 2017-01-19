@@ -19,7 +19,7 @@
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right" *ngIf="!authService.authenticated()">
 					<li><a routerLink="/signup">Регистрация</a></li>
-	        <li><a role="button" (click)="toggleLogin()">Вход</a></li>
+	        <li><a routerLink="/login">Вход</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right" *ngIf="authService.authenticated()">
 	        <li><a routerLink="/profile">Профиль</a></li>
@@ -31,8 +31,8 @@
 </header>
 
 <main class="container">
-	<p *ngIf="authService.authenticated()">
-		{{authService.userProfile.email}}
+	<p *ngIf="authService.authenticated() && authService.userProfile">
+		{{ authService.userProfile.email }}
 	</p>
   <router-outlet></router-outlet>
 </main>
@@ -45,5 +45,3 @@
     </p>
   </div>
 </footer>
-
-<login *ngIf="loginForm"></login>
