@@ -15,6 +15,7 @@ import { NewEventComponent } from './new-event/new-event.component';
 
 import { AuthService } from './auth.service';
 import { EventService } from './event.service';
+import { UserService } from './user.service';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
 
@@ -50,6 +51,7 @@ import { AuthGuard } from './auth.guard';
   providers: [
     EventService,
     AuthService,
+    UserService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
