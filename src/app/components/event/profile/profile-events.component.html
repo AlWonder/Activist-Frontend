@@ -1,0 +1,8 @@
+<div class="row">
+  <div *ngFor="let event of events">
+  	<article class="event well well-sm">
+  		<h3 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a></h3>
+  		<p class="description">{{event.description}}</p>
+  	</article>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 export class Event {
   id: number;
   userId: number;
-  name: string;
+  title: string;
   description: string;
   createDate: Date;
   eventDate: Date;

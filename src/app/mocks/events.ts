@@ -1,9 +1,9 @@
-import { Event } from '../event/event';
+import { Event } from 'app/models/event';
 
 export const EVENTS: Event[] = [{
   "id": 1,
   "userId": 3,
-  "name": "Блаблаб",
+  "title": "Блаблаб",
   "description": "Лалалалалалал",
   "createDate": new Date('2512-01-04T14:00:00'),
   "eventDate": new Date('2512-01-04T14:00:00'),
@@ -11,7 +11,7 @@ export const EVENTS: Event[] = [{
 }, {
   "id": 2,
   "userId": 3,
-  "name": "Блаблаб",
+  "title": "Блаблаб",
   "description": "Лалалалалалал",
   "createDate": new Date('2512-01-04T14:00:00'),
   "eventDate": new Date('2512-01-04T14:00:00'),
@@ -19,7 +19,7 @@ export const EVENTS: Event[] = [{
 }, {
   "id": 3,
   "userId": 3,
-  "name": "Блаблаб",
+  "title": "Блаблаб",
   "description": "Лалалалалалал",
   "createDate": new Date('2512-01-04T14:00:00'),
   "eventDate": new Date('2512-01-04T14:00:00'),
@@ -27,7 +27,7 @@ export const EVENTS: Event[] = [{
 }, {
   "id": 4,
   "userId": 3,
-  "name": "Блаблаб",
+  "title": "Блаблаб",
   "description": "Лалалалалалал",
   "createDate": new Date('2512-01-04T14:00:00'),
   "eventDate": new Date('2512-01-04T14:00:00'),
@@ -35,7 +35,7 @@ export const EVENTS: Event[] = [{
 }, {
   "id": 5,
   "userId": 3,
-  "name": "Блаблаб",
+  "title": "Блаблаб",
   "description": "Лалалалалалал",
   "createDate": new Date('2512-01-04T14:00:00'),
   "eventDate": new Date('2512-01-04T14:00:00'),
@@ -43,7 +43,7 @@ export const EVENTS: Event[] = [{
 }, {
   "id": 6,
   "userId": 3,
-  "name": "Блаблаб",
+  "title": "Блаблаб",
   "description": "Лалалалалалал",
   "createDate": new Date('2512-01-04T14:00:00'),
   "eventDate": new Date('2512-01-04T14:00:00'),

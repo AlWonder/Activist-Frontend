@@ -1,0 +1,14 @@
+<section class="article-full" *ngIf="event">
+	<h3>{{event.title}}</h3>
+	<p class="description">{{event.description}}</p>
+	<p class="event-date">Дата проведения: {{event.event_date | date:'yyyy-MM-dd'}} {{event.event_time | date:'hh:mm'}}</p>
+	<div class="join-event" *ngIf="authService.authenticated() && isActivist">
+		<div class="event-not-joined" *ngIf="!isJoined">
+			<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
+			<a href="#"></a>
+		</div>
+		<div class="event-joined" *ngIf="isJoined">
+			<p>Вы уже участвуете в этом мероприятии.</p>
+		</div>
+	</div>
+</section>

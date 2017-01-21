@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 
 import './rxjs-operators';
 
@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    console.log(this.authService.userProfile);
+    if(this.authService.authenticated()) {
+      console.log(this.authService.userId);
+    }
   }
 }

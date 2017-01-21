@@ -5,19 +5,26 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { EventComponent } from './event/event.component';
-import { EventsComponent } from './events/events.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
-import { NewEventComponent } from './new-event/new-event.component';
+import { HomeComponent } from './components/home/home.component';
 
-import { AuthService } from './auth.service';
-import { EventService } from './event.service';
-import { UserService } from './user.service';
-import { ProfileComponent } from './profile/profile.component';
-import { AuthGuard } from './auth.guard';
+import { EventsComponent } from './components/event/index/events.component';
+import { EventComponent } from './components/event/get/event.component';
+import { NewEventComponent } from './components/event/new/new-event.component';
+import { ProfileEventsComponent } from './components/event/profile/profile-events.component';
+
+import { LoginComponent } from './components/user/login/login.component';
+import { SignupComponent } from './components/user/signup/signup.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+
+import { AuthService } from './services/auth.service';
+import { ApiService } from './services/api.service';
+import { EventService } from './services/event.service';
+import { UserService } from './services/user.service';
+import { ProfileComponent } from './components/user/profile/profile.component';
+
+import { AuthGuard } from './guards/auth.guard';
+import { OrgGuard } from './guards/org.guard';
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import { AuthGuard } from './auth.guard';
     SignupComponent,
     ProfileComponent,
     UnauthorizedComponent,
-    NewEventComponent
+    NewEventComponent,
+    ProfileEventsComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
@@ -39,20 +48,23 @@ import { AuthGuard } from './auth.guard';
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'events', component: EventsComponent },
-      { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard] },
+      { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'unauthorized', component: UnauthorizedComponent },
+      { path: 'forbidden', component: ForbiddenComponent },
       { path: '**', redirectTo: '/home' }
     ])
   ],
   providers: [
     EventService,
     AuthService,
+    ApiService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    OrgGuard
   ],
   bootstrap: [AppComponent]
 })
