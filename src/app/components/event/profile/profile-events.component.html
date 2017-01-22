@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="events && events.length > 0">
   <div *ngFor="let event of events">
   	<article class="event well well-sm">
   		<h3 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a></h3>

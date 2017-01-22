@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
 
-import './rxjs-operators';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

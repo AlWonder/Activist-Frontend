@@ -3,6 +3,8 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 
+import 'app/rxjs-operators';
+
 @Injectable()
 export class ApiService {
 

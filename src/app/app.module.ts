@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { EventsComponent } from './components/event/index/events.component';
-import { EventComponent } from './components/event/get/event.component';
+import { EventComponent } from './components/event/show/event.component';
 import { NewEventComponent } from './components/event/new/new-event.component';
 import { ProfileEventsComponent } from './components/event/profile/profile-events.component';
 
