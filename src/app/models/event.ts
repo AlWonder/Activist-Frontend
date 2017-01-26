@@ -4,6 +4,6 @@ export class Event {
   title: string;
   description: string;
   createDate: Date;
-  eventDate: Date;
+  eventDate: number;
   eventTime: Date;
 }

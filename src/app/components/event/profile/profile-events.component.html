@@ -1,4 +1,5 @@
 <div class="row" *ngIf="events && events.length > 0">
+  <button class="btn btn-success" routerLink="/events/new">Новое мероприятие</button><br>
   <div *ngFor="let event of events">
   	<article class="event well well-sm">
   		<h3 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a></h3>

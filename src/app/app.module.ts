@@ -12,19 +12,23 @@ import { EventComponent } from './components/event/show/event.component';
 import { NewEventComponent } from './components/event/new/new-event.component';
 import { ProfileEventsComponent } from './components/event/profile/profile-events.component';
 
+import { TagsQueryComponent } from './components/tag/query/tags-query.component';
+import { TagComponent } from './components/tag/show/tag.component';
+
 import { LoginComponent } from './components/user/login/login.component';
 import { SignupComponent } from './components/user/signup/signup.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { EventService } from './services/event.service';
+import { TagService } from './services/tag.service';
 import { UserService } from './services/user.service';
-import { ProfileComponent } from './components/user/profile/profile.component';
 
-import { AuthGuard } from './guards/auth.guard';
-import { OrgGuard } from './guards/org.guard';
+import { AuthGuard, OrgGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { OrgGuard } from './guards/org.guard';
     UnauthorizedComponent,
     NewEventComponent,
     ProfileEventsComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    TagsQueryComponent,
+    NotFoundComponent,
+    NotFoundComponent,
+    TagComponent
   ],
   imports: [
     BrowserModule,
@@ -50,12 +58,15 @@ import { OrgGuard } from './guards/org.guard';
       { path: 'events', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
+      { path: 'tags', component: TagsQueryComponent },
+      { path: 'tags/:tag', component: TagComponent },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'unauthorized', component: UnauthorizedComponent },
       { path: 'forbidden', component: ForbiddenComponent },
-      { path: '**', redirectTo: '/home' }
+      { path: '404', component: NotFoundComponent},
+      { path: '**', redirectTo: '/404' }
     ])
   ],
   providers: [
@@ -63,6 +74,7 @@ import { OrgGuard } from './guards/org.guard';
     AuthService,
     ApiService,
     UserService,
+    TagService,
     AuthGuard,
     OrgGuard
   ],

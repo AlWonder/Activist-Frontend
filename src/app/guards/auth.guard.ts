@@ -23,3 +23,18 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+
+@Injectable()
+export class OrgGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (this.authService.isOrganizer()) {
+      return true;
+    } else {
+      this.router.navigate(['forbidden']);
+      return false;
+    }
+  }
+}

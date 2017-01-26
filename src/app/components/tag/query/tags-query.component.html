@@ -1,0 +1,13 @@
+<div class="container tags-query">
+    <h1>Поиск тегов</h1>
+    <form (keydown)="keyDownFunction($event)">
+    <div class="form-group">
+      <label for="query">Тег</label>
+      <input type="text" class="form-control" name="query" [(ngModel)]="query" placeholder="">
+    </div>
+    <button type="submit" class="btn btn-default" (click)="queryTags()">Найти</button>
+  </form>
+  <div class="row" *ngIf="tags && tags.length > 0">
+    <button class="btn btn-success" *ngFor="let tag of tags">{{tag.name}}</button>
+  </div>
+</div>

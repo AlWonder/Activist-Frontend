@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   public getUserInfo() {
-    return this.api.get("users", true);
+    return this.api.get("users", true, null);
   }
 
   public handleResponse(response: any) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 
 import 'app/rxjs-operators';
@@ -12,12 +12,20 @@ export class ApiService {
 
   constructor(private http: Http) { }
 
-  public get(uri: string, authHeader: boolean) {
+  public get(uri: string, authHeader: boolean, params: Object) {
     let headers = new Headers();
     if (authHeader && tokenNotExpired()) {
       this.createAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
+    if(params) {
+      let searchParams = new URLSearchParams();
+      for (let param in params) {
+        if (params.hasOwnProperty(param))
+        searchParams.set(param, params[param]);
+      }
+      options.search = searchParams;
+    }
 
     return this.http.get(this.apiUrl + uri, options)
                     .map(this.extractData)

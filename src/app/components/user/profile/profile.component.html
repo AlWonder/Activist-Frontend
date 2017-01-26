@@ -10,6 +10,6 @@
         <p><strong>Email: </strong> {{authService.userProfile.email}}</p>
       </div>
     </div>
-    <profile-events></profile-events>
+    <profile-events *ngIf="authService.isOrganizer()"></profile-events>
   </div>
   <h4 *ngIf="!authService.authenticated()">You are not logged in, please click 'Log in' button to login</h4>

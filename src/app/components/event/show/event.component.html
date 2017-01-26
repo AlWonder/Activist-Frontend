@@ -1,7 +1,11 @@
 <section class="article-full" *ngIf="event">
 	<h3>{{event.title}}</h3>
 	<p class="description">{{event.description}}</p>
-	<p class="event-date">Дата проведения: {{event.event_date | date:'yyyy-MM-dd'}} {{event.event_time | date:'hh:mm'}}</p>
+	<p class="event-date">Дата проведения: {{event.event_date | date:'yyyy-MM-dd'}} <span *ngIf="isTimeSet">{{event.event_time}}</span></p>
+	<div class="row" *ngIf="tags && tags.length > 0">
+		<label>Теги</label>
+		<div class="tag" *ngFor="let tag of tags; let i = index" [routerLink]="['/tags', tag.name]">{{tag.name}}</div>
+	</div>
 	<div class="join-event" *ngIf="authService.authenticated() && isActivist">
 		<div class="event-not-joined" *ngIf="!isJoined">
 			<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
