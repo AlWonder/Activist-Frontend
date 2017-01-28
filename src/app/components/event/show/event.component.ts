@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/services/auth.service';
@@ -12,12 +13,13 @@ import { Tag } from 'app/models/tag'
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  event: Event;
-  tags: Tag[];
-  isActivist: boolean;
-  isJoined: boolean;
-  isTimeSet: boolean;
-  id: number;
+  private event: Event;
+  private tags: Tag[];
+  private isActivist: boolean;
+  private isJoined: boolean;
+  private isTimeSet: boolean;
+  private id: number;
+  private sub: Subscription;
 
   constructor(private eventService: EventService,
     private route: ActivatedRoute,
@@ -25,7 +27,7 @@ export class EventComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(params => {
        this.id = +params['id']; // (+) converts string 'id' to a number
     });
     console.log(this.id);
@@ -42,6 +44,10 @@ export class EventComponent implements OnInit {
                              console.log(this.event);
                            },
                    error =>  this.handleError(error));
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   handleError(error) {

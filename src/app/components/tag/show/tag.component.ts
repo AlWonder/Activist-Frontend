@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/services/auth.service';
@@ -22,7 +23,7 @@ export class TagComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-       this.tag = params['tag']; // (+) converts string 'id' to a number
+       this.tag = params['tag'];
     });
 
     this.eventService.getEventsByTag(this.tag)

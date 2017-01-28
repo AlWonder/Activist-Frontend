@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -30,6 +30,18 @@ import { UserService } from './services/user.service';
 
 import { AuthGuard, OrgGuard } from './guards/auth.guard';
 
+import { ProfileIndexComponent } from './components/profile/profile-index/profile-index.component';
+import { ProfileFullComponent } from './components/profile/profile-full/profile-full.component';
+import { ProfileMyEventsComponent } from './components/profile/profile-my-events/profile-my-events.component';
+import { ProfileJoinedEventsComponent } from './components/profile/profile-joined-events/profile-joined-events.component';
+
+const profileRoutes: Routes = [
+    { path: '', component: ProfileIndexComponent },
+    { path: 'full', component: ProfileFullComponent },
+    { path: 'events', component: ProfileMyEventsComponent },
+    { path: 'joined', component: ProfileJoinedEventsComponent }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +58,11 @@ import { AuthGuard, OrgGuard } from './guards/auth.guard';
     TagsQueryComponent,
     NotFoundComponent,
     NotFoundComponent,
-    TagComponent
+    TagComponent,
+    ProfileIndexComponent,
+    ProfileFullComponent,
+    ProfileMyEventsComponent,
+    ProfileJoinedEventsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +78,7 @@ import { AuthGuard, OrgGuard } from './guards/auth.guard';
       { path: 'tags/:tag', component: TagComponent },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: profileRoutes },
       { path: 'unauthorized', component: UnauthorizedComponent },
       { path: 'forbidden', component: ForbiddenComponent },
       { path: '404', component: NotFoundComponent},

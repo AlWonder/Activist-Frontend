@@ -1,15 +1,35 @@
 <div *ngIf="authService.authenticated() && authService.userProfile">
-    <h4>You are logged in</h4>
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Profile</h3>
-        <!--<img [src]="authService.userProfile.picture" alt="" class="profile-img">-->
-        <p><strong>ФИО: </strong> {{authService.userProfile.firstName}}
-                                  {{authService.userProfile.secondName}}
-                                  {{authService.userProfile.lastName}}</p>
-        <p><strong>Email: </strong> {{authService.userProfile.email}}</p>
-      </div>
+  <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="full">Полная информация</a>
+                </li>
+                <li>
+                    <a routerLink="events">Мои меропряития</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
-    <profile-events *ngIf="authService.isOrganizer()"></profile-events>
   </div>
-  <h4 *ngIf="!authService.authenticated()">You are not logged in, please click 'Log in' button to login</h4>
