@@ -4,6 +4,7 @@
 	<p class="event-date">Дата проведения: {{event.event_date | date:'yyyy-MM-dd'}} <span *ngIf="isTimeSet">{{event.event_time}}</span></p>
 	<div class="row" *ngIf="tags && tags.length > 0">
 		<label>Теги</label>
+		<tag-input name="tags" [(ngModel)]="tags.name" [readonly]="true"></tag-input>
 		<div class="tag" *ngFor="let tag of tags; let i = index" [routerLink]="['/tags', tag.name]">{{tag.name}}</div>
 	</div>
 	<div class="join-event" *ngIf="authService.authenticated() && isActivist">

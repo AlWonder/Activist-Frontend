@@ -1,13 +1,15 @@
-<div class="container login">
-    <h1>Hero Form</h1>
-    <form>
+<div class="login-screen">
+  <div class="login-icon">
+    <h4>Вход</h4>
+  </div>
+    <form class="login-form">
     <div class="form-group">
       <label for="name">Username</label>
-      <input type="text" class="form-control" #username placeholder="yours@example.com">
+      <input type="text" class="form-control login-field" #username placeholder="yours@example.com">
     </div>
     <div class="form-group">
       <label for="name">Password</label>
-      <input type="password" class="form-control" #password placeholder="your password">
+      <input type="password" class="form-control login-field" #password placeholder="your password">
     </div>
     <button type="submit" class="btn btn-default" (click)="login(username.value, password.value)">Login</button>
   </form>

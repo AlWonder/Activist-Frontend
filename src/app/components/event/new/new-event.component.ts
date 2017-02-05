@@ -14,14 +14,25 @@ import { TagService } from 'app/services/tag.service';
 })
 export class NewEventComponent implements OnInit {
 
+  public tags = ['Car', 'Bus', 'Train'];
+
   event: Event = new Event();
   queriedTags: Tag[];
   addedTags: string[] = [];
   tagQuery: string = "";
+  volonteursChecked: boolean;
 
   constructor(private tagService: TagService, private eventService: EventService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  toggleVolonteursSwitch() {
+    if (this.volonteursChecked) {
+      this.volonteursChecked = false;
+    } else {
+      this.volonteursChecked = true;
+    }
   }
 
   tagKeyUp(event) {
@@ -62,11 +73,15 @@ export class NewEventComponent implements OnInit {
     this.addedTags.splice(tag, 1);
   }
 
-  onSubmit() {
-    this.eventService.addEvent({event: this.event, tags: this.addedTags})
-                   .subscribe(
-                     response  => this.handleResponse(response),
-                     error =>  alert("Error: " + error));
+  onSubmit(event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+    } else {
+      this.eventService.addEvent({event: this.event, tags: this.tags})
+                     .subscribe(
+                       response  => this.handleResponse(response),
+                       error =>  alert("Error: " + error));
+    }
   }
 
   handleResponse(response) {

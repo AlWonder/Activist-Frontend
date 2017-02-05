@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
+import { RlTagInputModule } from 'angular2-tag-input';
+import { TagInputModule } from 'ng2-tag-input';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -68,6 +70,8 @@ const profileRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RlTagInputModule,
+    TagInputModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
