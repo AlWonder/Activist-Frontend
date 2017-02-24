@@ -6,7 +6,7 @@ import { Event } from 'app/models/event';
 @Component({
   selector: 'app-profile-my-events',
   templateUrl: './profile-my-events.component.html',
-  styleUrls: ['./profile-my-events.component.css']
+  styleUrls: ['./profile-my-events.component.scss']
 })
 export class ProfileMyEventsComponent implements OnInit {
   events: Event[];
@@ -15,7 +15,7 @@ export class ProfileMyEventsComponent implements OnInit {
 
   ngOnInit() {
     this.eventService.getUserEvents(this.authService.userId)
-        .subscribe(data => this.events = data);
+      .subscribe(data => this.events = data);
   }
 
   public deleteEvent(id: number) {

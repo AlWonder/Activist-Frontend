@@ -5,7 +5,7 @@ import { AuthService } from 'app/services/auth.service';
 @Component({
   selector: 'app-profile-dashboard',
   templateUrl: './profile-dashboard.component.html',
-  styleUrls: ['./profile-dashboard.component.css']
+  styleUrls: ['./profile-dashboard.component.scss']
 })
 export class ProfileDashboardComponent implements OnInit {
 

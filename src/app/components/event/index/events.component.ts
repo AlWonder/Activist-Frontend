@@ -8,7 +8,7 @@ import { Event } from 'app/models/event';
 @Component({
   selector: 'events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.scss']
 })
 
 export class EventsComponent implements OnInit {
@@ -25,7 +25,7 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       this.page = +params['page']; // (+) converts string 'id' to a number
+      this.page = +params['page']; // (+) converts string 'id' to a number
     });
     if (isNaN(this.page)) {
       this.router.navigate(['/404']);
@@ -34,7 +34,7 @@ export class EventsComponent implements OnInit {
     this.getPage(this.page);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
@@ -45,9 +45,11 @@ export class EventsComponent implements OnInit {
 
   getPage(page: number) {
     this.eventService.getEvents(page)
-        .subscribe(data => {this.events = data.events;
-          this.page = page;
-                  this.count = data.count});
+      .subscribe(data => {
+      this.events = data.events;
+        this.page = page;
+        this.count = data.count
+      });
   }
 
 }

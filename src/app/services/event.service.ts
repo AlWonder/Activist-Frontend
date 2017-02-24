@@ -43,4 +43,8 @@ export class EventService {
   public deleteEvent(eventId: number) {
     return this.api.delete("events/" + eventId);
   }
+
+  public denyEvent(eventId: number) {
+    return this.api.delete("events/" + eventId + "/join");
+  }
 }

@@ -18,18 +18,18 @@ export class ApiService {
       this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
-    if(params) {
+    if (params) {
       let searchParams = new URLSearchParams();
       for (let param in params) {
         if (params.hasOwnProperty(param))
-        searchParams.set(param, params[param]);
+          searchParams.set(param, params[param]);
       }
       options.search = searchParams;
     }
 
     return this.http.get(this.apiUrl + uri, options)
-                    .map(this.extractData)
-                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
   }
 
   public post(uri: string, data: Object, authHeader: boolean) {
@@ -40,8 +40,8 @@ export class ApiService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.apiUrl + uri, data, options)
-                    .map(this.extractData)
-                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
   }
 
   public put(uri: string, data: Object) {
@@ -53,8 +53,8 @@ export class ApiService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.put(this.apiUrl + uri, data, options)
-                    .map(this.extractData)
-                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
   }
 
   public delete(uri: string) {
@@ -66,13 +66,13 @@ export class ApiService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.delete(this.apiUrl + uri, options)
-                    .map(this.extractData)
-                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
   }
 
   private extractData(res: Response) {
     let body = res.json();
-    return body || { };
+    return body || {};
   }
 
   public addAuthorizationHeader(headers: Headers) {

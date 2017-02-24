@@ -13,8 +13,8 @@ export class LoginComponent {
 
   login(email: string, password: string) {
     this.authService.login(email, password)
-                   .subscribe(
-                     response  => this.authService.handleResponse(response),
-                     error =>  alert("Error: " + error));
+      .subscribe(
+      response => this.authService.handleResponse(response),
+      error => alert("Error: " + error));
   }
 }

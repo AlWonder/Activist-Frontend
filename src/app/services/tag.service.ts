@@ -9,7 +9,7 @@ export class TagService {
   constructor(private api: ApiService) { }
 
   public queryTags(query: string) {
-    if(query) {
+    if (query) {
       return this.api.get('tags', false, { query: query });
     }
     return this.api.get('tags', false, null);

@@ -7,7 +7,7 @@ import { User } from 'app/models/user';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.scss']
 })
 
 export class SignupComponent implements OnInit {
@@ -23,8 +23,8 @@ export class SignupComponent implements OnInit {
     this.user.gender = +this.user.gender;
     this.user.group = +this.user.group;
     this.authService.signUp(this.user)
-                   .subscribe(
-                     response  => this.authService.handleResponse(response),
-                     error =>  alert("Error: " + error));
+      .subscribe(
+      response => this.authService.handleResponse(response),
+      error => alert("Error: " + error));
   }
 }

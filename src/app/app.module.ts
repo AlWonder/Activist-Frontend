@@ -39,11 +39,11 @@ import { ProfileMyEventsComponent } from './components/profile/my-events/profile
 import { ProfileJoinedEventsComponent } from './components/profile/joined-events/profile-joined-events.component';
 
 const profileRoutes: Routes = [
-    { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: ProfileDashboardComponent },
-    { path: 'full', component: ProfileFullComponent },
-    { path: 'events', component: ProfileMyEventsComponent },
-    { path: 'joined', component: ProfileJoinedEventsComponent }
+  { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: ProfileDashboardComponent },
+  { path: 'full', component: ProfileFullComponent },
+  { path: 'events', component: ProfileMyEventsComponent },
+  { path: 'joined', component: ProfileJoinedEventsComponent }
 ];
 
 @NgModule({
@@ -90,7 +90,7 @@ const profileRoutes: Routes = [
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: profileRoutes },
       { path: 'unauthorized', component: UnauthorizedComponent },
       { path: 'forbidden', component: ForbiddenComponent },
-      { path: '404', component: NotFoundComponent},
+      { path: '404', component: NotFoundComponent },
       { path: '**', redirectTo: '/404' }
     ])
   ],

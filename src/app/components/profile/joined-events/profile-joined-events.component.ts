@@ -6,7 +6,7 @@ import { Event } from 'app/models/event';
 @Component({
   selector: 'app-profile-joined-events',
   templateUrl: './profile-joined-events.component.html',
-  styleUrls: ['./profile-joined-events.component.css']
+  styleUrls: ['./profile-joined-events.component.scss']
 })
 export class ProfileJoinedEventsComponent implements OnInit {
 
@@ -16,15 +16,20 @@ export class ProfileJoinedEventsComponent implements OnInit {
 
   ngOnInit() {
     this.eventService.getJoinedEvents(this.authService.userId)
-        .subscribe(data => this.events = data);
+      .subscribe(data => this.events = data);
   }
 
 
-    public deleteEvent(id: number) {
-      if (confirm("Вы действительно хотите удалить мероприятие?")) {
-        this.eventService.deleteEvent(id)
-          .subscribe(data => console.log(data));
-      }
+  private deleteEvent(id: number) {
+    if (confirm("Вы действительно хотите удалить мероприятие?")) {
+      this.eventService.deleteEvent(id)
+        .subscribe(data => console.log(data));
     }
+  }
+
+  private denyEvent(id: number) {
+    this.eventService.denyEvent(id)
+      .subscribe(data => alert(data));
+  }
 
 }

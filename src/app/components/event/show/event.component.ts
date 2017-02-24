@@ -10,7 +10,7 @@ import { Tag } from 'app/models/tag'
 @Component({
   selector: 'event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
   private event: Event;
@@ -28,35 +28,41 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id']; // (+) converts string 'id' to a number
+      this.id = +params['id']; // (+) converts string 'id' to a number
     });
     if (isNaN(this.id)) {
       this.router.navigate(['/404']);
       return;
     }
     this.eventService.getEvent(this.id)
-        .subscribe(data => { this.event = data.event;
-                             this.event.description = this.event.description.split('\n');
-                             this.tags = data.tags;
-                             this.isActivist = data.isActivist;
-                             this.isJoined = data.isJoined;
-                             this.isTimeSet = data.isTimeSet;
-                             console.log(this.event);
-                           },
-                   error =>  this.handleError(error));
+      .subscribe(data => {
+        this.event = data.event;
+        this.event.description = this.event.description.split('\n');
+        this.tags = data.tags;
+        this.isActivist = data.isActivist;
+        this.isJoined = data.isJoined;
+        this.isTimeSet = data.isTimeSet;
+        console.log(this.event);
+      },
+      error => this.handleError(error));
   }
 
   joinAsActivist() {
-    this.eventService.joinEvent(this.id, {asVolonteur: false})
+    this.eventService.joinEvent(this.id, { asVolonteur: false })
       .subscribe(data => alert(data));
   }
 
   joinAsVolonteur() {
-    this.eventService.joinEvent(this.id, {asVolonteur: true})
+    this.eventService.joinEvent(this.id, { asVolonteur: true })
       .subscribe(data => this.handleVolonteurResponse(data));
   }
 
-  ngOnDestroy(){
+  denyEvent() {
+    this.eventService.denyEvent(this.id)
+      .subscribe(data => alert(data));
+  }
+
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 

@@ -4,7 +4,7 @@ export class Event {
   title: string;
   description: any;
   createDate: Date;
-  eventDate:  Date;
-  eventTime:  Date;
+  eventDate: Date;
+  eventTime: Date;
   volonteurs: boolean;
 }

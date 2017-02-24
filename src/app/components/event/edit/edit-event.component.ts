@@ -29,15 +29,15 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id']; // (+) converts string 'id' to a number
+      this.id = +params['id']; // (+) converts string 'id' to a number
     });
     if (isNaN(this.id)) {
       this.router.navigate(['/404']);
       return;
     }
     this.eventService.getEvent(this.id)
-        .subscribe(data =>   this.handleResponse(data),
-                   error =>  this.handleError(error));
+      .subscribe(data => this.handleResponse(data),
+      error => this.handleError(error));
   }
 
   handleResponse(data) {
@@ -47,7 +47,7 @@ export class EditEventComponent implements OnInit {
       for (let tag of data.tags) {
         this.shownTags.push({
           display: tag,
-          value:   tag
+          value: tag
         })
       }
     }
@@ -90,13 +90,14 @@ export class EditEventComponent implements OnInit {
     if (event.keyCode == 13) {
       event.preventDefault();
     } else {
-      this.eventService.editEvent({ event: this.event,
-                                   addedTags: this.addedTags,
-                                   removedTags: this.removedTags
-                                })
-                     .subscribe(
-                       response => this.handleEditResponse(response),
-                       error    => alert("Error: " + error));
+      this.eventService.editEvent({
+        event: this.event,
+        addedTags: this.addedTags,
+        removedTags: this.removedTags
+      })
+        .subscribe(
+        response => this.handleEditResponse(response),
+        error => alert("Error: " + error));
     }
   }
 

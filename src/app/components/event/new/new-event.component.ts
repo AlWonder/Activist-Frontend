@@ -10,7 +10,7 @@ import { TagService } from 'app/services/tag.service';
 @Component({
   selector: 'app-new-event',
   templateUrl: './new-event.component.html',
-  styleUrls: ['./new-event.component.css']
+  styleUrls: ['./new-event.component.scss']
 })
 export class NewEventComponent implements OnInit {
 
@@ -48,7 +48,7 @@ export class NewEventComponent implements OnInit {
 
   queryTags() {
     if (this.tagQuery.trim() != "") {
-    this.tagService.queryTags(this.tagQuery.trim())
+      this.tagService.queryTags(this.tagQuery.trim())
         .subscribe(data => this.queriedTags = data);
     } else {
       this.queriedTags = [];
@@ -58,8 +58,8 @@ export class NewEventComponent implements OnInit {
   addTag(tag: string) {
     this.tagQuery = "";
     let found: boolean = false;
-    for(let addedTag of this.addedTags) {
-      if(tag == addedTag) {
+    for (let addedTag of this.addedTags) {
+      if (tag == addedTag) {
         found = true;
         return;
       }
@@ -81,10 +81,10 @@ export class NewEventComponent implements OnInit {
       for (let tag of this.tags) {
         this.addedTags.push(tag.value);
       }
-      this.eventService.addEvent({event: this.event, tags: this.addedTags})
-                     .subscribe(
-                       response  => this.handleResponse(response),
-                       error =>  alert("Error: " + error));
+      this.eventService.addEvent({ event: this.event, tags: this.addedTags })
+        .subscribe(
+        response => this.handleResponse(response),
+        error => alert("Error: " + error));
     }
   }
 
