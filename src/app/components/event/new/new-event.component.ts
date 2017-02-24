@@ -14,11 +14,11 @@ import { TagService } from 'app/services/tag.service';
 })
 export class NewEventComponent implements OnInit {
 
-  public tags = ['Car', 'Bus', 'Train'];
+  public tags: any[] = [];
 
   event: Event = new Event();
-  queriedTags: Tag[];
-  addedTags: string[] = [];
+  queriedTags: Tag[] = [];
+  addedTags: string[];
   tagQuery: string = "";
   volonteursChecked: boolean;
 
@@ -77,7 +77,11 @@ export class NewEventComponent implements OnInit {
     if (event.keyCode == 13) {
       event.preventDefault();
     } else {
-      this.eventService.addEvent({event: this.event, tags: this.tags})
+      this.addedTags = [];
+      for (let tag of this.tags) {
+        this.addedTags.push(tag.value);
+      }
+      this.eventService.addEvent({event: this.event, tags: this.addedTags})
                      .subscribe(
                        response  => this.handleResponse(response),
                        error =>  alert("Error: " + error));

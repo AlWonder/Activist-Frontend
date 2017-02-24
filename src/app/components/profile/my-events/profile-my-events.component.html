@@ -4,6 +4,8 @@
   	<article class="event well well-sm">
   		<h3 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a></h3>
   		<p class="description">{{event.description}}</p>
+      <button class="btn btn-info btn-filled" [routerLink]="['/events/edit', event.id]">Изменить</button>
+      <button class="btn btn-danger btn-filled" (click)="deleteEvent(event.id)">Удалить</button>
   	</article>
   </div>
 </div>

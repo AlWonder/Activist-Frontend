@@ -5,14 +5,14 @@ import { AuthService } from 'app/services/auth.service';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
   constructor(private authService: AuthService) { }
 
-  login(username: string, password: string) {
-    this.authService.login(username, password)
+  login(email: string, password: string) {
+    this.authService.login(email, password)
                    .subscribe(
                      response  => this.authService.handleResponse(response),
                      error =>  alert("Error: " + error));

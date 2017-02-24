@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
-import { RlTagInputModule } from 'angular2-tag-input';
+import { DatepickerModule } from 'ng2-bootstrap'
 import { TagInputModule } from 'ng2-tag-input';
+import { Ng2PaginationModule } from 'ng2-pagination';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -12,14 +13,14 @@ import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/event/index/events.component';
 import { EventComponent } from './components/event/show/event.component';
 import { NewEventComponent } from './components/event/new/new-event.component';
-import { ProfileEventsComponent } from './components/event/profile/profile-events.component';
+import { EditEventComponent } from './components/event/edit/edit-event.component';
 
 import { TagsQueryComponent } from './components/tag/query/tags-query.component';
 import { TagComponent } from './components/tag/show/tag.component';
 
 import { LoginComponent } from './components/user/login/login.component';
 import { SignupComponent } from './components/user/signup/signup.component';
-import { ProfileComponent } from './components/user/profile/profile.component';
+import { ProfileComponent } from './components/profile/index/profile.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -32,13 +33,14 @@ import { UserService } from './services/user.service';
 
 import { AuthGuard, OrgGuard } from './guards/auth.guard';
 
-import { ProfileIndexComponent } from './components/profile/profile-index/profile-index.component';
-import { ProfileFullComponent } from './components/profile/profile-full/profile-full.component';
-import { ProfileMyEventsComponent } from './components/profile/profile-my-events/profile-my-events.component';
-import { ProfileJoinedEventsComponent } from './components/profile/profile-joined-events/profile-joined-events.component';
+import { ProfileDashboardComponent } from './components/profile/dashboard/profile-dashboard.component';
+import { ProfileFullComponent } from './components/profile/full/profile-full.component';
+import { ProfileMyEventsComponent } from './components/profile/my-events/profile-my-events.component';
+import { ProfileJoinedEventsComponent } from './components/profile/joined-events/profile-joined-events.component';
 
 const profileRoutes: Routes = [
-    { path: '', component: ProfileIndexComponent },
+    { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
+    { path: 'dashboard', component: ProfileDashboardComponent },
     { path: 'full', component: ProfileFullComponent },
     { path: 'events', component: ProfileMyEventsComponent },
     { path: 'joined', component: ProfileJoinedEventsComponent }
@@ -55,29 +57,32 @@ const profileRoutes: Routes = [
     ProfileComponent,
     UnauthorizedComponent,
     NewEventComponent,
-    ProfileEventsComponent,
     ForbiddenComponent,
     TagsQueryComponent,
     NotFoundComponent,
     NotFoundComponent,
     TagComponent,
-    ProfileIndexComponent,
+    ProfileDashboardComponent,
     ProfileFullComponent,
     ProfileMyEventsComponent,
-    ProfileJoinedEventsComponent
+    ProfileJoinedEventsComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RlTagInputModule,
     TagInputModule,
+    Ng2PaginationModule,
+    DatepickerModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'events', component: EventsComponent },
+      { path: 'events', redirectTo: '/events/page/1', pathMatch: 'full' },
+      { path: 'events/page/:page', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
+      { path: 'events/edit/:id', component: EditEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'tags', component: TagsQueryComponent },
       { path: 'tags/:tag', component: TagComponent },
       { path: 'login', component: LoginComponent },
@@ -96,7 +101,8 @@ const profileRoutes: Routes = [
     UserService,
     TagService,
     AuthGuard,
-    OrgGuard
+    OrgGuard,
+    { provide: LOCALE_ID, useValue: "ru-RU" }
   ],
   bootstrap: [AppComponent]
 })

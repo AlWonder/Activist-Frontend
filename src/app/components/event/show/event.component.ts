@@ -14,7 +14,7 @@ import { Tag } from 'app/models/tag'
 })
 export class EventComponent implements OnInit {
   private event: Event;
-  private tags: Tag[];
+  private tags: string[];
   private isActivist: boolean;
   private isJoined: boolean;
   private isTimeSet: boolean;
@@ -30,13 +30,13 @@ export class EventComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
        this.id = +params['id']; // (+) converts string 'id' to a number
     });
-    console.log(this.id);
     if (isNaN(this.id)) {
       this.router.navigate(['/404']);
       return;
     }
     this.eventService.getEvent(this.id)
         .subscribe(data => { this.event = data.event;
+                             this.event.description = this.event.description.split('\n');
                              this.tags = data.tags;
                              this.isActivist = data.isActivist;
                              this.isJoined = data.isJoined;
@@ -46,8 +46,26 @@ export class EventComponent implements OnInit {
                    error =>  this.handleError(error));
   }
 
+  joinAsActivist() {
+    this.eventService.joinEvent(this.id, {asVolonteur: false})
+      .subscribe(data => alert(data));
+  }
+
+  joinAsVolonteur() {
+    this.eventService.joinEvent(this.id, {asVolonteur: true})
+      .subscribe(data => this.handleVolonteurResponse(data));
+  }
+
   ngOnDestroy(){
     this.sub.unsubscribe();
+  }
+
+  handleVolonteurResponse(data: any) {
+    if (data.hasForm) {
+      alert("Круто!")
+    } else {
+      alert("У вас ещё нет анкеты волонтёра.")
+    }
   }
 
   handleError(error) {

@@ -1,0 +1,23 @@
+<div *ngIf="authService.authenticated() && authService.userProfile">
+  <div class="container">
+    <div class="row">
+
+      <ul class="nav nav-tabs" *ngIf="authService.isOrganizer()">
+        <li routerLinkActive="active"><a routerLink="dashboard">Дэшборд</a></li>
+        <li routerLinkActive="active"><a routerLink="full">Полная информация</a></li>
+        <li routerLinkActive="active"><a routerLink="events">Мои меропряития</a></li>
+      </ul>
+
+      <ul class="nav nav-tabs" *ngIf="authService.isActivist()">
+        <li routerLinkActive="active"><a routerLink="dashboard">Дэшборд</a></li>
+        <li routerLinkActive="active"><a routerLink="full">Полная информация</a></li>
+        <li routerLinkActive="active"><a routerLink="joined">Мои меропряития</a></li>
+      </ul>
+
+    </div>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

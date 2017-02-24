@@ -17,4 +17,11 @@ export class ProfileMyEventsComponent implements OnInit {
     this.eventService.getUserEvents(this.authService.userId)
         .subscribe(data => this.events = data);
   }
+
+  public deleteEvent(id: number) {
+    if (confirm("Вы действительно хотите удалить мероприятие?")) {
+      this.eventService.deleteEvent(id)
+        .subscribe(data => console.log(data));
+    }
+  }
 }

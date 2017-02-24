@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 
 @Component({
-  selector: 'app-profile-index',
-  templateUrl: './profile-index.component.html',
-  styleUrls: ['./profile-index.component.css']
+  selector: 'app-profile-dashboard',
+  templateUrl: './profile-dashboard.component.html',
+  styleUrls: ['./profile-dashboard.component.css']
 })
-export class ProfileIndexComponent implements OnInit {
+export class ProfileDashboardComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 

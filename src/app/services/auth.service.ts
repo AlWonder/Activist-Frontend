@@ -26,8 +26,8 @@ export class AuthService {
     }
   }
 
-  public login(username, password) {
-    return this.api.post("login", { username, password }, false);
+  public login(email, password) {
+    return this.api.post("login", { email, password }, false);
   }
 
   public authenticated() {
@@ -85,5 +85,9 @@ export class AuthService {
 
   public isOrganizer() {
     return this.userProfile && this.userProfile.group == "2";
+  }
+
+  public isActivist() {
+    return this.userProfile && this.userProfile.group == "1";
   }
 }

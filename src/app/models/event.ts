@@ -2,8 +2,9 @@ export class Event {
   id: number;
   userId: number;
   title: string;
-  description: string;
+  description: any;
   createDate: Date;
-  eventDate: number;
-  eventTime: Date;
+  eventDate:  Date;
+  eventTime:  Date;
+  volonteurs: boolean;
 }

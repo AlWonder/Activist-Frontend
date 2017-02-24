@@ -1,16 +1,14 @@
-<div class="login-screen">
-  <div class="login-icon">
-    <h4>Вход</h4>
-  </div>
-    <form class="login-form">
+<div class="container">
+  <h4>Вход</h4>
+  <form class="login-form">
     <div class="form-group">
-      <label for="name">Username</label>
-      <input type="text" class="form-control login-field" #username placeholder="yours@example.com">
+      <label for="name">Email</label>
+      <input type="text" class="form-control login-field" #email placeholder="yours@example.com">
     </div>
     <div class="form-group">
-      <label for="name">Password</label>
+      <label for="name">Пароль</label>
       <input type="password" class="form-control login-field" #password placeholder="your password">
     </div>
-    <button type="submit" class="btn btn-default" (click)="login(username.value, password.value)">Login</button>
+    <button type="submit" class="btn btn-default" (click)="login(email.value, password.value)">Login</button>
   </form>
 </div>

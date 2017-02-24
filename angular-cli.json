@@ -18,12 +18,9 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss",
-        "assets/sass/gsdk.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

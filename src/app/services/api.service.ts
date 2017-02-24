@@ -15,7 +15,7 @@ export class ApiService {
   public get(uri: string, authHeader: boolean, params: Object) {
     let headers = new Headers();
     if (authHeader && tokenNotExpired()) {
-      this.createAuthorizationHeader(headers);
+      this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
     if(params) {
@@ -35,21 +35,47 @@ export class ApiService {
   public post(uri: string, data: Object, authHeader: boolean) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     if (authHeader && tokenNotExpired()) {
-      this.createAuthorizationHeader(headers);
+      this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.apiUrl + uri, data, options)
                     .map(this.extractData)
                     .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+  }
+
+  public put(uri: string, data: Object) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    if (!tokenNotExpired()) {
+      return;
     }
+    this.addAuthorizationHeader(headers);
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.apiUrl + uri, data, options)
+                    .map(this.extractData)
+                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+  }
+
+  public delete(uri: string) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    if (!tokenNotExpired()) {
+      return;
+    }
+    this.addAuthorizationHeader(headers);
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.delete(this.apiUrl + uri, options)
+                    .map(this.extractData)
+                    .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+  }
 
   private extractData(res: Response) {
     let body = res.json();
     return body || { };
   }
 
-  public createAuthorizationHeader(headers: Headers) {
+  public addAuthorizationHeader(headers: Headers) {
     headers.append('Authorization', 'Bearer ' +
       localStorage.getItem("id_token"));
   }

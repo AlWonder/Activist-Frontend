@@ -1,52 +1,77 @@
 <header>
-	<div id="navbar">
-		<nav class="navbar navbar-ct-blue" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+	<div id="navbar-full">
+		<div class="">
+			<nav class="navbar navbar-default navbar-fixed-top navbar-transparent" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-					<a class="navbar-brand" routerLink="/home">Активист</a>
-				</div>
+						<a class="navbar-brand" routerLink="/home">Активист</a>
+					</div>
 
-				<div class="navbar-collapse collapse" id="navbar-collapse">
-					<ul class="nav navbar-nav navbar-left">
-						<li routerLinkActive="active"><a routerLink="/events">Мероприятия <span class="sr-only">(current)</span></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right" *ngIf="!authService.authenticated()">
-						<li routerLinkActive="active"><a routerLink="/signup">Регистрация</a></li>
-						<li routerLinkActive="active"><a class="btn btn-round btn-default" routerLink="/login">Вход</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right" *ngIf="authService.authenticated() && authService.userProfile">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ authService.userProfile.email }} <b class="caret"></b></a>
-							<span class="dropdown-arrow"></span>
-							<ul class="dropdown-menu">
-								<li routerLinkActive="active"><a routerLink="/profile">Профиль</a></li>
-								<li class="divider"></li>
-								<li routerLinkActive="active"><a (click)="authService.logout()">Выход</a></li>
-							</ul>
-						</li>
-					</ul>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-left">
+							<li routerLinkActive="active"><a routerLink="/events">Мероприятия <span class="sr-only">(current)</span></a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" *ngIf="!authService.authenticated()">
+							<li routerLinkActive="active"><a routerLink="/signup">Регистрация</a></li>
+							<li routerLinkActive="active"><a class="btn btn-round btn-default" routerLink="/login">Вход</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" *ngIf="authService.authenticated() && authService.userProfile">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ authService.userProfile.email }} <b class="caret"></b></a>
+								<span class="dropdown-arrow"></span>
+								<ul class="dropdown-menu">
+									<li routerLinkActive="active"><a routerLink="/profile">Профиль</a></li>
+									<li class="divider"></li>
+									<li routerLinkActive="active"><a (click)="authService.logout()">Выход</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
 				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-		</nav>
-		<!-- /navbar -->
+			</nav>
+			<!-- /navbar -->
+		</div>
+		<div class="blurred-container">
+			<div class="img-src" style="background-image: url('assets/img/cover_4.jpg')"></div>
+			<div class="img-src blur" style="background-image: url('assets/img/cover_4_blur.jpg'); opacity: 0;"></div>
+		</div>
 	</div>
 </header>
-<router-outlet></router-outlet>
-
-<!--
-
-<footer>
-	<div class="container">
-		<h3>Бултых</h3>
-		<p>
-			Разработано для ОСО БГПУ
-		</p>
+<div class="main">
+	<div class="container tim-container">
+		<router-outlet></router-outlet>
 	</div>
-</footer>-->
+</div>
+
+<div class="footer">
+    <div class="overlayer">
+    <div class="container">
+        <div class="row support">
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-2">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="credits">
+                &copy; 2017 Сделано с <i class="fa fa-heart heart" alt="love"></i> для БГПУ.
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

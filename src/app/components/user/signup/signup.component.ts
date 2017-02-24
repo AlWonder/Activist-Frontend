@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/models/user';
 
-declare var jQuery: any;
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -19,10 +17,11 @@ export class SignupComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    jQuery("select").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
   }
 
   signUp() {
+    this.user.gender = +this.user.gender;
+    this.user.group = +this.user.group;
     this.authService.signUp(this.user)
                    .subscribe(
                      response  => this.authService.handleResponse(response),

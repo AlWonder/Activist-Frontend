@@ -5,6 +5,7 @@ export class User {
   firstName: string;
   secondName: string;
   lastName: string;
+  birthDate: Date;
   group: number;
   gender: number;
 }
