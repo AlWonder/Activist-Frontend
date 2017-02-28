@@ -1,4 +1,13 @@
 <h1>Тег "{{tag}}"</h1>
+<div class="row" *ngIf="authService.authenticated() && !hasStatus">
+  <button class="btn btn-success" (click)="addTagStatus(true)">Добавить в избранное</button>
+  <button class="btn btn-danger" (click)="addTagStatus(false)">В чёрный список</button>
+</div>
+<div class="row" *ngIf="authService.authenticated() && hasStatus">
+  <p *ngIf="status">Этот тег у Вас в избранном</p>
+  <p *ngIf="!status">Вы скрыли этот тег</p>
+  <button class="btn btn-default" (click)="deleteTagStatus()">Убрать</button>
+</div>
 <div class="row">
   <div class='col-sm-4' *ngFor="let event of events">
   	<article class="event well well-sm">

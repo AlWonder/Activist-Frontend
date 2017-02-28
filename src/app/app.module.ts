@@ -37,6 +37,7 @@ import { ProfileDashboardComponent } from './components/profile/dashboard/profil
 import { ProfileFullComponent } from './components/profile/full/profile-full.component';
 import { ProfileMyEventsComponent } from './components/profile/my-events/profile-my-events.component';
 import { ProfileJoinedEventsComponent } from './components/profile/joined-events/profile-joined-events.component';
+import { JoinedUsersComponent } from './components/user/joined-users/joined-users.component';
 
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
@@ -66,7 +67,8 @@ const profileRoutes: Routes = [
     ProfileFullComponent,
     ProfileMyEventsComponent,
     ProfileJoinedEventsComponent,
-    EditEventComponent
+    EditEventComponent,
+    JoinedUsersComponent
   ],
   imports: [
     BrowserModule,

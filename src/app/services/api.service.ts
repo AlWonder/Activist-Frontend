@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angular/http';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 
 import 'app/rxjs-operators';
 
