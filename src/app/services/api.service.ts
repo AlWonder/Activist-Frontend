@@ -8,7 +8,7 @@ import 'app/rxjs-operators';
 @Injectable()
 export class ApiService {
 
-  apiUrl: string = "http://localhost:8080/"
+  apiUrl: string = "http://localhost:8070/"
 
   constructor(private http: Http) { }
 

@@ -10,6 +10,7 @@ import { Event } from 'app/models/event';
 })
 export class ProfileMyEventsComponent implements OnInit {
   events: Event[];
+  activeEvent: number = 0;
 
   constructor(private eventService: EventService, private authService: AuthService) { }
 
@@ -23,5 +24,9 @@ export class ProfileMyEventsComponent implements OnInit {
       this.eventService.deleteEvent(id)
         .subscribe(data => console.log(data));
     }
+  }
+
+  public makeEventActive(id: number) {
+    this.activeEvent = id;
   }
 }

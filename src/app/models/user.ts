@@ -9,3 +9,9 @@ export class User {
   group: number;
   gender: number;
 }
+
+export class JoinedUser {
+  users: User;
+  asVolonteur: boolean;
+  formId: number;
+}
