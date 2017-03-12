@@ -8,6 +8,7 @@ export class User {
   birthDate: Date;
   group: number;
   gender: number;
+  avatar: string;
 }
 
 export class JoinedUser {

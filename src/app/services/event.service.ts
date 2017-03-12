@@ -35,6 +35,10 @@ export class EventService {
     return this.api.post("events", data, true);
   }
 
+  public addCover(id: number, data: Object) {
+    return this.api.postFile("events/" + id + "/cover", data, true);
+  }
+
   public editEvent(data: Object) {
     return this.api.put("events", data);
   }

@@ -52,28 +52,10 @@ export class AuthService {
     return this.api.get("users", true, null);
   }
 
-  public handleResponse(response: any) {
-    if (response.errors == null) {
-      console.log(response)
-      localStorage.setItem('id_token', response.idToken);
-      this.userId = this.getUserId();
-
-      this.getUserInfo()
-        .subscribe(
-        response => this.saveUserInfo(response),
-        error => alert("Error: " + error));
-
-      this.router.navigate(['/home']);
-    } else {
-      for (let error of response.errors) {
-        alert(error.userMessage);
-      }
-    }
-  }
-
-  private saveUserInfo(response: any) {
+  public saveUserInfo(response: any) {
     localStorage.setItem("profile", JSON.stringify(response.user));
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
+    this.router.navigate(['/home']);
   }
 
   public getUserId() {

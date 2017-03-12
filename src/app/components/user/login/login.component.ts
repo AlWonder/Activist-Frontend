@@ -14,7 +14,25 @@ export class LoginComponent {
   login(email: string, password: string) {
     this.authService.login(email, password)
       .subscribe(
-      response => this.authService.handleResponse(response),
+      response => this.handleResponse(response),
       error => alert("Error: " + error));
+  }
+
+  handleResponse(response: any) {
+    if (response.errors == null) {
+      console.log(response)
+      localStorage.setItem('id_token', response.idToken);
+      this.authService.userId = this.authService.getUserId();
+      this.authService.getUserInfo()
+        .subscribe(
+        response => {
+          this.authService.saveUserInfo(response);
+        },
+        error => alert("Error: " + error));
+    } else {
+      for (let error of response.errors) {
+        alert(error.userMessage);
+      }
+    }
   }
 }

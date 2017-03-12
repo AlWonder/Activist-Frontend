@@ -32,6 +32,10 @@
   </select>
 </div>
 <div class="form-group">
+  <label>Аватар</label>
+  <input type="file" (change)="fileChange($event)" />
+</div>
+<div class="form-group">
   <label for="group">Зарегистрироваться как</label><br />
   <select id="group" name="group" [(ngModel)]="user.group">
     <option value="1">Участник</option>

@@ -1,0 +1,118 @@
+.background-image {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-filter: blur(15px);
+  -moz-filter: blur(15px);
+  -o-filter: blur(15px);
+  -ms-filter: blur(15px);
+  filter: blur(15px);
+}
+
+.shadow {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  width: 100%;
+  height: 500px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hat {
+  background-color: #333333;
+}
+
+.container {
+  position: relative;
+  z-index: 3;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  background-color: #353A5A;
+  padding-top: 20px;
+}
+
+.cover {
+  height: 500px;
+  text-align: center;
+  padding: 0;
+  position: relative;
+  z-index: 3;
+  background-attachment: local;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .overlay {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+
+    h1 {
+      display: inline-block;
+      margin: 150px 0 0;
+      line-height: 1.25;
+      font-size: 2.5em;
+      color: #E0E0E0;
+      font-weight: bold;
+
+      small {
+        color: #DDDDDD;
+      }
+
+      .btn-tag {
+        background-color: rgba(100, 100, 100, 0.3);
+        font-size: 0.5em;
+        color: #DDDDDD;
+        border: 0;
+        margin: 100px 5px 5px;
+
+        &:hover {
+          background-color: rgba(120, 120, 120, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.event-info,
+.join-event,
+.organizer-info {
+  background-color: #FFFFFF;
+  background-origin: content-box;
+  padding: 15px;
+  margin: 10px 0 20px 0;
+  -webkit-box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
+  -moz-box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
+  box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
+}
+
+.organizer-info {
+  h4 {
+    margin: 0;
+  }
+  .org-avatar {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+}
+
+.join-event {
+  text-align: center;
+}

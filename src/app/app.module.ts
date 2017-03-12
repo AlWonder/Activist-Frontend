@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DatepickerModule } from 'ng2-bootstrap'
 import { TagInputModule } from 'ng2-tag-input';
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -39,6 +40,9 @@ import { ProfileMyEventsComponent } from './components/profile/my-events/profile
 import { ProfileJoinedEventsComponent } from './components/profile/joined-events/profile-joined-events.component';
 import { JoinedUsersComponent } from './components/user/joined-users/joined-users.component';
 
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { UploadCoverComponent } from './components/event/upload-cover/upload-cover.component';
+
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: ProfileDashboardComponent },
@@ -68,7 +72,11 @@ const profileRoutes: Routes = [
     ProfileMyEventsComponent,
     ProfileJoinedEventsComponent,
     EditEventComponent,
-    JoinedUsersComponent
+    JoinedUsersComponent,
+    FileUploadComponent,
+    FileSelectDirective,
+    FileDropDirective,
+    UploadCoverComponent
   ],
   imports: [
     BrowserModule,
@@ -77,13 +85,16 @@ const profileRoutes: Routes = [
     TagInputModule,
     Ng2PaginationModule,
     DatepickerModule.forRoot(),
+    //ImageUploadModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
+                { path: 'upload', component: FileUploadComponent },
       { path: 'events', redirectTo: '/events/page/1', pathMatch: 'full' },
       { path: 'events/page/:page', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
+      { path: 'events/:id/cover', component: UploadCoverComponent },
       { path: 'events/edit/:id', component: EditEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'tags', component: TagsQueryComponent },
       { path: 'tags/:tag', component: TagComponent },

@@ -1,20 +1,51 @@
-<section class="article-full" *ngIf="event">
-	<h3>{{event.title}}</h3>
-	<p class="description" *ngFor="let paragraph of event.description">{{paragraph}}</p>
-	<p class="event-date">Дата проведения: {{event.eventDate | date:'yyyy-MM-dd'}} <span *ngIf="isTimeSet">{{event.eventTime}}</span></p>
-	<div class="row" *ngIf="tags && tags.length > 0">
-		<label>Теги</label>
-		<button class="btn btn-primary btn-xs btn-fill" *ngFor="let tag of tags; let i = index" [routerLink]="['/tags', tag]">{{tag}}</button>
+<div class="container-full hat" *ngIf="event">
+	<div class="background-image" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
 	</div>
-	<div class="join-event" *ngIf="authService.authenticated() && isActivist">
-		<div class="event-not-joined" *ngIf="!isJoined">
-			<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
-			<button class="btn btn-default" (click)="joinAsActivist()">Как активист</button>
-			<button class="btn btn-default" [disabled]="!event.volonteurs" (click)="joinAsVolonteur()">Как волонтёр</button>
-		</div>
-		<div class="event-joined" *ngIf="isJoined">
-			<p>Вы уже участвуете в этом мероприятии.</p>
-			<button class="btn btn-danger" (click)="denyEvent()">Не, ребят, ну вас нафиг</button>
+	<div class="shadow">
+
+	</div>
+	<div class="container cover" id="cover-full" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+		<div class="overlay">
+			<h1>{{event.title}}
+			<br><small>{{event.eventDate | date:'longDate'}}</small>
+		<br><button class="btn btn-primary btn-sm btn-fill btn-tag" *ngFor="let tag of tags; let i = index" [routerLink]="['/tags', tag]">{{tag}}</button></h1>
 		</div>
 	</div>
-</section>
+</div>
+
+<div class="content">
+	<section class="container" *ngIf="event">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="event-info">
+				<p class="description" *ngFor="let paragraph of event.description">{{paragraph}}</p>
+				<br>
+				<p class="event-date"><strong>Дата проведения:</strong> {{event.eventDate | date:'yyyy-MM-dd'}} <span *ngIf="isTimeSet">{{event.eventTime}}</span></p>
+				</div>
+			</div>
+
+			<div class="col-md-4" *ngIf="authService.authenticated()">
+				<div class="organizer-info">
+					<h4>Организатор:</h4>
+					<br/><h5><img *ngIf="organizer.avatar != ''" [src]="'http://localhost:8070/storage/user/avatar/' + organizer.avatar" alt="" class="org-avatar">
+			    <img *ngIf="organizer.avatar == ''" src="http://localhost:8070/storage/noavatar.png" alt="" class="org-avatar">
+					{{organizer.firstName}} {{organizer.secondName}} {{organizer.lastName}}</h5>
+					E-mail: {{organizer.email}}
+				</div>
+
+				<div class="join-event" *ngIf="authService.authenticated() && isActivist">
+				<div class="event-not-joined" *ngIf="!isJoined">
+					<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
+					<button class="btn btn-default" (click)="joinAsActivist()">Как активист</button>
+					<button class="btn btn-default" [disabled]="!event.volonteurs" (click)="joinAsVolonteur()">Как волонтёр</button>
+				</div>
+				<div class="event-joined" *ngIf="isJoined">
+					<p>Вы уже участвуете в этом мероприятии.</p>
+					<button class="btn btn-danger" (click)="denyEvent()">Отказаться от участия</button>
+				</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

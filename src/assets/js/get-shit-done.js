@@ -15,7 +15,7 @@
  */
 
 searchVisible = 0;
-transparent = true;
+transparent = false;
 
 $(document).ready(function(){
     /*      Activate the switches with icons      */
@@ -96,7 +96,12 @@ $(function () {
 
 });
 
-$(document).scroll(function() {
+$(window).scroll(function() {
+  var scrolledY = $(window).scrollTop();
+  $('#cover-full').css('background-position', 'center ' + ((scrolledY)) + 'px');
+});
+
+/*$(document).scroll(function() {
     if( $(this).scrollTop() > 40 ) {
         if(transparent) {
             transparent = false;
@@ -108,4 +113,4 @@ $(document).scroll(function() {
             $('nav[role="navigation"]').addClass('navbar-transparent');
         }
     }
-});
+});*/

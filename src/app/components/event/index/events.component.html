@@ -1,63 +1,26 @@
 <div class="container">
-  <div class="col-md-8">
-    <div class='row' *ngFor="let event of events | paginate: { id: 'server', itemsPerPage: 10, currentPage: page, totalItems: count }">
+  <div class="row">
+    <h1>Последние мероприятия</h1>
+  </div>
+  <div class="row">
+    <div class='event-container col-md-4 col-sm-6' *ngFor="let event of events | paginate: { id: 'server', itemsPerPage: 10, currentPage: page, totalItems: count }">
       <article class="event">
-        <h4 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a>
-        <br><small>{{event.event_date | date:'longDate'}}</small></h4>
-        <p class="description"><small>{{event.description}}</small></p>
+        <div class="cover" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+          <div class="overlay">
+            <h4><a [routerLink]="['/events', event.id]">{{event.title}}</a>
+            <br><small>{{event.eventDate | date:'longDate'}}</small></h4>
+          </div>
+        </div>
+        <p class="description">{{shortifyDescription(event.description)}}</p>
       </article>
     </div>
-    <div class="has-text-centered">
-      <!--<div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>-->
-      <pagination-controls previousLabel="Туда"
-                      nextLabel="Сюда"
-                      (pageChange)="changePage($event)"
-                      id="server"></pagination-controls>
-    </div>
   </div>
-
-
-  <div class="col-md-4">
-    <div class="todo">
-      <div class="todo-search">
-        <input class="todo-search-field" type="search" value="" placeholder="Search">
-      </div>
-      <ul>
-        <li class="">
-          <div class="todo-icon fui-user"></div>
-          <div class="todo-content">
-            <h4 class="todo-name">
-                    Meet <strong>Adrian</strong> at <strong>6pm</strong>
-                  </h4> Times Square
-          </div>
-        </li>
-        <li class="">
-          <div class="todo-icon fui-list"></div>
-          <div class="todo-content">
-            <h4 class="todo-name">
-                    Chat with <strong>V.Kudinov</strong>
-                  </h4> Skype conference an 9 am
-          </div>
-        </li>
-        <li class="">
-          <div class="todo-icon fui-eye"></div>
-          <div class="todo-content">
-            <h4 class="todo-name">
-                    Watch <strong>Iron Man</strong>
-                  </h4> 1998 Broadway
-          </div>
-        </li>
-        <li class="">
-          <div class="todo-icon fui-time"></div>
-          <div class="todo-content">
-            <h4 class="todo-name">
-                    Fix bug on a <strong>Website</strong>
-                  </h4> As soon as possible
-          </div>
-        </li>
-      </ul>
+  <div class="row">
+    <div class="pagination">
+      <pagination-controls previousLabel="Туда" nextLabel="Сюда" (pageChange)="changePage($event)" id="server"></pagination-controls>
     </div>
-    <!-- /.todo -->
+    <!--<div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>-->
+
   </div>
   <!--/.container-->
 </div>

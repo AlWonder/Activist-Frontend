@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
 
 import { AuthService } from './services/auth.service';
 

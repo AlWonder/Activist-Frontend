@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/services/auth.service';
 import { Event } from 'app/models/event';
+import { User } from 'app/models/user';
 import { Tag } from 'app/models/tag'
 
 @Component({
@@ -14,12 +15,14 @@ import { Tag } from 'app/models/tag'
 })
 export class EventComponent implements OnInit {
   private event: Event;
+  private organizer: User;
   private tags: string[];
   private isActivist: boolean;
   private isJoined: boolean;
   private isTimeSet: boolean;
   private id: number;
   private sub: Subscription;
+  private imageSrc: string = "http://localhost:8070/storage/event/";
 
   constructor(private eventService: EventService,
     private route: ActivatedRoute,
@@ -38,6 +41,7 @@ export class EventComponent implements OnInit {
       .subscribe(data => {
         this.event = data.event;
         this.event.description = this.event.description.split('\n');
+        this.organizer = data.organizer;
         this.tags = data.tags;
         this.isActivist = data.isActivist;
         this.isJoined = data.isJoined;
@@ -45,6 +49,11 @@ export class EventComponent implements OnInit {
         console.log(this.event);
       },
       error => this.handleError(error));
+  }
+
+  getCover(uri: string) {
+    console.log(this.imageSrc + uri)
+    return this.imageSrc + uri;
   }
 
   joinAsActivist() {

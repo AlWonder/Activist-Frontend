@@ -24,6 +24,10 @@
        </label>
     </div>
     <div class="form-group">
+      <label>Обложка мероприятия</label>
+      <input type="file" (change)="fileChange($event)" />
+    </div>
+    <div class="form-group">
       <label for="query">Добавить теги</label>
       <tag-input name="tags" [(ngModel)]="tags"></tag-input>
     </div>

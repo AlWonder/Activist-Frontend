@@ -21,6 +21,15 @@ export class NewEventComponent implements OnInit {
   addedTags: string[];
   tagQuery: string = "";
   volonteursChecked: boolean;
+  cover: File = null;
+
+
+  fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.cover = fileList[0];
+    }
+  }
 
   constructor(private tagService: TagService, private eventService: EventService, private router: Router) { }
 
@@ -81,7 +90,7 @@ export class NewEventComponent implements OnInit {
       for (let tag of this.tags) {
         this.addedTags.push(tag.value);
       }
-      this.eventService.addEvent({ event: this.event, tags: this.addedTags })
+      this.eventService.addEvent({ event: this.event, tags: this.addedTags})
         .subscribe(
         response => this.handleResponse(response),
         error => alert("Error: " + error));
@@ -90,7 +99,14 @@ export class NewEventComponent implements OnInit {
 
   handleResponse(response) {
     if (response.ok) {
-      this.router.navigate(['/events/' + response.eventId]);
+      this.event.id = response.eventId;
+      let formData = new FormData();
+      formData.append("file", this.cover, this.cover.name);
+      this.eventService.addCover(response.eventId, formData)
+        .subscribe(
+        response => { this.router.navigate(['/events/' + this.event.id]);},
+        error => alert("Error: " + error));
     }
   }
+
 }

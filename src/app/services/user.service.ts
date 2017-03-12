@@ -10,4 +10,8 @@ export class UserService {
     return this.api.get('events/' + eventId + "/joined", true, null);
   }
 
+  public addAvatar(data: Object) {
+    return this.api.postFile("users/avatar", data, true);
+  }
+
 }

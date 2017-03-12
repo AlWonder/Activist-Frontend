@@ -7,4 +7,5 @@ export class Event {
   eventDate: Date;
   eventTime: Date;
   volonteurs: boolean;
+  cover: string;
 }

@@ -44,6 +44,20 @@ export class ApiService {
       .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
   }
 
+  public postFile(uri: string, data: Object, authHeader: boolean) {
+    let headers = new Headers({
+      //'Content-Type': 'multipart/form-data'
+    });
+    if (authHeader && tokenNotExpired()) {
+      this.addAuthorizationHeader(headers);
+    }
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.apiUrl + uri, data, options)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+  }
+
   public put(uri: string, data: Object) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     if (!tokenNotExpired()) {
