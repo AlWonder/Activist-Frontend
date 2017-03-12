@@ -20,7 +20,7 @@ export class NewEventComponent implements OnInit {
   queriedTags: Tag[] = [];
   addedTags: string[];
   tagQuery: string = "";
-  volonteursChecked: boolean;
+  volunteersChecked: boolean;
   cover: File = null;
 
 
@@ -36,11 +36,11 @@ export class NewEventComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleVolonteursSwitch() {
-    if (this.volonteursChecked) {
-      this.volonteursChecked = false;
+  togglevolunteersSwitch() {
+    if (this.volunteersChecked) {
+      this.volunteersChecked = false;
     } else {
-      this.volonteursChecked = true;
+      this.volunteersChecked = true;
     }
   }
 

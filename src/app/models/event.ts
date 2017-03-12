@@ -6,6 +6,6 @@ export class Event {
   createDate: Date;
   eventDate: Date;
   eventTime: Date;
-  volonteurs: boolean;
+  volunteers: boolean;
   cover: string;
 }

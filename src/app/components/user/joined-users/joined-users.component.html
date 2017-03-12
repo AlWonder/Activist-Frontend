@@ -1,9 +1,9 @@
 <div>
   <p *ngFor="let user of users">
     {{ user.user.email }} {{ user.user.firstName }} {{ user.user.lastName }}
-    <span class="btn btn-success btn-xs btn-fill" *ngIf="user.asVolonteur">Волонтёр</span>
-    <span class="btn btn-success btn-xs btn-fill" *ngIf="!user.asVolonteur">Активист</span>
-    <span class="btn btn-danger btn-xs btn-fill" *ngIf="user.asVolonteur && user.formId == 0">У участника ещё нет анкеты</span>
+    <span class="btn btn-success btn-xs btn-fill" *ngIf="user.asvolunteer">Волонтёр</span>
+    <span class="btn btn-success btn-xs btn-fill" *ngIf="!user.asvolunteer">Активист</span>
+    <span class="btn btn-danger btn-xs btn-fill" *ngIf="user.asvolunteer && user.formId == 0">У участника ещё нет анкеты</span>
   </p>
   <p *ngIf="!users">
     У мероприятия ещё нет участников

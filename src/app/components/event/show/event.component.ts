@@ -57,13 +57,13 @@ export class EventComponent implements OnInit {
   }
 
   joinAsActivist() {
-    this.eventService.joinEvent(this.id, { asVolonteur: false })
+    this.eventService.joinEvent(this.id, { asvolunteer: false })
       .subscribe(data => alert(data));
   }
 
-  joinAsVolonteur() {
-    this.eventService.joinEvent(this.id, { asVolonteur: true })
-      .subscribe(data => this.handleVolonteurResponse(data));
+  joinAsvolunteer() {
+    this.eventService.joinEvent(this.id, { asvolunteer: true })
+      .subscribe(data => this.handlevolunteerResponse(data));
   }
 
   denyEvent() {
@@ -75,7 +75,7 @@ export class EventComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  handleVolonteurResponse(data: any) {
+  handlevolunteerResponse(data: any) {
     if (data.hasForm) {
       alert("Круто!")
     } else {

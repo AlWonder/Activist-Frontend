@@ -13,6 +13,6 @@ export class User {
 
 export class JoinedUser {
   users: User;
-  asVolonteur: boolean;
+  asvolunteer: boolean;
   formId: number;
 }
