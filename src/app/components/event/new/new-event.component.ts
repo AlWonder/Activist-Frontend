@@ -90,7 +90,7 @@ export class NewEventComponent implements OnInit {
       for (let tag of this.tags) {
         this.addedTags.push(tag.value);
       }
-      this.eventService.addEvent({ event: this.event, tags: this.addedTags})
+      this.eventService.addEvent({ event: this.event, tags: this.addedTags })
         .subscribe(
         response => this.handleResponse(response),
         error => alert("Error: " + error));
@@ -100,13 +100,18 @@ export class NewEventComponent implements OnInit {
   handleResponse(response) {
     if (response.ok) {
       this.event.id = response.eventId;
-      let formData = new FormData();
-      formData.append("file", this.cover, this.cover.name);
-      this.eventService.addCover(response.eventId, formData)
-        .subscribe(
-        response => { this.router.navigate(['/events/' + this.event.id]);},
-        error => alert("Error: " + error));
+      if (this.cover != null) {
+        let formData = new FormData();
+        formData.append("file", this.cover, this.cover.name);
+        this.eventService.addCover(response.eventId, formData)
+          .subscribe(
+          response => { this.router.navigate(['/events/' + this.event.id]); },
+          error => alert("Error: " + error));
+      } else {
+        this.router.navigate(['/events/' + this.event.id]);
+      }
     }
+
   }
 
 }

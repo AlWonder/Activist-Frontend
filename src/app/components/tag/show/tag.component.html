@@ -1,17 +1,39 @@
-<h1>Тег "{{tag}}"</h1>
-<div class="row" *ngIf="authService.authenticated() && !hasStatus">
-  <button class="btn btn-success" (click)="addTagStatus(true)">Добавить в избранное</button>
-  <button class="btn btn-danger" (click)="addTagStatus(false)">В чёрный список</button>
-</div>
-<div class="row" *ngIf="authService.authenticated() && hasStatus">
-  <p *ngIf="status">Этот тег у Вас в избранном</p>
-  <p *ngIf="!status">Вы скрыли этот тег</p>
-  <button class="btn btn-default" (click)="deleteTagStatus()">Убрать</button>
-</div>
-<div class="row">
-  <div class='col-sm-4' *ngFor="let event of events">
-  	<article class="event well well-sm">
-  		<h3 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a></h3>
-  		<p class="description">{{event.description}}</p>
-  	</article>
+  <div class="container">
+    <div class="row">
+        <div class="page-header">
+          <h1>Тег "{{tag}}"</h1>
+          <div class="row" *ngIf="authService.authenticated() && !hasStatus">
+            <button class="btn btn-success" (click)="addTagStatus(true)">Добавить в избранное</button>
+            <button class="btn btn-danger" (click)="addTagStatus(false)">В чёрный список</button>
+          </div>
+          <div class="row" *ngIf="authService.authenticated() && hasStatus">
+            <p *ngIf="status">Этот тег у Вас в избранном</p>
+            <p *ngIf="!status">Вы скрыли этот тег</p>
+            <button class="btn btn-default" (click)="deleteTagStatus()">Убрать</button>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class='event-container col-md-4 col-sm-6' *ngFor="let event of events | paginate: { id: 'server', itemsPerPage: 12, currentPage: page, totalItems: count }">
+          <article class="event">
+            <div class="cover" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+              <div class="overlay">
+                <h4><a [routerLink]="['/events', event.id]">{{event.title}}</a>
+              <br><small>{{event.eventDate | date:'longDate'}}</small></h4>
+                <p class="organizer">
+                  {{event.userId.firstName}} {{event.userId.lastName}}
+                </p>
+              </div>
+            </div>
+            <p class="description">{{shortifyDescription(event.description)}}</p>
+          </article>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pagination">
+          <pagination-controls previousLabel="Туда" nextLabel="Сюда" (pageChange)="changePage($event)" id="server"></pagination-controls>
+        </div>
+      <!--/.row-->
+    </div>
+    <!--/.container-->
   </div>

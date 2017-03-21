@@ -1,10 +1,15 @@
 <div>
-  <p *ngFor="let user of users">
-    {{ user.user.email }} {{ user.user.firstName }} {{ user.user.lastName }}
-    <span class="btn btn-success btn-xs btn-fill" *ngIf="user.asvolunteer">Волонтёр</span>
-    <span class="btn btn-success btn-xs btn-fill" *ngIf="!user.asvolunteer">Активист</span>
-    <span class="btn btn-danger btn-xs btn-fill" *ngIf="user.asvolunteer && user.formId == 0">У участника ещё нет анкеты</span>
-  </p>
+    <table>
+      <tr *ngFor="let user of users">
+        <td class="prt-type">
+          <span class="prt prt-act" *ngIf="!user.asVolunteer">А</span>
+          <span class="prt prt-vol" *ngIf="user.asVolunteer && user.formId">В</span>
+          <span class="prt prt-vol-no-form" *ngIf="user.asVolunteer && !user.formId">В</span>
+        </td>
+        <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
+        <td>{{ user.user.email }} </td>
+      </tr>
+    </table>
   <p *ngIf="!users">
     У мероприятия ещё нет участников
   </p>

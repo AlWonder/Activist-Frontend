@@ -22,6 +22,15 @@
 							<li routerLinkActive="active"><a class="btn btn-round btn-default" routerLink="/login">Вход</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right" *ngIf="authService.authenticated() && authService.userProfile">
+							<li>
+								<div class="logo-container pull-right">
+									<div class="logo">
+										<img *ngIf="authService.userProfile.avatar" [src]="'http://localhost:8070/storage/user/avatar/' + authService.userProfile.avatar" alt="" class="profile-img">
+									  <img *ngIf="!authService.userProfile.avatar" src="http://localhost:8070/storage/noavatar.png" alt="" class="profile-img">
+									</div>
+								</div>
+							</li>
+
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ authService.userProfile.email }} <b class="caret"></b></a>
 								<span class="dropdown-arrow"></span>
@@ -42,31 +51,30 @@
 
 </header>
 <div class="main">
-		<router-outlet></router-outlet>
+	<router-outlet></router-outlet>
 </div>
 
 <div class="footer">
-    <div class="overlayer">
-    <div class="container">
-        <div class="row support">
-            <div class="col-sm-3">
+	<div class="overlayer">
+		<div class="container">
+			<div class="row support">
+				<div class="col-sm-3">
+				</div>
+				<div class="col-sm-3">
 
-            </div>
-            <div class="col-sm-3">
+				</div>
+				<div class="col-sm-4">
 
-            </div>
-            <div class="col-sm-4">
+				</div>
+				<div class="col-sm-2">
 
-            </div>
-            <div class="col-sm-2">
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="credits">
-                &copy; 2017 Сделано с <i class="fa fa-heart heart" alt="love"></i> для БГПУ.
-            </div>
-        </div>
-    </div>
-    </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="credits">
+					&copy; 2017 Сделано с <i class="fa fa-heart heart" alt="love"></i> для БГПУ.
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

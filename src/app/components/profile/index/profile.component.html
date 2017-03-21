@@ -1,23 +1,23 @@
 <div *ngIf="authService.authenticated() && authService.userProfile">
-  <div class="container">
-    <div class="row">
+  <div class="container-fluid">
+    <div class="row nav-profile-fluid">
+      <div class="container">
+        <h1>Профиль</h1>
+        <ul class="nav nav-tabs nav-profile" *ngIf="authService.isOrganizer()">
+          <li routerLinkActive="active"><a routerLink="dashboard">Дэшборд</a></li>
+          <li routerLinkActive="active"><a routerLink="full">Полная информация</a></li>
+          <li routerLinkActive="active"><a routerLink="events">Мои меропряития</a></li>
+        </ul>
 
-      <ul class="nav nav-tabs" *ngIf="authService.isOrganizer()">
-        <li routerLinkActive="active"><a routerLink="dashboard">Дэшборд</a></li>
-        <li routerLinkActive="active"><a routerLink="full">Полная информация</a></li>
-        <li routerLinkActive="active"><a routerLink="events">Мои меропряития</a></li>
-      </ul>
-
-      <ul class="nav nav-tabs" *ngIf="authService.isActivist()">
-        <li routerLinkActive="active"><a routerLink="dashboard">Дэшборд</a></li>
-        <li routerLinkActive="active"><a routerLink="full">Полная информация</a></li>
-        <li routerLinkActive="active"><a routerLink="joined">Мои меропряития</a></li>
-      </ul>
-
+        <ul class="nav nav-tabs nav-profile" *ngIf="authService.isActivist()">
+          <li routerLinkActive="active"><a routerLink="dashboard">Дэшборд</a></li>
+          <li routerLinkActive="active"><a routerLink="full">Полная информация</a></li>
+          <li routerLinkActive="active"><a routerLink="joined">Мои меропряития</a></li>
+        </ul>
+      </div>
     </div>
     <div class="container">
       <router-outlet></router-outlet>
     </div>
-
   </div>
 </div>

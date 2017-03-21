@@ -17,9 +17,10 @@ export class EventComponent implements OnInit {
   private event: Event;
   private organizer: User;
   private tags: string[];
-  private isActivist: boolean;
   private isJoined: boolean;
-  private isTimeSet: boolean;
+  private asVolunteer: boolean;
+  private hasForm: boolean;
+  //private confirm: boolean = false; // I'll make it later
   private id: number;
   private sub: Subscription;
   private imageSrc: string = "http://localhost:8070/storage/event/";
@@ -30,6 +31,7 @@ export class EventComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });
@@ -43,43 +45,57 @@ export class EventComponent implements OnInit {
         this.event.description = this.event.description.split('\n');
         this.organizer = data.organizer;
         this.tags = data.tags;
-        this.isActivist = data.isActivist;
+        this.asVolunteer = data.asVolunteer;
         this.isJoined = data.isJoined;
-        this.isTimeSet = data.isTimeSet;
-        console.log(this.event);
       },
       error => this.handleError(error));
   }
 
   getCover(uri: string) {
-    console.log(this.imageSrc + uri)
     return this.imageSrc + uri;
   }
 
   joinAsActivist() {
     this.eventService.joinEvent(this.id, { asvolunteer: false })
-      .subscribe(data => alert(data));
+      .subscribe(response => this.handleActivistResponse(response));
   }
 
   joinAsvolunteer() {
     this.eventService.joinEvent(this.id, { asvolunteer: true })
-      .subscribe(data => this.handlevolunteerResponse(data));
+      .subscribe(data => this.handleVolunteerResponse(data));
   }
 
   denyEvent() {
     this.eventService.denyEvent(this.id)
-      .subscribe(data => alert(data));
+      .subscribe(response => this.handleDenyResponse(response));
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  handlevolunteerResponse(data: any) {
+  handleVolunteerResponse(data: any) {
     if (data.hasForm) {
-      alert("Круто!")
+      this.isJoined = true;
+      this.asVolunteer = true;
+      this.hasForm = true;
     } else {
-      alert("У вас ещё нет анкеты волонтёра.")
+      this.isJoined = true;
+      this.asVolunteer = true;
+      this.hasForm = false;
+    }
+  }
+
+  handleActivistResponse(response: any) {
+    if (response.ok) {
+      this.isJoined = true;
+      this.asVolunteer = false;
+    }
+  }
+
+  handleDenyResponse(response: any) {
+    if (response.ok) {
+      this.isJoined = false;
     }
   }
 

@@ -1,7 +1,51 @@
-<div class="jumbotron">
-  <div class="container">
-    <h1>Активист</h1>
-    <p>Если ты активный, то ты пришёл по адресу</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Узнать больше</a></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="activist-logo">
+      <img src="assets/img/activist_logo.svg" alt="">
+      <h1>Активист</h1>
+      <h4>Слоган, который ещё не придумали</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="sooner-events">
+      <div class="container">
+        <h2>Скоро проводятся:</h2>
+        <div class='event-container col-md-4 col-sm-6' *ngFor="let event of soonerEvents">
+          <article class="event">
+            <div class="cover" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + apiService.getCover(event.cover) + ')'}">
+              <div class="overlay">
+                <h4><a [routerLink]="['/events', event.id]">{{event.title}}</a>
+                <br><small>{{event.eventDate | date:'longDate'}}</small></h4>
+                <!--<p class="organizer">
+                    {{event.userId.firstName}} {{event.userId.lastName}}
+                  </p>-->
+              </div>
+            </div>
+            <p class="description">{{shortifyDescription(event.description)}}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag-container" *ngFor="let eventsByTag of eventsByTags">
+      <div class="container">
+        <h2>{{eventsByTag.tag}} </h2>
+        <div class='event-container' *ngFor="let event of eventsByTag.events; let index = index" [class.col-md-6]="index < 2" [class.col-md-4]="index > 1">
+          <article class="event">
+            <div class="cover" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + apiService.getCover(event.cover) + ')'}">
+              <div class="overlay">
+                <h4><a [routerLink]="['/events', event.id]">{{event.title}}</a>
+                <br><small>{{event.eventDate | date:'longDate'}}</small></h4>
+                <!--<p class="organizer">
+                    {{event.userId.firstName}} {{event.userId.lastName}}
+                  </p>-->
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

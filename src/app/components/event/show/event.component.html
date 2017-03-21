@@ -1,10 +1,11 @@
+<div class="event-loading" *ngIf="!event"><img src="assets/img/loading.svg"></div>
 <div class="container-full hat" *ngIf="event">
-	<div class="background-image" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+	<div class="background-image" [ngStyle]="!event.cover ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
 	</div>
 	<div class="shadow">
 
 	</div>
-	<div class="container cover" id="cover-full" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+	<div class="container cover" id="cover-full" [ngStyle]="!event.cover ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
 		<div class="overlay">
 			<h1>{{event.title}}
 			<br><small>{{event.eventDate | date:'longDate'}}</small>
@@ -18,32 +19,40 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="event-info">
-				<p class="description" *ngFor="let paragraph of event.description">{{paragraph}}</p>
-				<br>
-				<p class="event-date"><strong>Дата проведения:</strong> {{event.eventDate | date:'yyyy-MM-dd'}} <span *ngIf="isTimeSet">{{event.eventTime}}</span></p>
+					<h4>Описание:</h4>
+					<p class="description" *ngFor="let paragraph of event.description">{{paragraph}}</p>
+					<br>
+					<p class="event-date"><strong>Дата проведения:</strong> {{event.eventDate | date:'longDate'}} <span *ngIf="event.eventTime">{{event.eventTime}}</span></p>
 				</div>
 			</div>
 
-			<div class="col-md-4" *ngIf="authService.authenticated()">
+			<div class="col-md-4">
 				<div class="organizer-info">
 					<h4>Организатор:</h4>
-					<br/><h5><img *ngIf="organizer.avatar != ''" [src]="'http://localhost:8070/storage/user/avatar/' + organizer.avatar" alt="" class="org-avatar">
-			    <img *ngIf="organizer.avatar == ''" src="http://localhost:8070/storage/noavatar.png" alt="" class="org-avatar">
+					<br/>
+					<h5><img *ngIf="organizer.avatar" [src]="'http://localhost:8070/storage/user/avatar/' + organizer.avatar" alt="" class="org-avatar">
+			    <img *ngIf="!organizer.avatar" src="http://localhost:8070/storage/noavatar.png" alt="" class="org-avatar">
 					{{organizer.firstName}} {{organizer.secondName}} {{organizer.lastName}}</h5>
-					E-mail: {{organizer.email}}
+					<div class="contact-info" *ngIf="authService.authenticated()">E-mail: {{organizer.email}} </div>
+					<div class="contact-info" *ngIf="!authService.authenticated()">
+						<i>Для отображения контактной информации вам необходимо войти в систему</i>
+					</div>
 				</div>
 
-				<div class="join-event" *ngIf="authService.authenticated() && isActivist">
-				<div class="event-not-joined" *ngIf="!isJoined">
-					<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
-					<button class="btn btn-default" (click)="joinAsActivist()">Как активист</button>
-					<button class="btn btn-default" [disabled]="!event.volunteers" (click)="joinAsvolunteer()">Как волонтёр</button>
-				</div>
-				<div class="event-joined" *ngIf="isJoined">
-					<p>Вы уже участвуете в этом мероприятии.</p>
-					<button class="btn btn-danger" (click)="denyEvent()">Отказаться от участия</button>
-				</div>
+				<div class="join-event" *ngIf="authService.authenticated() && authService.userProfile.group == 1">
+					<div class="event-not-joined" *ngIf="!isJoined">
+						<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
+						<button class="btn btn-default" (click)="joinAsActivist()">Как активист</button>
+						<button class="btn btn-default" [disabled]="!event.volunteers" (click)="joinAsvolunteer()">Как волонтёр</button>
+					</div>
+					<div class="event-joined" *ngIf="isJoined">
+						<p *ngIf="!asVolunteer">Вы участвуете в этом мероприятии как активист</p>
+						<p *ngIf="asVolunteer">Вы участвуете в этом мероприятии как волонтёр</p>
+						<button class="btn btn-danger" (click)="denyEvent()">Отказаться от участия</button>
+					</div>
+					<div class="join-confirm" *ngIf="confirm">
 
+					</div>
 				</div>
 			</div>
 		</div>

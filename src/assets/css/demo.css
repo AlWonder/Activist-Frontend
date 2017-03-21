@@ -106,16 +106,13 @@
     color: #ddd !important;
 }
 .footer{
-    background-color: #DDDDDD;
-    background-image: url('../img/cover_4_blur.jpg');
-    background-attachment: fixed;
     position: relative;
 }
 .heart{
     color: #FF3B30;
 }
 .footer .overlayer{
-    background-color: rgba(27, 27, 27, 0.7);
+    background-color: rgba(50, 50, 50, 1);
     position: relative;
 }
 .footer .credits {
@@ -329,14 +326,13 @@
 }
 
 .logo-container{
-    margin-top: 10px;
+    margin: 15px 10px 15px 10px;
 }
 .logo-container .logo{
     overflow: hidden;
     border-radius: 50%;
-    border: 1px solid #333333;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     float: left;
 }
 .logo-container .logo img{

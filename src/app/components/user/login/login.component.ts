@@ -9,9 +9,14 @@ import { AuthService } from 'app/services/auth.service';
 })
 export class LoginComponent {
 
+  private loggingIn: boolean = false;
+  private error: string = "";
+
   constructor(private authService: AuthService) { }
 
   login(email: string, password: string) {
+    this.error = "";
+    this.loggingIn = true;
     this.authService.login(email, password)
       .subscribe(
       response => this.handleResponse(response),
@@ -19,8 +24,8 @@ export class LoginComponent {
   }
 
   handleResponse(response: any) {
-    if (response.errors == null) {
-      console.log(response)
+    this.loggingIn = false;
+    if (response.ok) {
       localStorage.setItem('id_token', response.idToken);
       this.authService.userId = this.authService.getUserId();
       this.authService.getUserInfo()
@@ -30,9 +35,7 @@ export class LoginComponent {
         },
         error => alert("Error: " + error));
     } else {
-      for (let error of response.errors) {
-        alert(error.userMessage);
-      }
+      this.error = response.error.userMessage;
     }
   }
 }

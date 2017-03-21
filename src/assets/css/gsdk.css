@@ -84,7 +84,6 @@ h1 .subtitle {
 .app-loading {
   position: relative;
   min-height: 100%;
-  background-color: #FAFAFA;
 }
 
 .app-loading img {
@@ -1482,7 +1481,7 @@ input.ct-red+span.switch-left, input.ct-red+span+label+span.switch-right {
 }
 
 .navbar .navbar-nav>li>a {
-  padding: 10px 15px;
+  padding: 10px 5px;
   margin: 15px 3px;
 }
 
@@ -2433,3 +2432,12 @@ input.ct-red+span.switch-left, input.ct-red+span+label+span.switch-right {
     margin-bottom: 0;
   }
 }
+
+.events-pagination .ng2-pagination li {
+    cursor: default;
+  }
+
+.events-pagination .ng2-pagination .current {
+    background: #353A5A;
+    border-radius: 5px;
+  }

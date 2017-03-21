@@ -11,6 +11,7 @@ import { Event } from 'app/models/event';
 export class ProfileJoinedEventsComponent implements OnInit {
 
   events: Event[];
+  private imageSrc: string = "http://localhost:8070/storage/event/";
 
   constructor(private eventService: EventService, private authService: AuthService) { }
 
@@ -30,6 +31,21 @@ export class ProfileJoinedEventsComponent implements OnInit {
   private denyEvent(id: number) {
     this.eventService.denyEvent(id)
       .subscribe(data => alert(data));
+  }
+
+  getCover(uri: string) {
+    return this.imageSrc + uri;
+  }
+
+  shortifyDescription(description: string) {
+    if (description.length <= 140) {
+      return description;
+    }
+    description = description.slice(0, 140)
+    let a = description.split(' ');
+    a.splice(a.length - 1, 1);
+    description = a.join(' ');
+    return description + '...';
   }
 
 }

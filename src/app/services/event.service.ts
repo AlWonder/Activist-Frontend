@@ -7,12 +7,16 @@ export class EventService {
 
   constructor(private api: ApiService) { }
 
+  public indexPage() {
+    return this.api.get('index', false, null);
+  }
+
   public getEvents(page: number) {
     return this.api.get('events', false, { page: page });
   }
 
-  public getEventsByTag(tag: string) {
-    return this.api.get('tags/' + tag, false, null);
+  public getEventsByTag(tag: string, page: number) {
+    return this.api.get('tags/' + tag, false, { page: page });
   }
 
   public getUserEvents(userId: number) {

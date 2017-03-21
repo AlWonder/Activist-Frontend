@@ -8,7 +8,8 @@ import 'app/rxjs-operators';
 @Injectable()
 export class ApiService {
 
-  apiUrl: string = "http://localhost:8070/"
+  public apiUrl: string = "http://localhost:8070/"
+  public coverSrc: string = "http://localhost:8070/storage/event/";
 
   constructor(private http: Http) { }
 
@@ -92,6 +93,10 @@ export class ApiService {
   public addAuthorizationHeader(headers: Headers) {
     headers.append('Authorization', 'Bearer ' +
       localStorage.getItem("id_token"));
+  }
+
+  public getCover(uri: string) {
+    return this.coverSrc + uri;
   }
 
 }

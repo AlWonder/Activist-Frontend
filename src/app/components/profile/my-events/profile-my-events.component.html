@@ -1,19 +1,33 @@
+<div class="row">
+  <div class="my-events-panel">
+    <button class="btn btn-success btn-fill" routerLink="/events/new"><i class="fa fa-plus" aria-hidden="true"></i> Добавить мероприятие</button><br>
+  </div>
+</div>
+
 <div class="row" *ngIf="!events || !(events.length > 0)">
   <h4>У вас ещё нет добавленных мероприятий</h4>
-  <button class="btn btn-success" routerLink="/events/new">Новое мероприятие</button><br>
 </div>
 
 <div class="row" *ngIf="events && events.length > 0">
   <div *ngFor="let event of events">
-  	<article class="event well well-sm">
-  		<h3 class="title"><a [routerLink]="['/events', event.id]">{{event.title}}</a></h3>
-  		<p class="description">{{event.description}}</p>
-      <button *ngIf="activeEvent != event.id" class="btn btn-default btn-filled" (click)="makeEventActive(event.id)">Показать участников</button>
-      <button *ngIf="activeEvent == event.id" class="btn btn-default btn-filled" (click)="makeEventActive(0)">Закрыть</button>
+    <div class='event-container col-md-4 col-sm-6'>
+      <article class="event">
+        <div class="cover" [ngStyle]="event.cover == '' ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+          <div class="overlay">
+            <h4><a [routerLink]="['/events', event.id]">{{event.title}}</a>
+          <br><small>{{event.eventDate | date:'longDate'}}</small></h4>
+          </div>
+        </div>
+        <p class="description">{{shortifyDescription(event.description)}}</p>
 
-      <button class="btn btn-info btn-filled" [routerLink]="['/events/edit', event.id]">Изменить</button>
-      <button class="btn btn-danger btn-filled" (click)="deleteEvent(event.id)">Удалить</button>
-      <joined-users *ngIf="activeEvent == event.id" [eventId]="event.id"></joined-users>
-  	</article>
+        <div class="event-buttons">
+          <button class="btn btn-danger btn-fill" (click)="deleteEvent(event.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button class="btn btn-info btn-fill" [routerLink]="['/events/edit', event.id]"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button *ngIf="activeEvent != event.id" class="btn btn-default btn-fill" (click)="makeEventActive(event.id)"><i class="fa fa-user" aria-hidden="true"></i></button>
+          <button *ngIf="activeEvent == event.id" class="btn btn-default btn-fill" (click)="makeEventActive(0)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+        <joined-users class="joined-users" *ngIf="activeEvent == event.id" [eventId]="event.id"></joined-users>
+      </article>
+    </div>
   </div>
 </div>

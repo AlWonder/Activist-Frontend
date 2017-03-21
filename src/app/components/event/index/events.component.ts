@@ -40,7 +40,6 @@ export class EventsComponent implements OnInit {
   }
 
   getCover(uri: string) {
-    console.log(this.imageSrc + uri)
     return this.imageSrc + uri;
   }
 

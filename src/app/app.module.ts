@@ -98,6 +98,7 @@ const profileRoutes: Routes = [
       { path: 'events/edit/:id', component: EditEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'tags', component: TagsQueryComponent },
       { path: 'tags/:tag', component: TagComponent },
+      { path: 'tags/:tag/page/:page', component: TagComponent },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: profileRoutes },

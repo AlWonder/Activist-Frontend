@@ -9,3 +9,8 @@ export class Event {
   volunteers: boolean;
   cover: string;
 }
+
+export class EventsByTag {
+  Tag: string;
+  Events: Event[];
+}
