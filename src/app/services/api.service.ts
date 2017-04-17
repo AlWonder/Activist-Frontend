@@ -8,8 +8,7 @@ import 'app/rxjs-operators';
 @Injectable()
 export class ApiService {
 
-  public apiUrl: string = "http://localhost:8070/"
-  public coverSrc: string = "http://localhost:8070/storage/event/";
+  public apiUrl: string = "/api/"
 
   constructor(private http: Http) { }
 
@@ -31,6 +30,25 @@ export class ApiService {
     return this.http.get(this.apiUrl + uri, options)
       .map(this.extractData)
       .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+  }
+
+  public getFile(uri: string, authHeader: boolean, params: Object) {
+    let headers = new Headers();
+    if (authHeader && tokenNotExpired()) {
+      this.addAuthorizationHeader(headers);
+    }
+    let options = new RequestOptions({ headers: headers });
+    if (params) {
+      let searchParams = new URLSearchParams();
+      for (let param in params) {
+        if (params.hasOwnProperty(param))
+          searchParams.set(param, params[param]);
+      }
+      options.search = searchParams;
+    }
+
+    return this.http.get(this.apiUrl + uri, options)
+      .map((res) => res['_body']);
   }
 
   public post(uri: string, data: Object, authHeader: boolean) {
@@ -94,9 +112,4 @@ export class ApiService {
     headers.append('Authorization', 'Bearer ' +
       localStorage.getItem("id_token"));
   }
-
-  public getCover(uri: string) {
-    return this.coverSrc + uri;
-  }
-
 }

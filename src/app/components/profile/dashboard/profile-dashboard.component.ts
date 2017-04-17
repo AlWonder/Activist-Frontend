@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -9,7 +10,10 @@ import { AuthService } from 'app/services/auth.service';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
   }

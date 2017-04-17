@@ -38,3 +38,18 @@ export class OrgGuard implements CanActivate {
     }
   }
 }
+
+@Injectable()
+export class PrtGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (!this.authService.isOrganizer()) {
+      return true;
+    } else {
+      this.router.navigate(['forbidden']);
+      return false;
+    }
+  }
+}

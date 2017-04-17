@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,10 @@ export class AppComponent implements OnInit {
     console.log(this.isCollapsed);
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     if (this.authService.authenticated()) {

@@ -1,25 +1,11 @@
-.event-loading {
-  position: relative;
-  min-height: 100px;
-}
-
-.event-loading img {
-  display: block;
-  overflow: auto;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-}
-
 .background-image {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   z-index: 1;
   display: block;
   width: 100%;
   height: 571px;
-  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,7 +17,7 @@
 }
 
 .shadow {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   z-index: 2;
@@ -55,6 +41,9 @@
   z-index: 3;
   background-color: #353A5A;
   padding-top: 20px;
+  -webkit-box-shadow: 0 -8px 139px 20px rgba(0,0,0,0.58);
+  -moz-box-shadow: 0 -8px 139px 20px rgba(0,0,0,0.58);
+  box-shadow: 0 -8px 139px 20px rgba(0,0,0,0.58);
 }
 
 .cover {
@@ -109,13 +98,12 @@
   background-color: #FFFFFF;
   background-origin: content-box;
   padding: 15px;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 20px;
   -webkit-box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
   -moz-box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
   box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
   h4 {
     margin: 0;
-
   }
 }
 

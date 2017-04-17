@@ -8,6 +8,7 @@ export class Event {
   eventTime: Date;
   volunteers: boolean;
   cover: string;
+  participants: number;
 }
 
 export class EventsByTag {

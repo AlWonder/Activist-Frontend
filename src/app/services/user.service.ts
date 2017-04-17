@@ -4,7 +4,18 @@ import { ApiService } from './api.service';
 @Injectable()
 export class UserService {
 
+  public avatarSrc: string = this.api.apiUrl + "storage/avatar/";
+  public avatarSmSrc: string = this.api.apiUrl + "storage/avatar/sm/";
+
   constructor(private api: ApiService) { }
+
+  public getAvatar(uri: string) {
+    return this.avatarSrc + uri;
+  }
+
+  public getSmallAvatar(uri: string) {
+    return this.avatarSmSrc + uri;
+  }
 
   public getJoinedUsers(eventId: number) {
     return this.api.get('events/' + eventId + "/joined", true, null);

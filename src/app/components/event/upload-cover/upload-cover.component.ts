@@ -9,7 +9,7 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class UploadCoverComponent implements OnInit {
 
-  public uploader: FileUploader = new FileUploader({url: "http://localhost:8070/upload", authToken: 'Bearer ' + localStorage.getItem("id_token")});
+  public uploader: FileUploader = new FileUploader({url: "http://localhost:8080/upload", authToken: 'Bearer ' + localStorage.getItem("id_token")});
 
   constructor() { }
 

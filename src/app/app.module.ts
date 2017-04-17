@@ -31,8 +31,9 @@ import { ApiService } from './services/api.service';
 import { EventService } from './services/event.service';
 import { TagService } from './services/tag.service';
 import { UserService } from './services/user.service';
+import { FormService } from './services/form.service';
 
-import { AuthGuard, OrgGuard } from './guards/auth.guard';
+import { AuthGuard, OrgGuard, PrtGuard } from './guards/auth.guard';
 
 import { ProfileDashboardComponent } from './components/profile/dashboard/profile-dashboard.component';
 import { ProfileFullComponent } from './components/profile/full/profile-full.component';
@@ -42,13 +43,18 @@ import { JoinedUsersComponent } from './components/user/joined-users/joined-user
 
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadCoverComponent } from './components/event/upload-cover/upload-cover.component';
+import { MyFormTemplatesComponent } from './components/profile/my-form-templates/my-form-templates.component';
+import { UploadTemplateComponent } from './components/form/upload-template/upload-template.component';
+import { DownloadTemplateComponent } from './components/download/template/download-template.component';
+import { UploadFormComponent } from './components/form/upload-form/upload-form.component';
 
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: ProfileDashboardComponent },
   { path: 'full', component: ProfileFullComponent },
   { path: 'events', component: ProfileMyEventsComponent },
-  { path: 'joined', component: ProfileJoinedEventsComponent }
+  { path: 'joined', component: ProfileJoinedEventsComponent },
+  { path: 'tpls', component: MyFormTemplatesComponent }
 ];
 
 @NgModule({
@@ -76,7 +82,11 @@ const profileRoutes: Routes = [
     FileUploadComponent,
     FileSelectDirective,
     FileDropDirective,
-    UploadCoverComponent
+    UploadCoverComponent,
+    MyFormTemplatesComponent,
+    UploadTemplateComponent,
+    DownloadTemplateComponent,
+    UploadFormComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +109,9 @@ const profileRoutes: Routes = [
       { path: 'tags', component: TagsQueryComponent },
       { path: 'tags/:tag', component: TagComponent },
       { path: 'tags/:tag/page/:page', component: TagComponent },
+      { path: 'tpls/upload', component: UploadTemplateComponent, canActivate: [AuthGuard, OrgGuard] },
+      { path: 'forms/upload/:tplid', component: UploadFormComponent, canActivate: [AuthGuard, PrtGuard] },
+      { path: 'download/tpl/:id/:tpl', component: DownloadTemplateComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: profileRoutes },
@@ -114,8 +127,10 @@ const profileRoutes: Routes = [
     ApiService,
     UserService,
     TagService,
+    FormService,
     AuthGuard,
     OrgGuard,
+    PrtGuard,
     { provide: LOCALE_ID, useValue: "ru-RU" }
   ],
   bootstrap: [AppComponent]

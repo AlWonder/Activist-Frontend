@@ -10,7 +10,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-						<a class="navbar-brand" routerLink="/home">Активист</a>
+						<a class="navbar-brand" routerLink="/home">
+							<svg width="39px" height="36px" viewBox="333 -36 39 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+							    <desc>Главная</desc>
+							    <defs></defs>
+							    <path d="M348.638484,-14.0698536 L344.603205,-0.724609375 L333.549316,-0.724609375 L346.70416,-35.7246094 L358.498157,-35.7246094 L371.653,-0.724609375 L360.336492,-0.724609375 L348.638484,-14.0698536 Z M356.349453,-14.0704484 L352.481786,-26.6523038 L348.638484,-14.0698536 L356.349453,-14.0704484 Z" id="A" stroke="none" fill-rule="evenodd"></path>
+							</svg> <span class="sr-only">Активист</span></a>
 					</div>
 
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -25,8 +31,8 @@
 							<li>
 								<div class="logo-container pull-right">
 									<div class="logo">
-										<img *ngIf="authService.userProfile.avatar" [src]="'http://localhost:8070/storage/user/avatar/' + authService.userProfile.avatar" alt="" class="profile-img">
-									  <img *ngIf="!authService.userProfile.avatar" src="http://localhost:8070/storage/noavatar.png" alt="" class="profile-img">
+										<img *ngIf="authService.userProfile.avatar" [src]="userService.getSmallAvatar(authService.userProfile.avatar)" alt="" class="profile-img">
+									  <img *ngIf="!authService.userProfile.avatar" src="assets/img/noavatar_sm.png" alt="" class="profile-img">
 									</div>
 								</div>
 							</li>

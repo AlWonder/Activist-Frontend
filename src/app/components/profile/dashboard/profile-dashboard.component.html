@@ -1,7 +1,7 @@
 <div class="col-md-4 profile">
   <h3>Профиль</h3>
-  <img *ngIf="authService.userProfile.avatar" [src]="'http://localhost:8070/storage/user/avatar/' + authService.userProfile.avatar" alt="" class="profile-img">
-  <img *ngIf="!authService.userProfile.avatar" src="http://localhost:8070/storage/noavatar.png" alt="" class="profile-img">
+  <img *ngIf="authService.userProfile.avatar" [src]="userService.getSmallAvatar(authService.userProfile.avatar)" alt="" class="profile-img">
+  <img *ngIf="!authService.userProfile.avatar" src="assets/img/noavatar.png" alt="" class="profile-img">
   <p><strong>ФИО: </strong> {{authService.userProfile.firstName}} {{authService.userProfile.secondName}} {{authService.userProfile.lastName}}
   </p>
   <p><strong>Email: </strong> {{authService.userProfile.email}}</p>

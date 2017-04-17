@@ -5,7 +5,18 @@ import { ApiService } from './api.service';
 @Injectable()
 export class EventService {
 
+  public coverSrc: string = this.api.apiUrl + "storage/cover/";
+  public coverSmSrc: string = this.api.apiUrl + "storage/cover/sm/";
+
   constructor(private api: ApiService) { }
+
+  public getCover(uri: string) {
+    return this.coverSrc + uri;
+  }
+
+  public getSmallCover(uri: string) {
+    return this.coverSmSrc + uri;
+  }
 
   public indexPage() {
     return this.api.get('index', false, null);

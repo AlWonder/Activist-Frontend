@@ -11,6 +11,19 @@
   background-color: #353A5A;
   background-clip: content-box;
 }
+a.navbar-brand {
+  padding: {
+    top: 13px;
+    bottom: 0;
+  }
+  svg {
+    vertical-align: middle;
+    fill: #777;
+    &:hover {
+      fill: #444;
+    }
+  }
+}
 
 .footer {
   position: relative;

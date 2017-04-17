@@ -11,7 +11,6 @@ import { Event } from 'app/models/event';
 export class ProfileMyEventsComponent implements OnInit {
   events: Event[];
   activeEvent: number = 0;
-  private imageSrc: string = "http://localhost:8070/storage/event/";
 
   constructor(private eventService: EventService, private authService: AuthService) { }
 
@@ -29,10 +28,6 @@ export class ProfileMyEventsComponent implements OnInit {
 
   public makeEventActive(id: number) {
     this.activeEvent = id;
-  }
-
-  getCover(uri: string) {
-    return this.imageSrc + uri;
   }
 
   shortifyDescription(description: string) {

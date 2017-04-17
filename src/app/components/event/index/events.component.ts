@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -16,15 +17,16 @@ export class EventsComponent implements OnInit {
   private count: number;
   private page: number = 1;
   private sub: Subscription;
-  private imageSrc: string = "http://localhost:8070/storage/event/";
 
   constructor(
     private eventService: EventService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Мероприятия – Активист");
     this.sub = this.route.params.subscribe(params => {
       this.page = +params['page']; // (+) converts string 'id' to a number
     });
@@ -37,10 +39,6 @@ export class EventsComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  }
-
-  getCover(uri: string) {
-    return this.imageSrc + uri;
   }
 
   changePage(page: number) {

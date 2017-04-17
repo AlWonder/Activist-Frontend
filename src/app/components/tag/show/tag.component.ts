@@ -20,7 +20,6 @@ export class TagComponent implements OnInit {
   status: boolean;
   private count: number;
   private page: number = 1;
-  private imageSrc: string = "http://localhost:8070/storage/event/";
 
   constructor(private eventService: EventService,
     private tagService: TagService,
@@ -32,7 +31,6 @@ export class TagComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.tag = params['tag'];
     });
-
 
     if (this.authService.authenticated()) {
       let o1 = this.eventService.getEventsByTag(this.tag, this.page);
@@ -56,10 +54,6 @@ export class TagComponent implements OnInit {
       },
       error => alert(error));
     }
-  }
-
-  getCover(uri: string) {
-    return this.imageSrc + uri;
   }
 
   changePage(page: number) {

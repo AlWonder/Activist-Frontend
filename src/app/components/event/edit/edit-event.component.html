@@ -1,34 +1,39 @@
 <div class="container">
-  <h1>Изменить мероприятие</h1>
-  <form (ngSubmit)="onSubmit($event)">
-    <div class="form-group">
-      <label for="title">Название</label>
-      <input type="text" class="form-control input-sm" id="title" name="title" [(ngModel)]="event.title" required>
-    </div>
-    <div class="form-group">
-      <label for="description">Описание</label>
-      <textarea class="form-control" id="description" name="description" [(ngModel)]="event.description" required></textarea>
-    </div>
-    <div class="form-group">
-      <label for="eventDate">Дата проведения мероприятия</label>
-      <input type="date" class="form-control input-sm" id="eventDate" name="eventDate" [(ngModel)]="event.eventDate" required>
-    </div>
-    <div class="form-group">
-      <label for="eventTime">Время начала</label>
-      <input type="time" class="form-control input-sm" id="eventTime" name="eventTime" [(ngModel)]="event.eventTime">
-    </div>
-    <div class="form-group">
-      <label class="checkbox ct-blue">
-        <input type="checkbox" name="volunteers" data-toggle="checkbox" [(ngModel)]="event.volunteers"/>
-         Волонтёры
-       </label>
-    </div>
-    <div class="form-group">
-      <label for="query">Добавить теги</label>
-      <tag-input name="shownTags" [(ngModel)]="shownTags" (onAdd)="onAdd($event)" (onRemove)="onRemove($event)"></tag-input>
-    </div>
+  <div class="col-md-10 col-md-offset-1 new-event-form">
+    <h1>Изменить мероприятие</h1>
+    <form (ngSubmit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="title">Название</label>
+        <input type="text" class="form-control input-sm" id="email" name="title" [(ngModel)]="event.title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Описание</label>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="event.description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="eventDate">Дата проведения мероприятия</label>
+        <input type="date" class="form-control input-sm" id="eventDate" name="eventDate" [(ngModel)]="event.eventDate" required>
+      </div>
+      <div class="form-group">
+        <label for="eventTime">Время начала</label>
+        <input type="time" class="form-control input-sm" id="eventTime" name="eventTime" [(ngModel)]="event.eventTime">
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="volunteers" [(ngModel)]="event.volunteers">
+           Волонтёры
+         </label>
+      </div>
+      <div class="form-group">
+        <label>Обложка мероприятия</label>
+        <input type="file" (change)="fileChange($event)" />
+      </div>
+      <div class="form-group">
+        <label for="query">Добавить теги</label>
+        <tag-input name="shownTags" [(ngModel)]="shownTags" (onAdd)="onAdd($event)" (onRemove)="onRemove($event)"></tag-input>
+      </div>
 
-    <button type="submit" class="btn btn-default">Добавить новость</button>
-  </form>
-
+      <button type="submit" class="btn btn-default">Изменить</button>
+    </form>
+  </div>
 </div>

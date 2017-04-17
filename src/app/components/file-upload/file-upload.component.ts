@@ -14,7 +14,7 @@ export class FileUploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  public uploader:FileUploader = new FileUploader({url: "http://localhost:8070/upload"});
+  public uploader:FileUploader = new FileUploader({url: "/api/tpl"});
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
 

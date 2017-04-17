@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
 import { Event } from 'app/models/event';
 import { User } from 'app/models/user';
 import { Tag } from 'app/models/tag'
@@ -23,12 +24,14 @@ export class EventComponent implements OnInit {
   //private confirm: boolean = false; // I'll make it later
   private id: number;
   private sub: Subscription;
-  private imageSrc: string = "http://localhost:8070/storage/event/";
 
-  constructor(private eventService: EventService,
+  constructor(
+    private eventService: EventService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -49,10 +52,6 @@ export class EventComponent implements OnInit {
         this.isJoined = data.isJoined;
       },
       error => this.handleError(error));
-  }
-
-  getCover(uri: string) {
-    return this.imageSrc + uri;
   }
 
   joinAsActivist() {

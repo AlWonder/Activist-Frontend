@@ -96,10 +96,10 @@ $(function () {
 
 });
 
-$(window).scroll(function() {
+/*$(window).scroll(function() {
   var scrolledY = $(window).scrollTop();
   $('#cover-full').css('background-position', 'center ' + ((scrolledY)) + 'px');
-});
+});*/
 
 /*$(document).scroll(function() {
     if( $(this).scrollTop() > 40 ) {

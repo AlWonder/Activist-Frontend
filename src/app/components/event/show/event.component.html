@@ -1,11 +1,11 @@
 <div class="event-loading" *ngIf="!event"><img src="assets/img/loading.svg"></div>
 <div class="container-full hat" *ngIf="event">
-	<div class="background-image" [ngStyle]="!event.cover ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+	<div class="background-image" [ngStyle]="!event.cover ? {'background-color': '#777777'} : {'background-image': 'url(' + eventService.getCover(event.cover) + ')'}">
 	</div>
 	<div class="shadow">
 
 	</div>
-	<div class="container cover" id="cover-full" [ngStyle]="!event.cover ? {'background-color': '#777777'} : {'background-image': 'url(' + getCover(event.cover) + ')'}">
+	<div class="container cover" id="cover-full" [ngStyle]="!event.cover ? {'background-color': '#777777'} : {'background-image': 'url(' + eventService.getCover(event.cover) + ')'}">
 		<div class="overlay">
 			<h1>{{event.title}}
 			<br><small>{{event.eventDate | date:'longDate'}}</small>
@@ -14,8 +14,8 @@
 	</div>
 </div>
 
-<div class="content">
-	<section class="container" *ngIf="event">
+<div class="content" *ngIf="event">
+	<section class="container">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="event-info">
@@ -30,8 +30,8 @@
 				<div class="organizer-info">
 					<h4>Организатор:</h4>
 					<br/>
-					<h5><img *ngIf="organizer.avatar" [src]="'http://localhost:8070/storage/user/avatar/' + organizer.avatar" alt="" class="org-avatar">
-			    <img *ngIf="!organizer.avatar" src="http://localhost:8070/storage/noavatar.png" alt="" class="org-avatar">
+					<h5><img *ngIf="organizer.avatar" [src]="userService.getAvatar(organizer.avatar)" alt="" class="org-avatar">
+			    <img *ngIf="!organizer.avatar" src="assets/img/noavatar.png" alt="" class="org-avatar">
 					{{organizer.firstName}} {{organizer.secondName}} {{organizer.lastName}}</h5>
 					<div class="contact-info" *ngIf="authService.authenticated()">E-mail: {{organizer.email}} </div>
 					<div class="contact-info" *ngIf="!authService.authenticated()">
