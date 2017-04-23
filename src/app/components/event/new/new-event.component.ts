@@ -7,6 +7,9 @@ import { EventService } from 'app/services/event.service';
 import { Tag } from 'app/models/tag';
 import { TagService } from 'app/services/tag.service';
 
+import { FormService } from 'app/services/form.service';
+import { AuthService } from 'app/services/auth.service';
+
 @Component({
   selector: 'app-new-event',
   templateUrl: './new-event.component.html',
@@ -14,48 +17,47 @@ import { TagService } from 'app/services/tag.service';
 })
 export class NewEventComponent implements OnInit {
 
-  public tags: any[] = [];
+  private tags: any[] = [];
+  private event: Event = new Event();
+  private volunteers: boolean = false;
+  private queriedTags: Tag[] = [];
+  private addedTags: string[];
+  private tagQuery: string = "";
+  private cover: File = null;
+  private templates: Object;
 
-  event: Event = new Event();
-  queriedTags: Tag[] = [];
-  addedTags: string[];
-  tagQuery: string = "";
-  volunteersChecked: boolean;
-  cover: File = null;
+  constructor(
+    private tagService: TagService,
+    private eventService: EventService,
+    private formService: FormService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
+  ngOnInit() {
+    this.formService.queryUserFormTemplates(this.authService.userProfile.id)
+    .subscribe(data => this.templates = data);
+  }
 
-  fileChange(event) {
+  private fileChange(event) {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       this.cover = fileList[0];
     }
   }
 
-  constructor(private tagService: TagService, private eventService: EventService, private router: Router) { }
-
-  ngOnInit() {
-  }
-
-  togglevolunteersSwitch() {
-    if (this.volunteersChecked) {
-      this.volunteersChecked = false;
-    } else {
-      this.volunteersChecked = true;
-    }
-  }
-
-  tagKeyUp(event) {
+  private tagKeyUp(event) {
     this.queryTags();
   }
 
-  tagKeyDown(event) {
+  private tagKeyDown(event) {
     event.preventDefault();
     if (this.tagQuery.trim() != "") {
       this.addTag(this.tagQuery.trim());
     }
   }
 
-  queryTags() {
+  private queryTags() {
     if (this.tagQuery.trim() != "") {
       this.tagService.queryTags(this.tagQuery.trim())
         .subscribe(data => this.queriedTags = data);
@@ -64,7 +66,7 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  addTag(tag: string) {
+  private addTag(tag: string) {
     this.tagQuery = "";
     let found: boolean = false;
     for (let addedTag of this.addedTags) {
@@ -78,11 +80,11 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  removeTag(tag: number) {
+  private removeTag(tag: number) {
     this.addedTags.splice(tag, 1);
   }
 
-  onSubmit(event) {
+  private onSubmit(event) {
     if (event.keyCode == 13) {
       event.preventDefault();
     } else {
@@ -90,6 +92,10 @@ export class NewEventComponent implements OnInit {
       for (let tag of this.tags) {
         this.addedTags.push(tag.value);
       }
+      if (this.volunteers = false) {
+        this.event.templateId = null;
+      }
+      this.event.templateId = +this.event.templateId;
       this.eventService.addEvent({ event: this.event, tags: this.addedTags })
         .subscribe(
         response => this.handleResponse(response),
@@ -97,7 +103,7 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  handleResponse(response) {
+  private handleResponse(response: any) {
     if (response.ok) {
       this.event.id = response.eventId;
       if (this.cover != null) {

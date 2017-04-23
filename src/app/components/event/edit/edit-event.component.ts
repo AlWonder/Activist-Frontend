@@ -22,10 +22,12 @@ export class EditEventComponent implements OnInit {
   private id: number;
   private sub: Subscription;
 
-  constructor(private eventService: EventService,
+  constructor(
+    private eventService: EventService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -40,8 +42,13 @@ export class EditEventComponent implements OnInit {
       error => this.handleError(error));
   }
 
-  handleResponse(data) {
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  private handleResponse(data) {
     this.event = data.event;
+    this.event.userId = data.event.userId.id;
     if (data.tags) {
       this.tagsBefore = data.tags;
       for (let tag of data.tags) {
@@ -54,17 +61,18 @@ export class EditEventComponent implements OnInit {
     if (data.isTimeSet == false) {
       this.event.eventTime = null;
     }
+    //if (this.event.templateId == )
     console.log(this.event);
   }
 
-  handleError(error) {
+  private handleError(error) {
     console.log(error);
     if (error[0].code == 404) {
       this.router.navigate(['/404']);
     }
   }
 
-  onAdd(event) {
+  private onAdd(event) {
     // Delete a tag from removedTags array if that array exists in it
     if (this.removedTags.some(tag => event.value == tag)) {
       var i = this.removedTags.indexOf(event.value, 0);
@@ -75,7 +83,7 @@ export class EditEventComponent implements OnInit {
     }
   }
 
-  onRemove(event) {
+  private onRemove(event) {
     // Delete a tag from removedTags array if that array exists in it
     if (this.addedTags.some(tag => event.value == tag)) {
       var i = this.addedTags.indexOf(event.value, 0);
@@ -86,7 +94,7 @@ export class EditEventComponent implements OnInit {
     }
   }
 
-  onSubmit(event) {
+  private onSubmit(event) {
     if (event.keyCode == 13) {
       event.preventDefault();
     } else {
@@ -101,7 +109,7 @@ export class EditEventComponent implements OnInit {
     }
   }
 
-  handleEditResponse(response) {
+  private handleEditResponse(response) {
     if (response.ok) {
       this.router.navigate(['/events/' + response.eventId]);
     }

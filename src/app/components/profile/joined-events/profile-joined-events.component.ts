@@ -10,15 +10,17 @@ import { Event } from 'app/models/event';
 })
 export class ProfileJoinedEventsComponent implements OnInit {
 
-  events: Event[];
+  private events: Event[];
 
-  constructor(private eventService: EventService, private authService: AuthService) { }
+  constructor(
+    private eventService: EventService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.eventService.getJoinedEvents(this.authService.userId)
       .subscribe(data => this.events = data);
   }
-
 
   private deleteEvent(id: number) {
     if (confirm("Вы действительно хотите удалить мероприятие?")) {
@@ -30,17 +32,6 @@ export class ProfileJoinedEventsComponent implements OnInit {
   private denyEvent(id: number) {
     this.eventService.denyEvent(id)
       .subscribe(data => alert(data));
-  }
-
-  shortifyDescription(description: string) {
-    if (description.length <= 140) {
-      return description;
-    }
-    description = description.slice(0, 140)
-    let a = description.split(' ');
-    a.splice(a.length - 1, 1);
-    description = a.join(' ');
-    return description + '...';
   }
 
 }

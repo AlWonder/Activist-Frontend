@@ -13,11 +13,13 @@ export class JoinedUsersComponent implements OnInit {
   @Input() eventId: number;
   private users: JoinedUser[] = [];
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     this.userService.getJoinedUsers(this.eventId)
-    .subscribe(data => { this.users = data.users; });
+      .subscribe(data => { this.users = data.users; });
   }
 
 }

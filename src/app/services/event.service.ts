@@ -65,4 +65,15 @@ export class EventService {
   public denyEvent(eventId: number) {
     return this.api.delete("events/" + eventId + "/join");
   }
+
+  public shortifyDescription(description: string, length: number) {
+    if (description.length <= length) {
+      return description;
+    }
+    description = description.slice(0, length)
+    let a = description.split(' ');
+    a.splice(a.length - 1, 1);
+    description = a.join(' ');
+    return description + '...';
+  }
 }

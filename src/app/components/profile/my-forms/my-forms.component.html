@@ -1,0 +1,6 @@
+<div class="container">
+  <div *ngFor="let form of forms">
+    <a [routerLink]="['/download/form', form.id]">{{form.path}}</a>
+    <a [routerLink]="['/download/tpl', form.templateId]">Шаблон</a>
+  </div>
+</div>

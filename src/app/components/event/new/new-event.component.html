@@ -20,9 +20,20 @@
       </div>
       <div class="form-group">
         <label>
-          <input type="checkbox" name="volunteers" [(ngModel)]="event.volunteers">
+          <input type="checkbox" name="volunteers" [(ngModel)]="volunteers">
            Волонтёры
-         </label>
+       </label>
+      </div>
+      <div class="form-group" *ngIf="templates && volunteers">
+        <label for="template">Выберите шаблон для анкеты</label><br />
+        <select id="template" name="template" [(ngModel)]="event.templateId">
+          <option *ngFor="let template of templates" [value]="template.id">{{template.templatePath}}</option>
+        </select>
+        <a routerLink="/upload/tpl">Загрузить новый шаблон</a>
+      </div>
+      <div class="form-group" *ngIf="!templates && volunteers">
+        <label>У вас ещё нет шаблонов анкет</label>
+        <a routerLink="/upload/tpl">Загрузить новый шаблон</a>
       </div>
       <div class="form-group">
         <label>Обложка мероприятия</label>

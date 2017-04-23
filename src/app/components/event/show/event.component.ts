@@ -20,7 +20,7 @@ export class EventComponent implements OnInit {
   private tags: string[];
   private isJoined: boolean;
   private asVolunteer: boolean;
-  private hasForm: boolean;
+  private hasForm: boolean = true;
   //private confirm: boolean = false; // I'll make it later
   private id: number;
   private sub: Subscription;
@@ -54,54 +54,64 @@ export class EventComponent implements OnInit {
       error => this.handleError(error));
   }
 
-  joinAsActivist() {
-    this.eventService.joinEvent(this.id, { asvolunteer: false })
-      .subscribe(response => this.handleActivistResponse(response));
-  }
-
-  joinAsvolunteer() {
-    this.eventService.joinEvent(this.id, { asvolunteer: true })
-      .subscribe(data => this.handleVolunteerResponse(data));
-  }
-
-  denyEvent() {
-    this.eventService.denyEvent(this.id)
-      .subscribe(response => this.handleDenyResponse(response));
-  }
-
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  handleVolunteerResponse(data: any) {
-    if (data.hasForm) {
+  private joinAsActivist() {
+    this.eventService.joinEvent(this.id, { asvolunteer: false })
+      .subscribe(response => this.handleActivistResponse(response));
+  }
+
+  private joinAsvolunteer() {
+    this.eventService.joinEvent(this.id, { asvolunteer: true })
+      .subscribe(data => this.handleVolunteerResponse(data));
+  }
+
+  private denyEvent() {
+    this.eventService.denyEvent(this.id)
+      .subscribe(response => this.handleDenyResponse(response));
+  }
+
+  private handleVolunteerResponse(response: any) {
+    if (response.ok) {
       this.isJoined = true;
       this.asVolunteer = true;
-      this.hasForm = true;
     } else {
-      this.isJoined = true;
-      this.asVolunteer = true;
-      this.hasForm = false;
+      switch(response.error.code) {
+        // If a user doesn't have a form
+        case 1: {
+          this.hasForm = false;
+        }
+      }
     }
   }
 
-  handleActivistResponse(response: any) {
+  private handleActivistResponse(response: any) {
     if (response.ok) {
       this.isJoined = true;
       this.asVolunteer = false;
     }
   }
 
-  handleDenyResponse(response: any) {
+  private handleDenyResponse(response: any) {
     if (response.ok) {
       this.isJoined = false;
     }
   }
 
-  handleError(error) {
+  private handleError(error) {
     console.log(error);
-    if (error[0].code == 404) {
-      this.router.navigate(['/404']);
+    switch (error.code) {
+      case 401: {
+        this.router.navigate(['/unauthorized']);
+      }
+      case 403: {
+        this.router.navigate(['/forbidden']);
+      }
+      case 404: {
+        this.router.navigate(['/404']);
+      }
     }
   }
 }

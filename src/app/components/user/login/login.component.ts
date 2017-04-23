@@ -12,9 +12,11 @@ export class LoginComponent {
   private loggingIn: boolean = false;
   private error: string = "";
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
-  login(email: string, password: string) {
+  private login(email: string, password: string) {
     this.error = "";
     this.loggingIn = true;
     this.authService.login(email, password)
@@ -23,7 +25,7 @@ export class LoginComponent {
       error => alert("Error: " + error));
   }
 
-  handleResponse(response: any) {
+  private handleResponse(response: any) {
     this.loggingIn = false;
     if (response.ok) {
       localStorage.setItem('id_token', response.idToken);

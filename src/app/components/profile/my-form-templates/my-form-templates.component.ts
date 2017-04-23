@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
+
 import { FormService } from 'app/services/form.service';
 import { AuthService } from 'app/services/auth.service';
 
@@ -19,11 +19,7 @@ export class MyFormTemplatesComponent implements OnInit {
 
   ngOnInit() {
     this.formService.queryUserFormTemplates(this.authService.userProfile.id)
-    .subscribe(data => this.templates = data);
-  }
-
-  private getLinkToTemplate(template: any) {
-    return "/download/tpl/" + template.organizerId + "/" + template.templatePath;
+      .subscribe(data => this.templates = data);
   }
 
 }

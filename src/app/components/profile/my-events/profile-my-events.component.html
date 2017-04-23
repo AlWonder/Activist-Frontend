@@ -18,7 +18,7 @@
           <br><small>{{event.eventDate | date:'longDate'}}</small></h4>
           </div>
         </div>
-        <p class="description">{{shortifyDescription(event.description)}}</p>
+        <p class="description">{{eventService.shortifyDescription(event.description, 140)}}</p>
 
         <div class="event-buttons">
           <button class="btn btn-danger btn-fill" (click)="deleteEvent(event.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>

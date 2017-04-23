@@ -9,35 +9,27 @@ import { Event } from 'app/models/event';
   styleUrls: ['./profile-my-events.component.scss']
 })
 export class ProfileMyEventsComponent implements OnInit {
-  events: Event[];
-  activeEvent: number = 0;
+  private events: Event[];
+  private activeEvent: number = 0;
 
-  constructor(private eventService: EventService, private authService: AuthService) { }
+  constructor(
+    private eventService: EventService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.eventService.getUserEvents(this.authService.userId)
       .subscribe(data => this.events = data);
   }
 
-  public deleteEvent(id: number) {
+  private deleteEvent(id: number) {
     if (confirm("Вы действительно хотите удалить мероприятие?")) {
       this.eventService.deleteEvent(id)
         .subscribe(data => console.log(data));
     }
   }
 
-  public makeEventActive(id: number) {
+  private makeEventActive(id: number) {
     this.activeEvent = id;
-  }
-
-  shortifyDescription(description: string) {
-    if (description.length <= 140) {
-      return description;
-    }
-    description = description.slice(0, 140)
-    let a = description.split(' ');
-    a.splice(a.length - 1, 1);
-    description = a.join(' ');
-    return description + '...';
   }
 }

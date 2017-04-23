@@ -6,7 +6,7 @@ export class Event {
   createDate: Date;
   eventDate: Date;
   eventTime: Date;
-  volunteers: boolean;
+  templateId: number;
   cover: string;
   participants: number;
 }

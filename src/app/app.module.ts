@@ -11,21 +11,24 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
+// Event components
 import { EventsComponent } from './components/event/index/events.component';
 import { EventComponent } from './components/event/show/event.component';
 import { NewEventComponent } from './components/event/new/new-event.component';
 import { EditEventComponent } from './components/event/edit/edit-event.component';
 
+// Tag components
 import { TagsQueryComponent } from './components/tag/query/tags-query.component';
 import { TagComponent } from './components/tag/show/tag.component';
 
+// Auth components
 import { LoginComponent } from './components/user/login/login.component';
 import { SignupComponent } from './components/user/signup/signup.component';
-import { ProfileComponent } from './components/profile/index/profile.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+// Services
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { EventService } from './services/event.service';
@@ -33,28 +36,34 @@ import { TagService } from './services/tag.service';
 import { UserService } from './services/user.service';
 import { FormService } from './services/form.service';
 
-import { AuthGuard, OrgGuard, PrtGuard } from './guards/auth.guard';
+// Guards
+import { AuthGuard, OrgGuard, PrtGuard } from 'app/app.guards';
 
+// Profile components
+import { ProfileComponent } from './components/profile/index/profile.component';
 import { ProfileDashboardComponent } from './components/profile/dashboard/profile-dashboard.component';
 import { ProfileFullComponent } from './components/profile/full/profile-full.component';
 import { ProfileMyEventsComponent } from './components/profile/my-events/profile-my-events.component';
 import { ProfileJoinedEventsComponent } from './components/profile/joined-events/profile-joined-events.component';
+import { MyFormTemplatesComponent } from './components/profile/my-form-templates/my-form-templates.component';
+import { MyFormsComponent } from './components/profile/my-forms/my-forms.component';
 import { JoinedUsersComponent } from './components/user/joined-users/joined-users.component';
 
+// File and docs components
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
-import { UploadCoverComponent } from './components/event/upload-cover/upload-cover.component';
-import { MyFormTemplatesComponent } from './components/profile/my-form-templates/my-form-templates.component';
-import { UploadTemplateComponent } from './components/form/upload-template/upload-template.component';
+import { UploadTemplateComponent } from './components/upload/template/upload-template.component';
+import { UploadFormComponent } from './components/upload/form/upload-form.component';
 import { DownloadTemplateComponent } from './components/download/template/download-template.component';
-import { UploadFormComponent } from './components/form/upload-form/upload-form.component';
+import { DownloadFormComponent } from './components/download/form/download-form.component';
 
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: ProfileDashboardComponent },
   { path: 'full', component: ProfileFullComponent },
-  { path: 'events', component: ProfileMyEventsComponent },
-  { path: 'joined', component: ProfileJoinedEventsComponent },
-  { path: 'tpls', component: MyFormTemplatesComponent }
+  { path: 'events', component: ProfileMyEventsComponent, canActivate: [OrgGuard] },
+  { path: 'joined', component: ProfileJoinedEventsComponent, canActivate: [PrtGuard] },
+  { path: 'tpls', component: MyFormTemplatesComponent, canActivate: [OrgGuard] },
+  { path: 'forms', component: MyFormsComponent, canActivate: [PrtGuard] }
 ];
 
 @NgModule({
@@ -82,11 +91,12 @@ const profileRoutes: Routes = [
     FileUploadComponent,
     FileSelectDirective,
     FileDropDirective,
-    UploadCoverComponent,
     MyFormTemplatesComponent,
     UploadTemplateComponent,
     DownloadTemplateComponent,
-    UploadFormComponent
+    DownloadFormComponent,
+    UploadFormComponent,
+    MyFormsComponent
   ],
   imports: [
     BrowserModule,
@@ -104,14 +114,14 @@ const profileRoutes: Routes = [
       { path: 'events/page/:page', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
-      { path: 'events/:id/cover', component: UploadCoverComponent },
       { path: 'events/edit/:id', component: EditEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'tags', component: TagsQueryComponent },
       { path: 'tags/:tag', component: TagComponent },
       { path: 'tags/:tag/page/:page', component: TagComponent },
-      { path: 'tpls/upload', component: UploadTemplateComponent, canActivate: [AuthGuard, OrgGuard] },
-      { path: 'forms/upload/:tplid', component: UploadFormComponent, canActivate: [AuthGuard, PrtGuard] },
-      { path: 'download/tpl/:id/:tpl', component: DownloadTemplateComponent, canActivate: [AuthGuard] },
+      { path: 'upload/tpl', component: UploadTemplateComponent, canActivate: [AuthGuard, OrgGuard] },
+      { path: 'upload/form/:tplid', component: UploadFormComponent, canActivate: [AuthGuard, PrtGuard] },
+      { path: 'download/tpl/:id', component: DownloadTemplateComponent, canActivate: [AuthGuard] },
+      { path: 'download/form/:id', component: DownloadFormComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children: profileRoutes },

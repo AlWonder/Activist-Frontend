@@ -10,13 +10,13 @@ import { User } from 'app/models/user';
 import { Tag } from 'app/models/tag'
 
 @Component({
-  selector: 'app-download-template',
-  templateUrl: './download-template.component.html',
-  styleUrls: ['./download-template.component.scss']
+  selector: 'app-download-form',
+  templateUrl: './download-form.component.html',
+  styleUrls: ['./download-form.component.scss']
 })
-export class DownloadTemplateComponent implements OnInit {
+export class DownloadFormComponent implements OnInit {
 
-  private template: any;
+  private form: any;
   private id: number;
   private sub: Subscription;
   private downloadLink: string;
@@ -37,7 +37,7 @@ export class DownloadTemplateComponent implements OnInit {
       return;
     }
 
-    this.formService.getTemplateToken(this.id)
+    this.formService.getFormToken(this.id)
       .subscribe(response => this.handleResponse(response),
       error => this.handleError(error));
     // Get a token
@@ -49,8 +49,8 @@ export class DownloadTemplateComponent implements OnInit {
 
   private handleResponse(response: any) {
     if (response.ok) {
-      this.downloadLink = "/api/download/tpl/" + response.template.organizerId
-      + "/" + response.template.templatePath + "?token=" + response.token;
+      this.downloadLink = "/api/download/form/" + response.form.participantId
+      + "/" + response.form.path + "?token=" + response.token;
     }
   }
 

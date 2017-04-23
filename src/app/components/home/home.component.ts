@@ -30,16 +30,4 @@ export class HomeComponent implements OnInit {
         this.eventsByTags = response.eventsByTags;
       });
   }
-
-  shortifyDescription(description: string) {
-    if (description.length <= 250) {
-      return description;
-    }
-    description = description.slice(0, 250)
-    let a = description.split(' ');
-    a.splice(a.length - 1, 1);
-    description = a.join(' ');
-    return description + '...';
-  }
-
 }

@@ -14,18 +14,20 @@ import { Tag } from 'app/models/tag'
   styleUrls: ['./tag.component.scss']
 })
 export class TagComponent implements OnInit {
-  events: Event[];
-  tag: string;
-  hasStatus: boolean;
-  status: boolean;
+  private events: Event[];
+  private tag: string;
+  private hasStatus: boolean;
+  private status: boolean;
   private count: number;
   private page: number = 1;
 
-  constructor(private eventService: EventService,
+  constructor(
+    private eventService: EventService,
     private tagService: TagService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -56,29 +58,18 @@ export class TagComponent implements OnInit {
     }
   }
 
-  changePage(page: number) {
+  private changePage(page: number) {
     this.router.navigate(['/tags/' + this.tag + '/page', page]);
     this.getPage(page);
   }
 
-  getPage(page: number) {
+  private getPage(page: number) {
     this.eventService.getEventsByTag(this.tag, page)
       .subscribe(data => {
         this.events = data.events;
         this.page = page;
         this.count = data.count
       });
-  }
-
-  shortifyDescription(description: string) {
-    if (description.length <= 140) {
-      return description;
-    }
-    description = description.slice(0, 140)
-    let a = description.split(' ');
-    a.splice(a.length - 1, 1);
-    description = a.join(' ');
-    return description + '...';
   }
 
   private addTagStatus(favHide: boolean) {

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { UploadCoverComponentComponent } from './upload-cover-component.component';
+import { DownloadTemplateComponent } from './download-template.component';
 
-describe('UploadCoverComponentComponent', () => {
-  let component: UploadCoverComponentComponent;
-  let fixture: ComponentFixture<UploadCoverComponentComponent>;
+describe('DownloadTemplateComponent', () => {
+  let component: DownloadTemplateComponent;
+  let fixture: ComponentFixture<DownloadTemplateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadCoverComponentComponent ]
+      declarations: [ DownloadTemplateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadCoverComponentComponent);
+    fixture = TestBed.createComponent(DownloadTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

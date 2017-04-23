@@ -12,19 +12,21 @@ export class UploadTemplateComponent implements OnInit {
 
   template: File = null;
 
-  constructor(private formService: FormService) { }
+  constructor(
+    private formService: FormService
+  ) { }
 
   ngOnInit() {
   }
 
-  fileChange(event) {
+  private fileChange(event) {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       this.template = fileList[0];
     }
   }
 
-  onSubmit(event) {
+  private onSubmit(event) {
     if (this.template != null) {
       let formData = new FormData();
       formData.append("file", this.template, this.template.name);

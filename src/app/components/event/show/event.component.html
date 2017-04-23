@@ -43,15 +43,21 @@
 					<div class="event-not-joined" *ngIf="!isJoined">
 						<p>Вы не участвуете в этом мероприятии. Присоединиться?</p>
 						<button class="btn btn-default" (click)="joinAsActivist()">Как активист</button>
-						<button class="btn btn-default" [disabled]="!event.volunteers" (click)="joinAsvolunteer()">Как волонтёр</button>
+						<button class="btn btn-default" [disabled]="!event.templateId" (click)="joinAsvolunteer()">Как волонтёр</button>
 					</div>
 					<div class="event-joined" *ngIf="isJoined">
 						<p *ngIf="!asVolunteer">Вы участвуете в этом мероприятии как активист</p>
 						<p *ngIf="asVolunteer">Вы участвуете в этом мероприятии как волонтёр</p>
 						<button class="btn btn-danger" (click)="denyEvent()">Отказаться от участия</button>
 					</div>
-					<div class="join-confirm" *ngIf="confirm">
 
+					<div class="event-wout-form" *ngIf="!hasForm">
+						<p>
+							Сначала Вам нужно заполнить анкету волонтёра
+						</p>
+						<a [routerLink]="['/upload/form', event.templateId]" [queryParams]="{ event: event.id }">Загрузить анкету</a>
+					</div>
+					<div class="join-confirm" *ngIf="confirm">
 					</div>
 				</div>
 			</div>

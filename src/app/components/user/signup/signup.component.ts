@@ -13,8 +13,8 @@ import { User } from 'app/models/user';
 
 export class SignupComponent implements OnInit {
 
-  user: User = new User();
-  avatar: File = null;
+  private user: User = new User();
+  private avatar: File = null;
 
   constructor(
     private authService: AuthService,
@@ -25,14 +25,14 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  fileChange(event) {
+  private fileChange(event) {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       this.avatar = fileList[0];
     }
   }
 
-  signUp() {
+  private signUp() {
     this.user.gender = +this.user.gender;
     this.user.group = +this.user.group;
     this.authService.signUp(this.user)
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
       error => alert("Error: " + error));
   }
 
-  handleFirstResponse(response: any) {
+  private handleFirstResponse(response: any) {
     if (response.errors == null) {
       console.log(response)
       localStorage.setItem('id_token', response.idToken);
@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  handleSecondResponse(response: any) {
+  private handleSecondResponse(response: any) {
     if (response.ok) {
       this.authService.getUserInfo()
         .subscribe(

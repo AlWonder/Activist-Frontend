@@ -18,11 +18,19 @@ export class FormService {
     return this.api.getFile("storage/internal/docs/tpl/" + path, true, null);
   }
 
-  public queryUserFormTemplates(id: number) {
-    return this.api.get("form/tpl/" + id, true, null);
+  public queryUserForms() {
+    return this.api.get("form", true, null);
   }
 
-  public getTemplateToken() {
-    return this.api.get("xaccel/generate/tpl", true, null);
+  public queryUserFormTemplates(id: number) {
+    return this.api.get("tpl/" + id, true, null);
+  }
+
+  public getTemplateToken(id: number) {
+    return this.api.get("xaccel/generate/tpl/" + id, true, null);
+  }
+
+  public getFormToken(id: number) {
+    return this.api.get("xaccel/generate/form/" + id, true, null);
   }
 }

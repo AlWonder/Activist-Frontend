@@ -1,16 +1,17 @@
-import { Injectable }             from '@angular/core';
-import { Router,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot }    from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { CanActivate } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.authenticated()) {
       return true;
     } else {
@@ -27,9 +28,12 @@ export class AuthGuard implements CanActivate {
 @Injectable()
 export class OrgGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isOrganizer()) {
       return true;
     } else {
@@ -42,9 +46,12 @@ export class OrgGuard implements CanActivate {
 @Injectable()
 export class PrtGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!this.authService.isOrganizer()) {
       return true;
     } else {

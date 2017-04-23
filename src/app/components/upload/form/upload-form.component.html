@@ -1,6 +1,9 @@
 <div class="container">
   <div class="col-md-10 col-md-offset-1 post-form">
     <h1>Загрузить анкету волонтёра</h1>
+    <p>
+      Шаблон анкеты:
+    </p> <button class="btn btn-success btn-fill" *ngIf="tplId && downloadLink" (click)="download()">Скачать</button>
     <form (ngSubmit)="onSubmit($event)">
       <div class="form-group">
         <label>Файл анкеты</label>

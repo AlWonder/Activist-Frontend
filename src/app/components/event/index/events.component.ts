@@ -41,29 +41,18 @@ export class EventsComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  changePage(page: number) {
+  private changePage(page: number) {
     this.router.navigate(['/events/page', page]);
     this.getPage(page);
   }
 
-  getPage(page: number) {
+  private getPage(page: number) {
     this.eventService.getEvents(page)
       .subscribe(data => {
         this.events = data.events;
         this.page = page;
         this.count = data.count
       });
-  }
-
-  shortifyDescription(description: string) {
-    if (description.length <= 140) {
-      return description;
-    }
-    description = description.slice(0, 140)
-    let a = description.split(' ');
-    a.splice(a.length - 1, 1);
-    description = a.join(' ');
-    return description + '...';
   }
 
 }
