@@ -9,18 +9,36 @@
   }
 }
 
-.joined-users {
+.joined-users,
+.delete-confirm {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10000;
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 7px;
   background-clip: content-box;
   overflow: scroll;
   width: 100%;
+}
+
+.joined-users {
+  background-color: rgba(255, 255, 255, 0.8);
   max-height: 90%;
   max-height: -moz-calc(100% - 36px);
   max-height: -webkit-calc(100% - 36px);
   max-height: calc(100% - 36px);
+}
+
+.delete-confirm {
+  white-space: nowrap;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+
+  &:before {
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        content: '';
+    }
 }

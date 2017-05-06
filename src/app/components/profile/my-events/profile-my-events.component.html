@@ -9,7 +9,7 @@
 </div>
 
 <div class="row" *ngIf="events && events.length > 0">
-  <div *ngFor="let event of events">
+  <div *ngFor="let event of events; let index = index">
     <div class='event-container col-md-4 col-sm-6'>
       <article class="event">
         <div class="cover" [ngStyle]="!event.cover ? {'background-color': '#AAAAAA'} : {'background-image': 'url(' + eventService.getSmallCover(event.cover) + ')'}">
@@ -24,13 +24,18 @@
         <p class="description">{{eventService.shortifyDescription(event.description, 140)}}</p>
 
         <div class="event-buttons">
-          <button class="btn btn-danger btn-fill" (click)="deleteEvent(event.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button class="btn btn-danger btn-fill" (click)="showConfirm(event.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
           <button class="btn btn-warning btn-fill" [routerLink]="['/events/edit', event.id]"><i class="fa fa-pencil" aria-hidden="true"></i></button>
           <button class="btn btn-info btn-fill" [routerLink]="['/events/edit/cover', event.id]"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
-          <button *ngIf="activeEvent != event.id" class="btn btn-default btn-fill" (click)="makeEventActive(event.id)"><i class="fa fa-user" aria-hidden="true"></i></button>
-          <button *ngIf="activeEvent == event.id" class="btn btn-default btn-fill" (click)="makeEventActive(0)"><i class="fa fa-times" aria-hidden="true"></i></button>
+          <button *ngIf="joinedActiveEvent != event.id" class="btn btn-default btn-fill" (click)="activateJoined(event.id)"><i class="fa fa-user" aria-hidden="true"></i></button>
+          <button *ngIf="joinedActiveEvent == event.id" class="btn btn-default btn-fill" (click)="activateJoined(0)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
-        <joined-users class="joined-users" *ngIf="activeEvent == event.id" [eventId]="event.id"></joined-users>
+        <joined-users class="joined-users" *ngIf="joinedActiveEvent == event.id" [eventId]="event.id"></joined-users>
+        <app-confirm *ngIf="confirmActiveEvent == event.id"
+          class="delete-confirm"
+          [message]="'Вы уверены, что хотите удалить мероприятие?'"
+          [style]="'profile-events'"
+          (confirmMessage)="handleConfirmEvent($event, event.id, index)"></app-confirm>
       </article>
     </div>
   </div>

@@ -57,6 +57,7 @@ import { UploadFormComponent } from './components/upload/form/upload-form.compon
 import { DownloadTemplateComponent } from './components/download/template/download-template.component';
 import { DownloadFormComponent } from './components/download/form/download-form.component';
 import { EditCoverComponent } from './components/event/edit-cover/edit-cover.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
@@ -99,7 +100,8 @@ const profileRoutes: Routes = [
     DownloadFormComponent,
     UploadFormComponent,
     MyFormsComponent,
-    EditCoverComponent
+    EditCoverComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

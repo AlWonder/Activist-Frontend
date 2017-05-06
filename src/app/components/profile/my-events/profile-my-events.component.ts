@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from 'app/services/auth.service';
 import { EventService } from 'app/services/event.service';
+import { NotifyService } from 'app/services/notify.service'
+
 import { Event } from 'app/models/event';
 
 @Component({
@@ -10,11 +13,13 @@ import { Event } from 'app/models/event';
 })
 export class ProfileMyEventsComponent implements OnInit {
   private events: Event[];
-  private activeEvent: number = 0;
+  private joinedActiveEvent: number = 0;
+  private confirmActiveEvent: number = 0;
 
   constructor(
     private eventService: EventService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notifyService: NotifyService
   ) { }
 
   ngOnInit() {
@@ -29,7 +34,29 @@ export class ProfileMyEventsComponent implements OnInit {
     }
   }
 
-  private makeEventActive(id: number) {
-    this.activeEvent = id;
+  private activateJoined(id: number) {
+    this.joinedActiveEvent = id;
+  }
+
+  private showConfirm(id: number) {
+    this.confirmActiveEvent = id;
+  }
+
+  private handleConfirmEvent(event: boolean, eventId: number, index: number) {
+    this.confirmActiveEvent = 0;
+    if (event) {
+      this.notifyService.emitInfo("Удаляем мероприятие...");
+      this.eventService.deleteEvent(eventId)
+        .subscribe(response => this.handleDeleteResponse(response, index));
+    }
+  }
+
+  private handleDeleteResponse(response: any, index: number) {
+    if (response.ok) {
+      this.notifyService.emitSuccess("Мероприятие успешно удалено.");
+      this.events.splice(index, 1);
+      return
+    }
+    this.notifyService.emitError("Не удалось удалить новость.");
   }
 }
