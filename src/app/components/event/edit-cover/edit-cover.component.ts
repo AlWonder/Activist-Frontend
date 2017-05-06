@@ -45,21 +45,16 @@ export class EditCoverComponent implements OnInit {
         response => { this.handleResponse(response); },
         error => alert("Error: " + error));
     } else {
-      this.notifyService.throwError("Сначала загрузите обложку");
+      this.notifyService.emitError("Сначала загрузите обложку");
     }
   }
 
   private handleResponse(response: any) {
     if (response.ok) {
+      this.notifyService.emitSuccess("Обложка успешно обновлена!");
       this.router.navigate(['/events/' + this.eventId]);
     } else {
-      this.notifyService.throwError(response.error.message);
+      this.notifyService.emitError(response.error.message);
     }
   }
-
-  @Output() onError = new EventEmitter<string>();
-    throwError(error) {
-        this.onError.emit(error);
-    }
-
 }

@@ -4,13 +4,12 @@
         <td class="prt-type">
           <span class="prt prt-act" *ngIf="!user.asVolunteer">А</span>
           <span class="prt prt-vol" *ngIf="user.asVolunteer && user.formId">В</span>
-          <span class="prt prt-vol-no-form" *ngIf="user.asVolunteer && !user.formId">В</span>
         </td>
         <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
         <td>{{ user.user.email }} </td>
       </tr>
     </table>
-  <p *ngIf="!users">
+  <p class="no-prt" *ngIf="!users">
     У мероприятия ещё нет участников
   </p>
 </div>

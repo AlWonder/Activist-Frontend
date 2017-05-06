@@ -12,7 +12,11 @@ import { NotifyService } from 'app/services/notify.service'
 })
 export class AppComponent implements OnInit {
 
+  info: string = null;
+  success: string = null;
   error: string = null;
+  infoSub: Subscription;
+  successSub: Subscription;
   errorSub: Subscription;
 
   public isCollapsed: boolean = false;
@@ -26,12 +30,22 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private notifyService: NotifyService
   ) {
-    this.errorSub = notifyService.errorThrowed$.subscribe(
-        error => {
-          this.showError(error);
-          setTimeout(() => { this.hideError(); }, 3000);
+    this.infoSub = notifyService.infoThrowed$.subscribe(
+      info => {
+        this.info = info;
+        setTimeout(() => { this.info = null; }, 3000);
       });
-    }
+    this.successSub = notifyService.successThrowed$.subscribe(
+      success => {
+        this.success = success;
+        setTimeout(() => { this.success = null }, 3000);
+      });
+    this.errorSub = notifyService.errorThrowed$.subscribe(
+      error => {
+        this.error = error;
+        setTimeout(() => { this.error = null; }, 3000);
+      });
+  }
 
   ngOnInit() {
     if (this.authService.authenticated()) {
@@ -39,11 +53,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  showError(error: string) {
-    this.error = error;
-  }
-
-  hideError() {
-    this.error = null
+  ngOnDestroy() {
+    this.infoSub.unsubscribe();
+    this.successSub.unsubscribe();
+    this.errorSub.unsubscribe();
   }
 }
