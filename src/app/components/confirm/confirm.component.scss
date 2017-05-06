@@ -6,6 +6,9 @@
   text-align: left;
   padding: 10px;
   background-color: #FFFFFF;
+  -webkit-box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
+  -moz-box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
+  box-shadow: 0 10px 21px -5px rgba(0,0,0,0.17);
   button {
     display: block;
     float: right;
