@@ -35,14 +35,10 @@ export class TagComponent implements OnInit {
     });
 
     if (this.authService.authenticated()) {
-      let o1 = this.eventService.getEventsByTag(this.tag, this.page);
-      let o2 = this.tagService.getTagStatus(this.tag);
-      o1.combineLatest(o2)
+      this.eventService.getEventsByTag(this.tag, this.page)
         .subscribe(data => {
-          this.events = data[0].events;
-          this.count = data[0].count;
-          this.hasStatus = data[1].hasStatus;
-          this.status = data[1].status;
+          this.events = data.events;
+          this.count = data.count;
         },
         error => alert(error));
       /*this.tagService.getTagStatus(this.tag)
@@ -71,18 +67,4 @@ export class TagComponent implements OnInit {
         this.count = data.count
       });
   }
-
-  private addTagStatus(favHide: boolean) {
-    this.tagService.addTagStatus(this.tag, favHide)
-      .subscribe(data => { alert(data) },
-      error => alert(error));
-  }
-
-  private deleteTagStatus() {
-    this.tagService.deleteTagStatus(this.tag)
-      .subscribe(data => { alert(data) },
-      error => alert(error));
-  }
-
-
 }

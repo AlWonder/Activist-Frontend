@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="col-md-10 col-md-offset-1 post-form">
+    <h1>Обновить обложку мероприятия</h1>
+    <form (ngSubmit)="onSubmit($event)">
+      <div class="form-group">
+        <label>Новая обложка</label>
+        <input type="file" (change)="fileChange($event)" />
+      </div>
+      <button type="submit" class="btn btn-default">Изменить обложку</button>
+    </form>
+  </div>
+</div>

@@ -3,15 +3,6 @@
   <div class="row events-header">
     <div class="container">
       <h2>Тег "{{tag}}"</h2>
-      <div class="tag-buttons" *ngIf="authService.authenticated() && !hasStatus">
-        <button class="btn btn-success" (click)="addTagStatus(true)">Добавить в избранное</button>
-        <button class="btn btn-danger" (click)="addTagStatus(false)">В чёрный список</button>
-      </div>
-      <div class="tag-buttons" *ngIf="authService.authenticated() && hasStatus">
-        <p *ngIf="status"><small>Добавлен в избранное</small></p>
-        <p *ngIf="!status"><small>Добавлен в скрытые</small></p>
-        <button class="btn btn-default" (click)="deleteTagStatus()">Убрать</button>
-      </div>
     </div>
   </div>
   <div class="row">

@@ -34,8 +34,8 @@ export class EventService {
     return this.api.get('users/' + userId + '/events', false, null);
   }
 
-  public getJoinedEvents(userId: number) {
-    return this.api.get('users/' + userId + '/joined', true, null);
+  public getJoinedEvents() {
+    return this.api.get('events/joined', true, null);
   }
 
   public getEvent(id: number) {
@@ -64,6 +64,10 @@ export class EventService {
 
   public denyEvent(eventId: number) {
     return this.api.delete("events/" + eventId + "/join");
+  }
+
+  public editCover(data: Object, eventId: number) {
+    return this.api.putFile("events/" + eventId + "/cover", data, true);
   }
 
   public shortifyDescription(description: string, length: number) {

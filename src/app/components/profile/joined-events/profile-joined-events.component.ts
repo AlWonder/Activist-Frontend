@@ -18,7 +18,7 @@ export class ProfileJoinedEventsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.eventService.getJoinedEvents(this.authService.userId)
+    this.eventService.getJoinedEvents()
       .subscribe(data => this.events = data);
   }
 

@@ -35,6 +35,7 @@ import { EventService } from './services/event.service';
 import { TagService } from './services/tag.service';
 import { UserService } from './services/user.service';
 import { FormService } from './services/form.service';
+import { NotifyService } from './services/notify.service';
 
 // Guards
 import { AuthGuard, OrgGuard, PrtGuard } from 'app/app.guards';
@@ -55,6 +56,7 @@ import { UploadTemplateComponent } from './components/upload/template/upload-tem
 import { UploadFormComponent } from './components/upload/form/upload-form.component';
 import { DownloadTemplateComponent } from './components/download/template/download-template.component';
 import { DownloadFormComponent } from './components/download/form/download-form.component';
+import { EditCoverComponent } from './components/event/edit-cover/edit-cover.component';
 
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
@@ -96,7 +98,8 @@ const profileRoutes: Routes = [
     DownloadTemplateComponent,
     DownloadFormComponent,
     UploadFormComponent,
-    MyFormsComponent
+    MyFormsComponent,
+    EditCoverComponent
   ],
   imports: [
     BrowserModule,
@@ -115,6 +118,7 @@ const profileRoutes: Routes = [
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
       { path: 'events/edit/:id', component: EditEventComponent, canActivate: [AuthGuard, OrgGuard] },
+      { path: 'events/edit/cover/:id', component: EditCoverComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'tags', component: TagsQueryComponent },
       { path: 'tags/:tag', component: TagComponent },
       { path: 'tags/:tag/page/:page', component: TagComponent },
@@ -138,6 +142,7 @@ const profileRoutes: Routes = [
     UserService,
     TagService,
     FormService,
+    NotifyService,
     AuthGuard,
     OrgGuard,
     PrtGuard,
