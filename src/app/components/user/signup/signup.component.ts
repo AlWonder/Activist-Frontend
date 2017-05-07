@@ -14,7 +14,6 @@ import { User } from 'app/models/user';
 export class SignupComponent implements OnInit {
 
   private user: User = new User();
-  private avatar: File = null;
 
   constructor(
     private authService: AuthService,
@@ -25,48 +24,17 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  private fileChange(event) {
-    let fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-      this.avatar = fileList[0];
-    }
-  }
-
   private signUp() {
     this.user.gender = +this.user.gender;
-    this.user.group = +this.user.group;
     this.authService.signUp(this.user)
       .subscribe(
-      response => this.handleFirstResponse(response),
+      response => this.handleResponse(response),
       error => alert("Error: " + error));
   }
 
-  private handleFirstResponse(response: any) {
-    if (response.errors == null) {
-      console.log(response)
-      localStorage.setItem('id_token', response.idToken);
-      this.authService.userId = this.authService.getUserId();
-      let formData = new FormData();
-      formData.append("file", this.avatar, this.avatar.name);
-      this.userService.addAvatar(formData)
-        .subscribe(
-        response => { this.handleSecondResponse(response); },
-        error => alert("Error: " + error));
-    } else {
-      for (let error of response.errors) {
-        alert(error.userMessage);
-      }
-    }
-  }
-
-  private handleSecondResponse(response: any) {
+  private handleResponse(response: any) {
     if (response.ok) {
-      this.authService.getUserInfo()
-        .subscribe(
-        response => {
-          this.authService.saveUserInfo(response);
-        },
-        error => alert("Error: " + error));
-    }
+        this.router.navigate(['/login']);
+      }
   }
 }

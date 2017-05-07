@@ -29,7 +29,7 @@ export class ApiService {
 
     return this.http.get(this.apiUrl + uri, options)
       .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public getFile(uri: string, authHeader: boolean, params: Object) {
@@ -60,7 +60,7 @@ export class ApiService {
 
     return this.http.post(this.apiUrl + uri, data, options)
       .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public postFile(uri: string, data: Object, authHeader: boolean) {
@@ -74,7 +74,7 @@ export class ApiService {
 
     return this.http.post(this.apiUrl + uri, data, options)
       .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public put(uri: string, data: Object) {
@@ -87,7 +87,7 @@ export class ApiService {
 
     return this.http.put(this.apiUrl + uri, data, options)
       .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public putFile(uri: string, data: Object, authHeader: boolean) {
@@ -101,7 +101,7 @@ export class ApiService {
 
     return this.http.put(this.apiUrl + uri, data, options)
       .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public delete(uri: string) {
@@ -114,7 +114,7 @@ export class ApiService {
 
     return this.http.delete(this.apiUrl + uri, options)
       .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().errors || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   private extractData(res: Response) {
