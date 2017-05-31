@@ -1,3 +1,7 @@
 <div class="container">
-  <a *ngFor="let template of templates" [routerLink]="['/download/tpl', template.id]">{{template.templatePath}}</a>
+  <ul *ngIf="templates">
+    <li *ngFor="let tpl of tpls">
+      <a [routerLink]="['/download/tpl', tpl.id]">{{template.templatePath}}</a>
+    </li>
+  </ul>
 </div>

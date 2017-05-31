@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { EventService } from 'app/services/event.service';
 import { TagService } from 'app/services/tag.service';
-import { AuthService } from 'app/services/auth.service';
 import { Event } from 'app/models/event';
 import { Tag } from 'app/models/tag'
 
@@ -25,8 +24,7 @@ export class TagComponent implements OnInit {
     private eventService: EventService,
     private tagService: TagService,
     private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -34,24 +32,13 @@ export class TagComponent implements OnInit {
       this.tag = params['tag'];
     });
 
-    if (this.authService.authenticated()) {
-      this.eventService.getEventsByTag(this.tag, this.page)
-        .subscribe(data => {
-          this.events = data.events;
-          this.count = data.count;
-        },
-        error => alert(error));
-      /*this.tagService.getTagStatus(this.tag)
-        .subscribe(data => { this.events = data.status; },
-        error => alert(error));*/
-    } else {
-      this.eventService.getEventsByTag(this.tag, this.page)
+    this.eventService.getEventsByTag(this.tag, this.page)
       .subscribe(data => {
         this.events = data.events;
         this.count = data.count;
       },
       error => alert(error));
-    }
+
   }
 
   private changePage(page: number) {

@@ -15,11 +15,11 @@ export class MyFormTemplatesComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  private templates: Object;
+  private tpls: Object;
 
   ngOnInit() {
     this.formService.queryUserFormTemplates(this.authService.userProfile.id)
-      .subscribe(data => this.templates = data);
+      .subscribe(data => this.tpls = data);
   }
 
 }

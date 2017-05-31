@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, provideRoutes } from '@angular/router';
 import { DatepickerModule } from 'ng2-bootstrap'
 import { TagInputModule } from 'ng2-tag-input';
 import { Ng2PaginationModule } from 'ng2-pagination';
