@@ -1,10 +1,10 @@
-import { FirstAngularTwoAppPage } from './app.po';
+import { ActivistFrontendPage } from './app.po';
 
-describe('first-angular-two-app App', function() {
-  let page: FirstAngularTwoAppPage;
+describe('activist-frontend App', () => {
+  let page: ActivistFrontendPage;
 
   beforeEach(() => {
-    page = new FirstAngularTwoAppPage();
+    page = new ActivistFrontendPage();
   });
 
   it('should display message saying app works', () => {

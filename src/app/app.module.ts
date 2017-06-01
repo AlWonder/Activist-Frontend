@@ -3,8 +3,8 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule, provideRoutes } from '@angular/router';
-import { DatepickerModule } from 'ng2-bootstrap'
-import { TagInputModule } from 'ng2-tag-input';
+import { DatepickerModule } from 'ngx-bootstrap'
+//import { TagInputModule } from 'ngx-tag-input'; will add it when npm will be able to install it properly
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 
@@ -107,7 +107,7 @@ const profileRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    TagInputModule,
+    //TagInputModule,
     Ng2PaginationModule,
     DatepickerModule.forRoot(),
     //ImageUploadModule.forRoot(),
