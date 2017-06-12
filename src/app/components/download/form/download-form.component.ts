@@ -49,8 +49,9 @@ export class DownloadFormComponent implements OnInit {
 
   private handleResponse(response: any) {
     if (response.ok) {
+      this.form = response.form;
       this.downloadLink = "/api/download/form/" + response.form.participantId
-      + "/" + response.form.path + "?token=" + response.token;
+        + "/" + response.form.path + "?token=" + response.token;
     }
   }
 

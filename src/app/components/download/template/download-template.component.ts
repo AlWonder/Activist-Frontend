@@ -49,8 +49,9 @@ export class DownloadTemplateComponent implements OnInit {
 
   private handleResponse(response: any) {
     if (response.ok) {
+      this.template = response.template;
       this.downloadLink = "/api/download/tpl/" + response.template.organizerId
-      + "/" + response.template.templatePath + "?token=" + response.token;
+        + "/" + response.template.templatePath + "?token=" + response.token;
     }
   }
 
