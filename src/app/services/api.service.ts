@@ -14,7 +14,7 @@ export class ApiService {
 
   public get(uri: string, authHeader: boolean, params: Object) {
     let headers = new Headers();
-    if (authHeader && tokenNotExpired()) {
+    if (authHeader && tokenNotExpired("id_token")) {
       this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });

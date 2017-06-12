@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 
-import { ApiService } from "./api.service";
+import { ApiService } from "./";
 
 import { User } from '../models/user';
 
@@ -33,7 +33,7 @@ export class AuthService {
   public authenticated() {
     // Check if there's an unexpired JWT
     // This searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired();
+    return tokenNotExpired("id_token");
   }
 
   public logout() {

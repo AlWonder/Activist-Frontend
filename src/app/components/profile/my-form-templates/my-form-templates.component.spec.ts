@@ -6,9 +6,9 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { FormService } from 'app/services/form.service';
 import { AuthService } from 'app/services/auth.service';
 import { ApiService } from "app/services/api.service";
+import { FormService } from "app/services/form.service";
 
 import { MyFormTemplatesComponent } from './my-form-templates.component';
 

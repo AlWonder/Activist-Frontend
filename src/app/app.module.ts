@@ -29,13 +29,15 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Services
-import { AuthService } from './services/auth.service';
-import { ApiService } from './services/api.service';
-import { EventService } from './services/event.service';
-import { TagService } from './services/tag.service';
-import { UserService } from './services/user.service';
-import { FormService } from './services/form.service';
-import { NotifyService } from './services/notify.service';
+import {
+  AuthService,
+  ApiService,
+  EventService,
+  TagService,
+  UserService,
+  FormService,
+  NotifyService,
+} from 'app/services';
 
 // Guards
 import { AuthGuard, OrgGuard, PrtGuard } from 'app/app.guards';
@@ -114,7 +116,7 @@ const profileRoutes: Routes = [
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-                { path: 'upload', component: FileUploadComponent },
+      { path: 'upload', component: FileUploadComponent },
       { path: 'events', redirectTo: '/events/page/1', pathMatch: 'full' },
       { path: 'events/page/:page', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },

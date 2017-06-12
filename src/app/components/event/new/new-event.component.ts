@@ -35,8 +35,10 @@ export class NewEventComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.formService.queryUserFormTemplates(this.authService.userProfile.id)
-    .subscribe(data => this.templates = data);
+    if (this.authService.userProfile){
+      this.formService.queryUserFormTemplates(this.authService.userProfile.id)
+      .subscribe(data => this.templates = data);
+    }
   }
 
   private fileChange(event) {
