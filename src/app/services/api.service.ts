@@ -34,7 +34,7 @@ export class ApiService {
 
   public getFile(uri: string, authHeader: boolean, params: Object) {
     let headers = new Headers();
-    if (authHeader && tokenNotExpired()) {
+    if (authHeader && tokenNotExpired("id_token")) {
       this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
@@ -53,7 +53,7 @@ export class ApiService {
 
   public post(uri: string, data: Object, authHeader: boolean) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    if (authHeader && tokenNotExpired()) {
+    if (authHeader && tokenNotExpired("id_token")) {
       this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
@@ -67,7 +67,7 @@ export class ApiService {
     let headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     });
-    if (authHeader && tokenNotExpired()) {
+    if (authHeader && tokenNotExpired("id_token")) {
       this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
@@ -79,7 +79,7 @@ export class ApiService {
 
   public put(uri: string, data: Object) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    if (!tokenNotExpired()) {
+    if (!tokenNotExpired("id_token")) {
       return;
     }
     this.addAuthorizationHeader(headers);
@@ -94,7 +94,7 @@ export class ApiService {
     let headers = new Headers({
       //'Content-Type': 'multipart/form-data'
     });
-    if (authHeader && tokenNotExpired()) {
+    if (authHeader && tokenNotExpired("id_token")) {
       this.addAuthorizationHeader(headers);
     }
     let options = new RequestOptions({ headers: headers });
@@ -106,7 +106,7 @@ export class ApiService {
 
   public delete(uri: string) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    if (!tokenNotExpired()) {
+    if (!tokenNotExpired("id_token")) {
       return;
     }
     this.addAuthorizationHeader(headers);
