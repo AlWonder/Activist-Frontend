@@ -69,15 +69,4 @@ export class EventService {
   public editCover(data: Object, eventId: number) {
     return this.api.putFile("events/" + eventId + "/cover", data, true);
   }
-
-  public shortifyDescription(description: string, length: number) {
-    if (description.length <= length) {
-      return description;
-    }
-    description = description.slice(0, length)
-    let a = description.split(' ');
-    a.splice(a.length - 1, 1);
-    description = a.join(' ');
-    return description + '...';
-  }
 }

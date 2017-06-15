@@ -21,7 +21,7 @@
               </p>
             </div>
           </div>
-          <p class="description">{{eventService.shortifyDescription(event.description, 140)}}</p>
+          <p class="description">{{event.description | shortifyDescription: 140}}</p>
         </article>
       </div>
     </div>

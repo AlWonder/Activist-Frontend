@@ -21,7 +21,7 @@
           </p>
           </div>
         </div>
-        <p class="description">{{eventService.shortifyDescription(event.description, 140)}}</p>
+        <p class="description">{{event.description | shortifyDescription: 140}}</p>
 
         <div class="event-buttons">
           <button class="btn btn-danger btn-fill" (click)="showConfirm(event.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>

@@ -28,6 +28,8 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+import { ShortifyDescriptionPipe } from './pipes/event.pipe';
+
 // Services
 import {
   AuthService,
@@ -103,7 +105,8 @@ const profileRoutes: Routes = [
     UploadFormComponent,
     MyFormsComponent,
     EditCoverComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ShortifyDescriptionPipe
   ],
   imports: [
     BrowserModule,
