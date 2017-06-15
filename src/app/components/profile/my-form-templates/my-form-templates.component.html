@@ -1,7 +1,7 @@
-<div class="container">
-  <ul *ngIf="templates">
+<div class="container forms">
+  <ul *ngIf="tpls" class="forms-list">
     <li *ngFor="let tpl of tpls">
-      <a [routerLink]="['/download/tpl', tpl.id]">{{template.templatePath}}</a>
+      <a [routerLink]="['/download/tpl', tpl.id]">{{tpl.templatePath}}</a>
     </li>
   </ul>
 </div>

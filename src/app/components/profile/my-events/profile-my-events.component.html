@@ -1,11 +1,11 @@
+<div class="container no-events" *ngIf="!events || !(events.length > 0)">
+  <h4>У вас ещё нет добавленных мероприятий</h4>
+</div>
+
 <div class="row">
   <div class="my-events-panel">
     <button class="btn btn-success btn-fill" routerLink="/events/new"><i class="fa fa-plus" aria-hidden="true"></i> Добавить мероприятие</button><br>
   </div>
-</div>
-
-<div class="row" *ngIf="!events || !(events.length > 0)">
-  <h4>У вас ещё нет добавленных мероприятий</h4>
 </div>
 
 <div class="row" *ngIf="events && events.length > 0">

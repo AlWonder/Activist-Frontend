@@ -1,6 +1,8 @@
-<div class="container">
-  <div *ngFor="let form of forms">
-    <a [routerLink]="['/download/form', form.id]">{{form.path}}</a>
-    <a [routerLink]="['/download/tpl', form.templateId]">Шаблон</a>
-  </div>
+<div class="container forms">
+  <ul *ngIf="forms" class="forms-list">
+    <li *ngFor="let form of forms">
+      <a [routerLink]="['/download/form', form.id]">{{form.path}}</a>
+      <a class="template" [routerLink]="['/download/tpl', form.templateId]">Шаблон</a>
+    </li>
+  </ul>
 </div>
