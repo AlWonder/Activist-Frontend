@@ -62,6 +62,7 @@ import { DownloadTemplateComponent } from './components/download/template/downlo
 import { DownloadFormComponent } from './components/download/form/download-form.component';
 import { EditCoverComponent } from './components/event/edit-cover/edit-cover.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { JoinedUsersPrintableComponent } from './components/user/joined-users-printable/joined-users-printable.component';
 
 const profileRoutes: Routes = [
   { path: '', redirectTo: '/profile/dashboard', pathMatch: 'full' },
@@ -106,7 +107,8 @@ const profileRoutes: Routes = [
     MyFormsComponent,
     EditCoverComponent,
     ConfirmComponent,
-    ShortifyDescriptionPipe
+    ShortifyDescriptionPipe,
+    JoinedUsersPrintableComponent
   ],
   imports: [
     BrowserModule,
@@ -124,6 +126,7 @@ const profileRoutes: Routes = [
       { path: 'events/page/:page', component: EventsComponent },
       { path: 'events/new', component: NewEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/:id', component: EventComponent },
+      { path: 'events/:id/joined', component: JoinedUsersPrintableComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/edit/:id', component: EditEventComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'events/edit/cover/:id', component: EditCoverComponent, canActivate: [AuthGuard, OrgGuard] },
       { path: 'tags', component: TagsQueryComponent },

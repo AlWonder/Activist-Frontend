@@ -8,6 +8,11 @@
         <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
         <td>{{ user.user.email }} </td>
       </tr>
+      <tr>
+        <td>
+          <a [routerLink]="['/events', eventId, 'joined']">Версия для печати</a>
+        </td>
+      </tr>
     </table>
   <p class="no-prt" *ngIf="!users">
     У мероприятия ещё нет участников
