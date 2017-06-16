@@ -1,19 +1,17 @@
 <div>
-    <table>
-      <tr *ngFor="let user of users">
-        <td class="prt-type">
-          <span class="prt prt-act" *ngIf="!user.asVolunteer">А</span>
-          <span class="prt prt-vol" *ngIf="user.asVolunteer && user.formId">В</span>
-        </td>
-        <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
-        <td>{{ user.user.email }} </td>
-      </tr>
-      <tr>
-        <td>
-          <a [routerLink]="['/events', eventId, 'joined']">Версия для печати</a>
-        </td>
-      </tr>
-    </table>
+  <table *ngIf="users">
+    <tr class="show-full" [routerLink]="['/events', eventId, 'joined']">
+      <td colspan="3">Показать полностью</td>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td class="prt-type">
+        <span class="prt prt-act" *ngIf="!user.asVolunteer">А</span>
+        <span class="prt prt-vol" *ngIf="user.asVolunteer && user.formId">В</span>
+      </td>
+      <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
+      <td>{{ user.user.email }} </td>
+    </tr>
+  </table>
   <p class="no-prt" *ngIf="!users">
     У мероприятия ещё нет участников
   </p>

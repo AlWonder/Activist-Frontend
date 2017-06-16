@@ -1,14 +1,23 @@
-<div class="joined-users-list">
+<div class="joined-users-list" *ngIf="event && organizer && users">
+  <h1>Список участников, записавшихся на участие в мероприятии "{{ event.title }}"</h1>
+  <section class="event-info">
+    Организатор мероприятия: {{ organizer.firstName }} {{ organizer.secondName }} {{ organizer.lastName }} <br>
+    Дата проведения мероприятия: {{event.eventDate | date:'longDate'}} <span *ngIf="event.eventTime">{{event.eventTime}}</span>
+  </section>
   <table>
+    <tr>
+      <th>ФИО</th>
+      <th>E-Mail</th>
+      <th>Участвует как</th>
+    </tr>
     <tr *ngFor="let user of users">
-      <td class="prt-type">
-        <span class="prt prt-act" *ngIf="!user.asVolunteer">А</span>
-        <span class="prt prt-vol" *ngIf="user.asVolunteer && user.formId">В</span>
-      </td>
       <td>{{ user.user.firstName }} {{ user.user.lastName }}</td>
       <td>{{ user.user.email }} </td>
+      <td>
+        {{ user.asVolunteer ? "Волонтёр" : "Активист" }}
+      </td>
     </tr>
   </table>
 </div>
 
-<button type="button" name="button" (click)="print()">Печать</button>
+<button class="btn-print" (click)="print()"><i class="fa fa-print" aria-hidden="true"></i></button>

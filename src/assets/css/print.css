@@ -1,0 +1,44 @@
+.body {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: 10mm auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14pt;
+}
+
+.event-info {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14pt;
+  margin-bottom: 21px;
+}
+
+table {
+  border: 1px solid #000;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th, table td {
+  font-size: 14pt;
+  font-family: 'Times New Roman', Times, serif;
+  border: 1px solid #000;
+  padding: 2px;
+  text-align: center;
+}
+
+.subpage {
+  padding: 1cm;
+  border: 5px red solid;
+  height: 257mm;
+  outline: 2cm #FFEAEA solid;
+}

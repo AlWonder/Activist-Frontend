@@ -1,6 +1,20 @@
 table {
   width: 100%;
+
   tr {
+    &.show-full {
+      td {
+        text-align: center;
+        padding: 5px;
+        outline: 0 none !important;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+
     .prt-type {
       .prt {
         display: inline-block;
@@ -8,12 +22,15 @@ table {
         font-weight: bold;
         padding: 5px 8px;
         cursor: default;
+
         &-act {
           background-color: #05AE0E;
         }
+
         &-vol {
           background-color: #05AE0E;
         }
+
         &-vol-no-form {
           background-color: #EC3522;
         }
