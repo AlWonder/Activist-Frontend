@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { FormService } from 'app/services/form.service';
 
@@ -13,10 +14,12 @@ export class UploadTemplateComponent implements OnInit {
   template: File = null;
 
   constructor(
-    private formService: FormService
+    private formService: FormService,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Загрузить шаблон анкеты – Активист");
   }
 
   private fileChange(event) {

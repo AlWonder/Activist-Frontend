@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/services/auth.service';
@@ -26,10 +27,12 @@ export class EditEventComponent implements OnInit {
     private eventService: EventService,
     private route: ActivatedRoute,
     private router: Router,
+    private title: Title,
     private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Редактирование мероприятия – Активист");
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });

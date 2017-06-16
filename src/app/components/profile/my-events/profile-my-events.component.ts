@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from 'app/services/auth.service';
 import { EventService } from 'app/services/event.service';
@@ -19,10 +20,12 @@ export class ProfileMyEventsComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private authService: AuthService,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Мои мероприятия – Профиль – Активист");
     this.eventService.getUserEvents(this.authService.userId)
       .subscribe(data => this.events = data);
   }

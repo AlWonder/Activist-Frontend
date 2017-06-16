@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 
 import { FormService } from 'app/services/form.service';
 import { EventService } from 'app/services/event.service';
@@ -23,10 +24,12 @@ export class UploadFormComponent implements OnInit {
     private eventService: EventService,
     private formService: FormService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Загрузить анкету волонтёра – Активист");
     this.sub1 = this.route.params.subscribe(params => {
       this.tplId = +params['tplid']; // (+) converts string 'id' to a number
     });

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 
 import { EventService } from 'app/services/event.service'
 import { NotifyService } from 'app/services/notify.service'
@@ -20,10 +21,12 @@ export class EditCoverComponent implements OnInit {
     private eventService: EventService,
     private route: ActivatedRoute,
     private router: Router,
+    private title: Title,
     private notifyService: NotifyService
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Изменение обложки мероприятия – Активист");
     this.sub = this.route.params.subscribe(params => {
       this.eventId = +params['id']; // (+) converts string 'id' to a number
     });

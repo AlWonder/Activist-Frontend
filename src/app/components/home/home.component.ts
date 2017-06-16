@@ -19,11 +19,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private router: Router,
-    private titleService: Title
+    private title: Title
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Главная – Активист");
+    this.title.setTitle("Главная – Активист");
     this.eventService.indexPage()
       .subscribe(response => {
         this.soonerEvents = response.soonerEvents;

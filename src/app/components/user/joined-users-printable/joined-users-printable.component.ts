@@ -3,6 +3,7 @@ import { EventService, UserService } from 'app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { Title } from '@angular/platform-browser';
 
 import { Event, User, JoinedUser } from 'app/models';
 
@@ -24,7 +25,8 @@ export class JoinedUsersPrintableComponent implements OnInit {
     private eventService: EventService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,8 @@ export class JoinedUsersPrintableComponent implements OnInit {
         this.event = data[0].event;
         this.organizer = data[0].organizer;
         this.users = data[1].users;
+        this.title.setTitle("Пользователи, участвующие в мероприятии \""
+        + this.event.title + "\" – Активист");
       })
   }
 

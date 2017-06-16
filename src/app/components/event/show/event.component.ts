@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/services/auth.service';
@@ -30,6 +31,7 @@ export class EventComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
+    private title: Title,
     private authService: AuthService
   ) { }
 
@@ -50,6 +52,7 @@ export class EventComponent implements OnInit {
         this.tags = data.tags;
         this.asVolunteer = data.asVolunteer;
         this.isJoined = data.isJoined;
+        this.title.setTitle(this.event.title + " – Мероприятия – Активист");
       },
       error => this.handleError(error));
   }

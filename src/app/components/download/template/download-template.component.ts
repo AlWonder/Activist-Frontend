@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 
 import { FormService } from 'app/services/form.service';
 import { AuthService } from 'app/services/auth.service';
@@ -25,10 +26,12 @@ export class DownloadTemplateComponent implements OnInit {
     private formService: FormService,
     private route: ActivatedRoute,
     private router: Router,
+    private title: Title,
     private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Загрузка шаблона анкеты – Активист");
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });

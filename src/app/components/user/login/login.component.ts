@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from 'app/services/auth.service';
 
@@ -7,14 +8,19 @@ import { AuthService } from 'app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   private loggingIn: boolean = false;
   private error: string = "";
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private title: Title
   ) { }
+
+  ngOnInit() {
+    this.title.setTitle("Вход – Активист");
+  }
 
   private login(email: string, password: string) {
     this.error = "";

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { EventService } from 'app/services/event.service';
 import { Event } from 'app/models/event';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-joined-events',
@@ -14,10 +15,12 @@ export class ProfileJoinedEventsComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private authService: AuthService
+    private authService: AuthService,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Мои мероприятия – Профиль – Активист");
     this.eventService.getJoinedEvents()
       .subscribe(data => this.events = data);
   }

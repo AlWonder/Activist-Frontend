@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Title } from '@angular/platform-browser';
 
 import { EventService } from 'app/services/event.service';
 import { TagService } from 'app/services/tag.service';
@@ -24,12 +25,14 @@ export class TagComponent implements OnInit {
     private eventService: EventService,
     private tagService: TagService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.tag = params['tag'];
+      this.title.setTitle("Мероприятия по тегу \"" + this.tag + "\" – Активист");
     });
 
     this.eventService.getEventsByTag(this.tag, this.page)

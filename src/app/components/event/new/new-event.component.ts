@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { Event } from 'app/models/event';
 import { EventService } from 'app/services/event.service';
@@ -31,10 +32,12 @@ export class NewEventComponent implements OnInit {
     private eventService: EventService,
     private formService: FormService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private title: Title,
   ) { }
 
   ngOnInit() {
+    this.title.setTitle("Новое мероприятие – Активист");
     if (this.authService.userProfile){
       this.formService.queryUserFormTemplates(this.authService.userProfile.id)
       .subscribe(data => this.templates = data);
